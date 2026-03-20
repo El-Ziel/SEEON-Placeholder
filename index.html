@@ -1,94 +1,395 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>SEEON — Smart Networking. Anywhere.</title>
-  <meta name="description" content="SEEON is professional proximity networking — privacy-first, built in Europe.">
-  
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SEEON</title>
+  <meta name="description" content="SEEON is building a privacy-first proximity layer for business travel and live event environments." />
   <style>
-    body {
+    :root {
+      --bg: #ffffff;
+      --text: #111111;
+      --muted: #5d5d5d;
+      --soft: #7a7a7a;
+      --max: 1180px;
+      --content: 760px;
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body {
       margin: 0;
-      padding: 60px 20px;
-      background-color: #0b0e10;
-      color: #e3eeef;
-      font-family: "Helvetica Neue", Inter, Arial, sans-serif;
-      text-align: center;
+      padding: 0;
+      min-height: 100%;
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Helvetica, Arial, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+
+    body {
+      overflow-x: hidden;
+    }
+
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      background:
+        radial-gradient(circle at 50% 44%, rgba(255,255,255,0.985) 0%, rgba(255,255,255,0.975) 30%, rgba(255,255,255,0.93) 52%, rgba(255,255,255,0.975) 100%),
+        #fff;
+      overflow: hidden;
+      isolation: isolate;
+    }
+
+    canvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      display: block;
+      pointer-events: none;
+    }
+
+    .grid-overlay {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(to right, rgba(17, 17, 17, 0.04) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(17, 17, 17, 0.04) 1px, transparent 1px);
+      background-size: 74px 74px;
+      mask-image: radial-gradient(circle at 50% 44%, transparent 0 19%, rgba(0,0,0,.10) 33%, rgba(0,0,0,.42) 57%, rgba(0,0,0,.92) 100%);
+      -webkit-mask-image: radial-gradient(circle at 50% 44%, transparent 0 19%, rgba(0,0,0,.10) 33%, rgba(0,0,0,.42) 57%, rgba(0,0,0,.92) 100%);
+      pointer-events: none;
+    }
+
+    .wrap {
+      position: relative;
+      z-index: 2;
+      width: min(100%, var(--max));
+      margin: 0 auto;
+      padding: 48px 28px 64px;
+    }
+
+    .content {
+      max-width: var(--content);
+      background: rgba(255,255,255,0.82);
+      backdrop-filter: blur(3px);
+      -webkit-backdrop-filter: blur(3px);
+      padding: 10px 0;
     }
 
     .logo {
-      font-size: 140px;
-      font-weight: 800;
-      letter-spacing: -0.02em;
-      color: #e3eeef;
-    }
-    .logo i {
-      font-style: italic;
+      font-size: clamp(2.1rem, 4vw, 2.8rem);
+      font-weight: 700;
+      letter-spacing: 0.015em;
+      margin: 0 0 18px 0;
     }
 
-    .tagline {
-      font-size: 36px;
-      margin-top: -10px;
-      color: #e3eeef;
-      font-weight: 300;
+    .eyebrow {
+      display: inline-block;
+      font-size: 0.92rem;
+      font-weight: 600;
+      letter-spacing: 0.03em;
+      color: var(--soft);
+      margin: 0 0 18px 0;
     }
 
-    .coming {
-      font-size: 72px;
-      margin: 80px 0;
-      font-family: "Helvetica Light", Helvetica, Arial, sans-serif;
-      font-style: italic;
-      color: #e3eeef;
+    h1 {
+      margin: 0 0 20px 0;
+      font-size: clamp(2.5rem, 6vw, 4.75rem);
+      line-height: 0.98;
+      letter-spacing: -0.045em;
+      font-weight: 650;
+      max-width: 10.5ch;
+    }
+
+    .hook {
+      margin: 0 0 24px 0;
+      font-size: clamp(1.16rem, 1.9vw, 1.34rem);
+      line-height: 1.55;
+      color: var(--text);
+      font-weight: 560;
+      max-width: 32ch;
+    }
+
+    .lead {
+      font-size: clamp(1.04rem, 1.7vw, 1.18rem);
+      line-height: 1.82;
+      color: var(--muted);
+      margin: 0 0 14px 0;
+      max-width: 700px;
+    }
+
+    .lead strong {
+      color: var(--text);
+      font-weight: 650;
+    }
+
+    .proof {
+      margin-top: 26px;
+      font-size: 0.98rem;
+      line-height: 1.8;
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    .divider {
+      width: 88px;
+      height: 1px;
+      background: rgba(17, 17, 17, 0.14);
+      margin: 32px 0 26px 0;
+    }
+
+    .contact-title {
+      font-size: 1rem;
+      font-weight: 700;
+      margin: 0 0 10px 0;
+    }
+
+    .contact a {
+      color: var(--text);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(17, 17, 17, 0.17);
+      padding-bottom: 2px;
+      transition: border-color .2s ease, opacity .2s ease;
+    }
+
+    .contact a:hover {
+      border-color: rgba(17, 17, 17, 0.42);
+      opacity: 0.9;
+    }
+
+    .micro {
+      margin-top: 18px;
+      color: var(--soft);
+      font-size: 0.92rem;
+      line-height: 1.7;
+      max-width: 700px;
     }
 
     footer {
-      margin-top: 100px;
-      font-size: 14px;
-      color: #8aa4a9;
-      line-height: 1.6;
+      position: relative;
+      z-index: 2;
+      padding: 0 28px 30px;
     }
 
-    code {
-      background: rgba(255, 255, 255, 0.08);
-      padding: 2px 6px;
-      border-radius: 6px;
-      font-family: monospace;
+    .footer-inner {
+      width: min(100%, var(--max));
+      margin: 0 auto;
+      color: var(--soft);
+      font-size: 0.92rem;
+      line-height: 1.7;
     }
 
-    /* --- MOBILE ONLY --- */
-    @media (max-width: 600px) {
-      body {
-        padding: 40px 16px;
+    @media (max-width: 900px) {
+      .hero {
+        align-items: flex-start;
       }
 
-      .logo {
-        font-size: 80px;
+      .wrap {
+        padding-top: 84px;
+        padding-bottom: 60px;
       }
 
-      .tagline {
-        font-size: 24px;
+      .grid-overlay {
+        background-size: 58px 58px;
       }
 
-      .coming {
-        font-size: 40px;
-        margin: 60px 0;
+      h1 {
+        max-width: 11ch;
       }
+    }
+
+    @media (max-width: 640px) {
+      .hero {
+        min-height: 88vh;
+      }
+
+      .wrap,
+      footer {
+        padding-left: 22px;
+        padding-right: 22px;
+      }
+
+      .content {
+        background: rgba(255,255,255,0.9);
+      }
+
+      h1 {
+        letter-spacing: -0.03em;
+      }
+
+      .lead {
+        line-height: 1.75;
+      }
+
+      .micro {
+        font-size: 0.9rem;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      canvas { display: none; }
     }
   </style>
 </head>
-
 <body>
+  <main class="hero">
+    <canvas id="dots" aria-hidden="true"></canvas>
+    <div class="grid-overlay" aria-hidden="true"></div>
 
-  <div class="logo">SEE<i>ON</i></div>
+    <div class="wrap">
+      <section class="content">
+        <div class="logo">SEEON</div>
+        <div class="eyebrow">For business travel and live events</div>
 
-  <div class="tagline">Smart Networking. Anywhere.</div>
+        <h1>Turning physical proximity into relevant professional opportunity.</h1>
 
-  <div class="coming">– COMING SOON –</div>
+        <p class="hook">Because some of the most relevant people at an event are never truly absent. They are simply unseen.</p>
+
+        <p class="lead">
+          <strong>SEEON is building a privacy-first proximity layer for professional networking in physical environments.</strong>
+        </p>
+
+        <p class="lead">
+          At trade fairs, conferences, airports and hotels, relevant people are often in the same place at the same time without ever knowing it.
+        </p>
+
+        <p class="lead">
+          SEEON explores how this invisible relevance can become visible without relying on invasive data exposure, noisy feeds or traditional matchmaking logic.
+        </p>
+
+        <p class="proof">Built in Europe. Privacy-first by design. Currently in early validation.</p>
+
+        <div class="divider"></div>
+
+        <div class="contact">
+          <div class="contact-title"><strong>Happy to Chat</strong></div>
+          <a href="mailto:hello@seeon.io">hello@seeon.io</a>
+          <div class="micro">A quiet page for an idea rooted in real-world proximity, professional relevance and meaningful encounters.</div>
+        </div>
+      </section>
+    </div>
+  </main>
 
   <footer>
-    © SEEON • Built in Europe<br>
-    Contact: <code>hello@seeon.io</code> • Placeholder page
+    <div class="footer-inner">© SEEON<br>Built in Europe</div>
   </footer>
 
+  <script>
+    const canvas = document.getElementById('dots');
+    const ctx = canvas.getContext('2d');
+
+    let width = 0;
+    let height = 0;
+    let dpr = Math.min(window.devicePixelRatio || 1, 2);
+    let dots = [];
+    let rafId = null;
+
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    function resizeCanvas() {
+      width = window.innerWidth;
+      height = Math.max(window.innerHeight, document.querySelector('.hero').offsetHeight);
+      dpr = Math.min(window.devicePixelRatio || 1, 2);
+
+      canvas.width = Math.floor(width * dpr);
+      canvas.height = Math.floor(height * dpr);
+      canvas.style.width = width + 'px';
+      canvas.style.height = height + 'px';
+
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      createDots();
+    }
+
+    function insideTextSafeZone(x, y) {
+      const cx = width * 0.42;
+      const cy = height * 0.45;
+      const rx = Math.min(width * 0.29, 370);
+      const ry = Math.min(height * 0.25, 220);
+      const dx = (x - cx) / rx;
+      const dy = (y - cy) / ry;
+      return (dx * dx + dy * dy) < 1;
+    }
+
+    function createDots() {
+      dots = [];
+      const baseCount = width < 680 ? 70 : width < 1100 ? 105 : 135;
+      let attempts = 0;
+
+      while (dots.length < baseCount && attempts < baseCount * 25) {
+        attempts++;
+        const x = Math.random() * width;
+        const y = Math.random() * height;
+
+        if (insideTextSafeZone(x, y)) continue;
+
+        const size = Math.random() < 0.18 ? 2.8 + Math.random() * 1.4 : 1 + Math.random() * 1.6;
+        const drift = 0.06 + Math.random() * 0.18;
+        const opacity = 0.22 + Math.random() * 0.38;
+        const phase = Math.random() * Math.PI * 2;
+
+        dots.push({
+          x, y,
+          originX: x,
+          originY: y,
+          size,
+          opacity,
+          driftX: (Math.random() - 0.5) * drift,
+          driftY: (Math.random() - 0.5) * drift,
+          phase,
+          pulse: 0.3 + Math.random() * 0.55,
+        });
+      }
+    }
+
+    function drawDot(dot, time) {
+      const t = time * 0.001;
+      dot.x += dot.driftX;
+      dot.y += dot.driftY;
+
+      if (dot.x < -10 || dot.x > width + 10 || dot.y < -10 || dot.y > height + 10 || insideTextSafeZone(dot.x, dot.y)) {
+        dot.x = dot.originX;
+        dot.y = dot.originY;
+        dot.driftX *= -1;
+        dot.driftY *= -1;
+      }
+
+      const breath = 1 + Math.sin(t * dot.pulse + dot.phase) * 0.12;
+      const halo = dot.size + 6 + Math.sin(t * 0.7 + dot.phase) * 1.5;
+      const alpha = dot.opacity * (0.88 + Math.sin(t * 0.55 + dot.phase) * 0.12);
+
+      ctx.beginPath();
+      ctx.fillStyle = `rgba(17,17,17,${(alpha * 0.12).toFixed(3)})`;
+      ctx.arc(dot.x, dot.y, halo, 0, Math.PI * 2);
+      ctx.fill();
+
+      ctx.beginPath();
+      ctx.fillStyle = `rgba(17,17,17,${alpha.toFixed(3)})`;
+      ctx.arc(dot.x, dot.y, dot.size * breath, 0, Math.PI * 2);
+      ctx.fill();
+    }
+
+    function animate(time) {
+      ctx.clearRect(0, 0, width, height);
+      for (let i = 0; i < dots.length; i++) {
+        drawDot(dots[i], time);
+      }
+      rafId = requestAnimationFrame(animate);
+    }
+
+    if (!prefersReducedMotion) {
+      resizeCanvas();
+      animate(0);
+      window.addEventListener('resize', () => {
+        if (rafId) cancelAnimationFrame(rafId);
+        resizeCanvas();
+        animate(0);
+      }, { passive: true });
+    }
+  </script>
 </body>
 </html>
