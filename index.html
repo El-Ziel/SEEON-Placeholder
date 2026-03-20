@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>SEEON</title>
-  <meta name="description" content="Because some of the most relevant people are never truly absent. They are simply unseen." />
+  <meta name="description" content="The right people are often in the same place. They just do not know it." />
   <style>
     :root {
       --bg: #ffffff;
@@ -13,6 +13,8 @@
       --soft: #7a7a7a;
       --max: 1180px;
       --content: 760px;
+      --toast-bg: rgba(17, 17, 17, 0.92);
+      --toast-text: #ffffff;
     }
 
     * { box-sizing: border-box; }
@@ -35,6 +37,7 @@
     .hero {
       position: relative;
       min-height: 100vh;
+      min-height: 100svh;
       display: flex;
       align-items: center;
       background:
@@ -82,10 +85,14 @@
     }
 
     .logo {
+      display: inline-block;
       font-size: clamp(2.1rem, 4vw, 2.8rem);
       font-weight: 700;
       letter-spacing: 0.015em;
       margin: 0 0 18px 0;
+      cursor: pointer;
+      user-select: none;
+      -webkit-tap-highlight-color: transparent;
     }
 
     .eyebrow {
@@ -98,20 +105,20 @@
     }
 
     h1 {
-      margin: 0 0 20px 0;
+      margin: 0 0 22px 0;
       font-size: clamp(2.5rem, 6vw, 4.75rem);
       line-height: 0.98;
       letter-spacing: -0.045em;
       font-weight: 650;
-      max-width: 10.5ch;
+      max-width: 10.8ch;
     }
 
-    .hook {
-      margin: 0 0 24px 0;
-      font-size: clamp(1.16rem, 1.9vw, 1.34rem);
-      line-height: 1.55;
+    .lead-story {
+      margin: 0 0 22px 0;
+      font-size: clamp(1.18rem, 2vw, 1.38rem);
+      line-height: 1.58;
       color: var(--text);
-      font-weight: 560;
+      font-weight: 520;
       max-width: 32ch;
     }
 
@@ -126,6 +133,20 @@
     .lead strong {
       color: var(--text);
       font-weight: 650;
+    }
+
+    .highlight-trigger {
+      color: inherit;
+      text-decoration: none;
+      border-bottom: 1px dashed rgba(17, 17, 17, 0.22);
+      cursor: pointer;
+      transition: border-color .2s ease, opacity .2s ease;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .highlight-trigger:hover {
+      border-color: rgba(17, 17, 17, 0.45);
+      opacity: 0.95;
     }
 
     .proof {
@@ -170,6 +191,33 @@
       max-width: 700px;
     }
 
+    .toast {
+      position: fixed;
+      left: 50%;
+      bottom: 22px;
+      transform: translateX(-50%) translateY(16px);
+      background: var(--toast-bg);
+      color: var(--toast-text);
+      padding: 11px 16px;
+      border-radius: 999px;
+      font-size: 0.92rem;
+      line-height: 1.3;
+      white-space: nowrap;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .28s ease, transform .28s ease;
+      z-index: 9;
+      box-shadow: 0 10px 28px rgba(0,0,0,0.14);
+      max-width: calc(100vw - 32px);
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
     footer {
       position: relative;
       z-index: 2;
@@ -206,6 +254,7 @@
     @media (max-width: 640px) {
       .hero {
         min-height: 88vh;
+        min-height: 88svh;
       }
 
       .wrap,
@@ -222,17 +271,32 @@
         letter-spacing: -0.03em;
       }
 
-      .lead {
+      .lead,
+      .lead-story {
         line-height: 1.75;
+      }
+
+      .lead-story {
+        max-width: 25ch;
       }
 
       .micro {
         font-size: 0.9rem;
       }
+
+      .toast {
+        bottom: 16px;
+        font-size: 0.86rem;
+        padding: 10px 14px;
+        border-radius: 18px;
+        white-space: normal;
+        text-align: center;
+      }
     }
 
     @media (prefers-reduced-motion: reduce) {
       canvas { display: none; }
+      .toast { transition: none; }
     }
   </style>
 </head>
@@ -243,26 +307,26 @@
 
     <div class="wrap">
       <section class="content">
-        <div class="logo">SEEON</div>
+        <div class="logo" id="logo-trigger" title="SEEON">SEEON</div>
         <div class="eyebrow">For business travel and physical environments</div>
 
-        <h1>Turning physical proximity into relevant professional opportunity.</h1>
+        <h1>The right people are often in the same place. They just do not know it.</h1>
 
-        <p class="hook">Because some of the most relevant people are never truly absent. They are simply unseen.</p>
-
-        <p class="lead">
-          <strong>SEEON is building a privacy-first proximity layer for professional networking in physical environments.</strong>
+        <p class="lead-story">
+          At a trade fair, in an airport, in a hotel or at a conference, two relevant people can be just
+          <span class="highlight-trigger" id="thirty-trigger">30 metres apart</span>
+          without ever realizing it.
         </p>
 
         <p class="lead">
-          At trade fairs, conferences, airports and hotels, relevant people are often in the same place at the same time without ever knowing it.
+          <strong>SEEON explores how this quiet gap can become more visible in physical environments.</strong>
         </p>
 
         <p class="lead">
-          SEEON explores how this invisible relevance can become visible without relying on invasive data exposure, noisy feeds or traditional matchmaking logic.
+          Not through invasive data exposure, noisy feeds or traditional matchmaking logic, but through a more thoughtful way of making relevant professional proximity easier to notice.
         </p>
 
-        <p class="proof">Built in Europe. Privacy-first by design. Currently in early validation.</p>
+        <p class="proof">Built in Europe. Privacy-first by design. Currently exploring this with the industries.</p>
 
         <div class="divider"></div>
 
@@ -279,6 +343,8 @@
     <div class="footer-inner">© SEEON<br>Built in Europe</div>
   </footer>
 
+  <div class="toast" id="toast" aria-live="polite"></div>
+
   <script>
     const canvas = document.getElementById('dots');
     const ctx = canvas.getContext('2d');
@@ -288,8 +354,25 @@
     let dpr = Math.min(window.devicePixelRatio || 1, 2);
     let dots = [];
     let rafId = null;
+    let activePulse = 0;
+    let pulseTarget = null;
+    let logoTapCount = 0;
+    let logoTapTimer = null;
+    let toastTimer = null;
 
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const toast = document.getElementById('toast');
+    const logoTrigger = document.getElementById('logo-trigger');
+    const thirtyTrigger = document.getElementById('thirty-trigger');
+
+    function showToast(message) {
+      toast.textContent = message;
+      toast.classList.add('show');
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => {
+        toast.classList.remove('show');
+      }, 2600);
+    }
 
     function resizeCanvas() {
       width = window.innerWidth;
@@ -307,9 +390,9 @@
 
     function insideTextSafeZone(x, y) {
       const cx = width * 0.42;
-      const cy = height * 0.45;
-      const rx = Math.min(width * 0.29, 370);
-      const ry = Math.min(height * 0.25, 220);
+      const cy = height * 0.43;
+      const rx = Math.min(width * 0.30, 390);
+      const ry = Math.min(height * 0.27, 240);
       const dx = (x - cx) / rx;
       const dy = (y - cy) / ry;
       return (dx * dx + dy * dy) < 1;
@@ -317,20 +400,22 @@
 
     function createDots() {
       dots = [];
-      const baseCount = width < 680 ? 70 : width < 1100 ? 105 : 135;
+      const baseCount = width < 680 ? 72 : width < 1100 ? 108 : 142;
       let attempts = 0;
 
-      while (dots.length < baseCount && attempts < baseCount * 25) {
+      while (dots.length < baseCount && attempts < baseCount * 28) {
         attempts++;
         const x = Math.random() * width;
         const y = Math.random() * height;
 
         if (insideTextSafeZone(x, y)) continue;
 
-        const size = Math.random() < 0.18 ? 2.8 + Math.random() * 1.4 : 1 + Math.random() * 1.6;
-        const drift = 0.06 + Math.random() * 0.18;
-        const opacity = 0.22 + Math.random() * 0.38;
+        const prominent = Math.random() < 0.18;
+        const size = prominent ? 2.5 + Math.random() * 1.4 : 0.95 + Math.random() * 1.45;
+        const drift = 0.05 + Math.random() * 0.12;
+        const opacity = prominent ? 0.34 + Math.random() * 0.18 : 0.15 + Math.random() * 0.18;
         const phase = Math.random() * Math.PI * 2;
+        const halo = prominent ? 8 + Math.random() * 5 : 5 + Math.random() * 3;
 
         dots.push({
           x, y,
@@ -338,12 +423,20 @@
           originY: y,
           size,
           opacity,
+          halo,
           driftX: (Math.random() - 0.5) * drift,
           driftY: (Math.random() - 0.5) * drift,
           phase,
-          pulse: 0.3 + Math.random() * 0.55,
+          pulse: 0.35 + Math.random() * 0.55,
+          targetable: prominent
         });
       }
+
+      pulseTarget = dots[Math.floor(dots.length * 0.68)] || dots[0] || null;
+    }
+
+    function triggerPulse() {
+      activePulse = 1;
     }
 
     function drawDot(dot, time) {
@@ -359,17 +452,24 @@
       }
 
       const breath = 1 + Math.sin(t * dot.pulse + dot.phase) * 0.12;
-      const halo = dot.size + 6 + Math.sin(t * 0.7 + dot.phase) * 1.5;
-      const alpha = dot.opacity * (0.88 + Math.sin(t * 0.55 + dot.phase) * 0.12);
+      let halo = dot.halo + Math.sin(t * 0.7 + dot.phase) * 1.4;
+      let alpha = dot.opacity * (0.88 + Math.sin(t * 0.55 + dot.phase) * 0.12);
+      let size = dot.size * breath;
+
+      if (pulseTarget === dot && activePulse > 0.001) {
+        halo += 14 * activePulse;
+        alpha += 0.32 * activePulse;
+        size += 1.2 * activePulse;
+      }
 
       ctx.beginPath();
-      ctx.fillStyle = `rgba(17,17,17,${(alpha * 0.12).toFixed(3)})`;
+      ctx.fillStyle = `rgba(17,17,17,${Math.max(0, alpha * 0.11).toFixed(3)})`;
       ctx.arc(dot.x, dot.y, halo, 0, Math.PI * 2);
       ctx.fill();
 
       ctx.beginPath();
-      ctx.fillStyle = `rgba(17,17,17,${alpha.toFixed(3)})`;
-      ctx.arc(dot.x, dot.y, dot.size * breath, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(17,17,17,${Math.min(0.92, alpha).toFixed(3)})`;
+      ctx.arc(dot.x, dot.y, size, 0, Math.PI * 2);
       ctx.fill();
     }
 
@@ -378,8 +478,30 @@
       for (let i = 0; i < dots.length; i++) {
         drawDot(dots[i], time);
       }
+      activePulse *= 0.955;
       rafId = requestAnimationFrame(animate);
     }
+
+    logoTrigger.addEventListener('click', () => {
+      logoTapCount += 1;
+      clearTimeout(logoTapTimer);
+
+      if (logoTapCount >= 2) {
+        logoTapCount = 0;
+        triggerPulse();
+        showToast('You found a quiet signal.');
+        return;
+      }
+
+      logoTapTimer = setTimeout(() => {
+        logoTapCount = 0;
+      }, 420);
+    });
+
+    thirtyTrigger.addEventListener('click', () => {
+      triggerPulse();
+      showToast('Closer than it looks.');
+    });
 
     if (!prefersReducedMotion) {
       resizeCanvas();
