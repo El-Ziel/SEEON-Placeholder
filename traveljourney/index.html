@@ -3,8 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SEEON | Business Networking</title>
+  <title>Relevance in motion</title>
   <meta name="description" content="SEEON turns professional proximity at events, conferences and during business travel into relevant conversation opportunities without location tracking." />
+  <meta property="og:title" content="Relevance in motion" />
+  <meta property="og:description" content="SEEON turns professional proximity at events, conferences and during business travel into relevant conversation opportunities without location tracking." />
+  <meta name="twitter:title" content="Relevance in motion" />
+  <meta name="twitter:description" content="SEEON turns professional proximity at events, conferences and during business travel into relevant conversation opportunities without location tracking." />
   <style>
     :root {
       --bg: #ffffff;
@@ -331,6 +335,61 @@
       order: 2;
     }
 
+    .story.text-only {
+      grid-template-columns: minmax(0, 0.9fr) minmax(280px, 0.72fr);
+    }
+
+    .story.text-only .story-text {
+      min-height: 300px;
+      max-width: 760px;
+    }
+
+    .journey-table {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      min-height: 300px;
+      padding: clamp(18px, 4vw, 42px);
+      border-left: 1px solid var(--line);
+    }
+
+    .journey-title {
+      margin: 0;
+      color: var(--soft);
+      font-size: 0.78rem;
+      font-weight: 750;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .journey-line {
+      margin: 12px 0 24px;
+      color: var(--text);
+      font-size: clamp(1.25rem, 2.1vw, 1.85rem);
+      line-height: 1.12;
+      font-weight: 650;
+      max-width: 16ch;
+    }
+
+    .journey-list {
+      display: grid;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      border-top: 1px solid var(--line);
+    }
+
+    .journey-list li {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 38px;
+      border-bottom: 1px solid var(--line);
+      color: var(--text);
+      font-size: 1rem;
+      font-weight: 650;
+    }
+
     .story-media {
       position: relative;
       overflow: hidden;
@@ -608,8 +667,18 @@
       }
 
       .story-media,
-      .story-text {
+      .story-text,
+      .journey-table {
         min-height: 0;
+      }
+
+      .story.text-only .story-text {
+        max-width: none;
+      }
+
+      .journey-table {
+        border-left: 0;
+        border-top: 1px solid var(--line);
       }
 
       .story-media {
@@ -758,6 +827,14 @@
         padding: 18px 10px 20px;
       }
 
+      .journey-table {
+        padding: 20px 10px 12px;
+      }
+
+      .journey-line {
+        max-width: none;
+      }
+
       .story h3 {
         max-width: 12.5ch;
       }
@@ -879,7 +956,7 @@
           <div class="story-list" aria-label="SEEON concept images with explanations">
             <article class="story">
               <div class="story-media">
-                <img src="business-01-hall.png" alt="Black and white event hall with professional visitors" />
+                <img src="assets/business-01-hall.png" alt="Black and white event hall with professional visitors" />
               </div>
               <div class="story-text">
                 <p class="kicker">01 | Physical context</p>
@@ -891,7 +968,7 @@
 
             <article class="story">
               <div class="story-media">
-                <img src="business-03-phone.png" alt="Smartphone with the SEEON interface in front of an event environment" />
+                <img src="assets/business-03-phone.png" alt="Smartphone with the SEEON interface in front of an event environment" />
               </div>
               <div class="story-text">
                 <p class="kicker">02 | Interface</p>
@@ -903,7 +980,7 @@
 
             <article class="story">
               <div class="story-media">
-                <img src="business-05-conversation.png" alt="Two business people shaking hands at an event" />
+                <img src="assets/business-05-conversation.png" alt="Two business people shaking hands at an event" />
               </div>
               <div class="story-text">
                 <p class="kicker">03 | Outcome</p>
@@ -913,15 +990,24 @@
               </div>
             </article>
 
-            <article class="story">
-              <div class="story-media contain">
-                <img src="business-06-journey.png" alt="Concept graphic showing event, hotel, airport, station and train as usage contexts" />
-              </div>
+            <article class="story text-only">
               <div class="story-text">
                 <p class="kicker">04 | Journey</p>
                 <h3>Professional proximity travels with you.</h3>
-                <p>The context does not end at the booth. Relevant encounters can happen along the way, at the hotel, at the airport, at the station or on the train.</p>
+                <p>Relevance can appear across the whole journey: during an event, in the hotel lobby, at the airport, at the station or on the train. SEEON is designed for these moments of shared professional context, wherever they naturally happen.</p>
                 <span class="accent" aria-hidden="true"></span>
+              </div>
+              <div class="journey-table" aria-label="Concept in action across the journey">
+                <p class="journey-title">Concept in action</p>
+                <p class="journey-line">Professional proximity exists across the journey.</p>
+                <ul class="journey-list">
+                  <li>Event</li>
+                  <li>Hotel</li>
+                  <li>Airport</li>
+                  <li>Station</li>
+                  <li>Train</li>
+                  <li>Everywhere</li>
+                </ul>
               </div>
             </article>
           </div>
@@ -960,7 +1046,7 @@
         <div class="wrap">
           <div class="cta" id="presentation">
             <div>
-              <p class="eyebrow">Solution briefing</p>
+              <p class="eyebrow">Explore the fit</p>
               <h2>Curious how SEEON would fit your event or community? Let's talk.</h2>
               <p>
                 A short conversation is usually enough to understand the context, the audience and whether SEEON could create relevant encounters without adding noise.
