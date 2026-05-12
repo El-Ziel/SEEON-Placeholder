@@ -1,0 +1,1036 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SEEON | Business Networking</title>
+  <meta name="description" content="SEEON turns professional proximity at events, conferences and during business travel into relevant conversation opportunities without location tracking." />
+  <style>
+    :root {
+      --bg: #ffffff;
+      --text: #111111;
+      --muted: #5f6368;
+      --soft: #8a8f94;
+      --line: rgba(17, 17, 17, 0.12);
+      --line-strong: rgba(17, 17, 17, 0.24);
+      --blue: #1e6bb8;
+      --green: #49a564;
+      --max: 1180px;
+    }
+
+    * { box-sizing: border-box; }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    html,
+    body {
+      margin: 0;
+      min-height: 100%;
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Helvetica, Arial, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+
+    body {
+      overflow-x: hidden;
+      background:
+        radial-gradient(circle at 50% 18%, rgba(255,255,255,0.99) 0%, rgba(255,255,255,0.96) 32%, rgba(255,255,255,0.91) 54%, rgba(255,255,255,0.98) 100%),
+        #fff;
+    }
+
+    canvas {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      display: block;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .grid-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 1;
+      background-image:
+        linear-gradient(to right, rgba(17, 17, 17, 0.035) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(17, 17, 17, 0.035) 1px, transparent 1px);
+      background-size: 74px 74px;
+      mask-image: radial-gradient(circle at 50% 22%, transparent 0 18%, rgba(0,0,0,.10) 36%, rgba(0,0,0,.38) 62%, rgba(0,0,0,.9) 100%);
+      -webkit-mask-image: radial-gradient(circle at 50% 22%, transparent 0 18%, rgba(0,0,0,.10) 36%, rgba(0,0,0,.38) 62%, rgba(0,0,0,.9) 100%);
+      pointer-events: none;
+    }
+
+    .page {
+      position: relative;
+      z-index: 2;
+    }
+
+    .wrap {
+      width: min(100%, var(--max));
+      margin: 0 auto;
+      padding: 0 28px;
+    }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      padding: 34px 0 18px;
+    }
+
+    .brand {
+      color: var(--text);
+      text-decoration: none;
+      font-size: 1.05rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      color: var(--muted);
+      font-size: 0.94rem;
+    }
+
+    .nav a {
+      color: inherit;
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+      padding-bottom: 3px;
+      transition: color .2s ease, border-color .2s ease;
+    }
+
+    .nav a:hover {
+      color: var(--text);
+      border-color: var(--line-strong);
+    }
+
+    .nav-contact {
+      color: var(--text);
+      border-color: rgba(17, 17, 17, 0.18);
+    }
+
+    .hero {
+      min-height: 88vh;
+      display: grid;
+      align-items: center;
+      padding: 42px 0 82px;
+    }
+
+    .hero-copy {
+      max-width: 820px;
+      padding-top: 26px;
+    }
+
+    .eyebrow {
+      margin: 0 0 18px;
+      color: var(--soft);
+      font-size: 0.92rem;
+      font-weight: 650;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 0;
+      max-width: 10.8ch;
+      font-size: clamp(3.3rem, 9vw, 7.6rem);
+      line-height: 0.92;
+      font-weight: 650;
+      letter-spacing: 0;
+    }
+
+    .lead {
+      margin: 28px 0 0;
+      max-width: 680px;
+      color: var(--muted);
+      font-size: clamp(1.12rem, 2vw, 1.34rem);
+      line-height: 1.62;
+      font-weight: 500;
+    }
+
+    .lead strong {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--text);
+      font-weight: 650;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 34px;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      min-width: 190px;
+      padding: 0 18px;
+      border: 1px solid var(--text);
+      border-radius: 4px;
+      color: #fff;
+      background: var(--text);
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.98rem;
+      transition: transform .2s ease, background .2s ease, color .2s ease;
+    }
+
+    .button:hover {
+      transform: translateY(-1px);
+      background: #2a2a2a;
+    }
+
+    .button.secondary {
+      background: rgba(255, 255, 255, 0.72);
+      color: var(--text);
+      border-color: var(--line-strong);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+    }
+
+    .button.secondary:hover {
+      background: #fff;
+    }
+
+    .section {
+      padding: 58px 0;
+      border-top: 1px solid var(--line);
+    }
+
+    .section-head {
+      display: grid;
+      grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+      gap: 42px;
+      align-items: end;
+      margin-bottom: 34px;
+    }
+
+    h2 {
+      margin: 0;
+      font-size: clamp(2.1rem, 4vw, 4rem);
+      line-height: 1;
+      font-weight: 650;
+      letter-spacing: 0;
+    }
+
+    .section-intro {
+      margin: 0;
+      color: var(--muted);
+      font-size: 1.08rem;
+      line-height: 1.72;
+    }
+
+    .work-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .work-card {
+      min-height: 230px;
+      padding: 28px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(5px);
+      -webkit-backdrop-filter: blur(5px);
+    }
+
+    .work-card h3 {
+      margin: 0;
+      font-size: clamp(1.35rem, 2.1vw, 1.9rem);
+      line-height: 1.08;
+      font-weight: 650;
+      letter-spacing: 0;
+    }
+
+    .work-card p {
+      margin: 16px 0 0;
+      color: var(--muted);
+      font-size: 1rem;
+      line-height: 1.68;
+    }
+
+    .story-list {
+      display: grid;
+      gap: 18px;
+    }
+
+    .story {
+      display: grid;
+      grid-template-columns: minmax(0, 1.08fr) minmax(280px, 0.72fr);
+      gap: 24px;
+      align-items: stretch;
+      padding: 16px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.68);
+      backdrop-filter: blur(5px);
+      -webkit-backdrop-filter: blur(5px);
+    }
+
+    .story:nth-child(even) {
+      grid-template-columns: minmax(280px, 0.72fr) minmax(0, 1.08fr);
+    }
+
+    .story:nth-child(even) .story-media {
+      order: 2;
+    }
+
+    .story-media {
+      position: relative;
+      overflow: hidden;
+      min-height: 360px;
+      border-radius: 6px;
+      background: #f3f3f3;
+    }
+
+    .story-media img {
+      width: 100%;
+      height: 100%;
+      min-height: inherit;
+      display: block;
+      object-fit: cover;
+      filter: saturate(0.92);
+    }
+
+    .story-media.contain {
+      background: #fff;
+    }
+
+    .story-media.contain img {
+      object-fit: contain;
+      padding: 14px;
+    }
+
+    .story-text {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      min-height: 360px;
+      padding: clamp(18px, 4vw, 42px);
+    }
+
+    .kicker {
+      margin: 0 0 18px;
+      color: var(--soft);
+      font-size: 0.82rem;
+      font-weight: 750;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .story h3 {
+      margin: 0;
+      max-width: 14ch;
+      font-size: clamp(1.85rem, 3.2vw, 3.2rem);
+      line-height: 1.02;
+      font-weight: 650;
+      letter-spacing: 0;
+    }
+
+    .story p {
+      margin: 20px 0 0;
+      color: var(--muted);
+      font-size: 1.05rem;
+      line-height: 1.72;
+      max-width: 520px;
+    }
+
+    .accent {
+      width: 44px;
+      height: 3px;
+      margin-top: 24px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, var(--blue), var(--green));
+    }
+
+    .cta {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(280px, 0.58fr);
+      gap: 42px;
+      align-items: start;
+      padding: 58px;
+      border: 1px solid var(--line-strong);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.78);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      scroll-margin-top: 28px;
+    }
+
+    .differentiator {
+      display: grid;
+      grid-template-columns: minmax(0, 0.58fr) minmax(0, 1fr);
+      gap: 42px;
+      align-items: center;
+      padding: 46px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.72);
+      backdrop-filter: blur(5px);
+      -webkit-backdrop-filter: blur(5px);
+    }
+
+    .differentiator p {
+      margin: 0;
+      color: var(--muted);
+      font-size: clamp(1.06rem, 1.6vw, 1.2rem);
+      line-height: 1.75;
+    }
+
+    .cta h2 {
+      max-width: 12ch;
+    }
+
+    .cta p {
+      margin: 22px 0 0;
+      color: var(--muted);
+      font-size: 1.12rem;
+      line-height: 1.72;
+      max-width: 650px;
+    }
+
+    .contact-panel {
+      display: grid;
+      gap: 16px;
+      padding-top: 8px;
+    }
+
+    .contact-item {
+      padding: 0 0 16px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .contact-label {
+      margin: 0 0 7px;
+      color: var(--soft);
+      font-size: 0.78rem;
+      font-weight: 750;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .contact-value,
+    .contact-value a {
+      margin: 0;
+      color: var(--text);
+      text-decoration: none;
+      font-size: 1.02rem;
+      line-height: 1.55;
+      font-weight: 650;
+    }
+
+    .contact-value a {
+      border-bottom: 1px solid rgba(17, 17, 17, 0.22);
+      padding-bottom: 2px;
+    }
+
+    .contact-value a:hover {
+      border-color: rgba(17, 17, 17, 0.52);
+    }
+
+    .imprint {
+      color: var(--muted);
+      font-size: 0.98rem;
+      line-height: 1.7;
+    }
+
+    footer {
+      padding: 34px 0 42px;
+      color: var(--soft);
+      font-size: 0.92rem;
+      line-height: 1.7;
+      border-top: 1px solid var(--line);
+    }
+
+    .footer-inner {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .footer-imprint {
+      color: var(--muted);
+      text-align: right;
+    }
+
+    .footer-imprint summary {
+      cursor: pointer;
+      list-style: none;
+      color: var(--text);
+      font-weight: 650;
+      border-bottom: 1px solid rgba(17, 17, 17, 0.2);
+      display: inline-flex;
+      padding-bottom: 2px;
+    }
+
+    .footer-imprint summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .footer-imprint summary:hover {
+      border-color: rgba(17, 17, 17, 0.5);
+    }
+
+    .footer-imprint address {
+      margin-top: 12px;
+      font-style: normal;
+    }
+
+    @media (max-width: 900px) {
+      .topbar {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .nav {
+        flex-wrap: wrap;
+      }
+
+      .footer-inner {
+        flex-direction: column;
+      }
+
+      .footer-imprint {
+        text-align: left;
+      }
+
+      .hero {
+        min-height: 78vh;
+        padding-bottom: 54px;
+      }
+
+      .section-head,
+      .work-grid,
+      .story,
+      .story:nth-child(even),
+      .differentiator,
+      .cta {
+        grid-template-columns: 1fr;
+      }
+
+      .section-head {
+        gap: 18px;
+        align-items: start;
+      }
+
+      .story:nth-child(even) .story-media {
+        order: 0;
+      }
+
+      .story-media,
+      .story-text {
+        min-height: 0;
+      }
+
+      .story-media {
+        aspect-ratio: 4 / 3;
+      }
+
+      .work-card {
+        min-height: auto;
+      }
+
+      .story-media img {
+        min-height: 0;
+      }
+
+      .cta {
+        padding: 34px;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .wrap {
+        padding: 0 20px;
+      }
+
+      .topbar {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        padding-top: 26px;
+      }
+
+      .nav {
+        flex: 0 0 auto;
+        gap: 0;
+        font-size: 0.88rem;
+      }
+
+      .nav a:not(.nav-contact) {
+        display: none;
+      }
+
+      .nav-contact {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 38px;
+        padding: 0 12px;
+        border: 1px solid var(--line-strong);
+        border-radius: 4px;
+        background: rgba(255, 255, 255, 0.72);
+        backdrop-filter: blur(4px);
+        -webkit-backdrop-filter: blur(4px);
+        color: var(--text);
+        font-weight: 700;
+      }
+
+      h1 {
+        max-width: 9.6ch;
+        font-size: clamp(3rem, 17vw, 4.5rem);
+      }
+
+      .hero {
+        min-height: auto;
+        padding: 52px 0 46px;
+      }
+
+      .hero-copy {
+        padding-top: 8px;
+      }
+
+      .eyebrow {
+        margin-bottom: 16px;
+        font-size: 0.78rem;
+        line-height: 1.45;
+      }
+
+      .lead {
+        margin-top: 22px;
+        font-size: 1.04rem;
+        line-height: 1.62;
+      }
+
+      .lead strong {
+        margin-bottom: 10px;
+      }
+
+      .hero-actions {
+        flex-direction: column;
+        margin-top: 26px;
+      }
+
+      .button {
+        width: 100%;
+        min-width: 0;
+        min-height: 50px;
+        padding: 0 14px;
+      }
+
+      .section {
+        padding: 44px 0;
+      }
+
+      .section-head {
+        margin-bottom: 24px;
+      }
+
+      h2 {
+        font-size: clamp(2.25rem, 11vw, 3.2rem);
+      }
+
+      .story {
+        padding: 10px;
+      }
+
+      .story-media {
+        aspect-ratio: 1 / 1.18;
+      }
+
+      .story-media.contain {
+        aspect-ratio: 4 / 5;
+      }
+
+      .story-media.contain img {
+        padding: 10px;
+      }
+
+      .story-text {
+        padding: 18px 10px 20px;
+      }
+
+      .story h3 {
+        max-width: 12.5ch;
+      }
+
+      .story p,
+      .section-intro,
+      .work-card p,
+      .differentiator p,
+      .cta p {
+        font-size: 1rem;
+      }
+
+      .work-card,
+      .differentiator {
+        padding: 22px;
+      }
+
+      .cta {
+        padding: 24px;
+      }
+
+      .cta h2,
+      .differentiator h2 {
+        max-width: none;
+      }
+
+      .grid-overlay {
+        background-size: 58px 58px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      canvas {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <canvas id="dots" aria-hidden="true"></canvas>
+  <div class="grid-overlay" aria-hidden="true"></div>
+
+  <div class="page">
+    <header class="wrap topbar">
+      <a class="brand" href="#top" aria-label="SEEON home">SEEON</a>
+      <nav class="nav" aria-label="Page navigation">
+        <a href="#how-it-works">How it works</a>
+        <a href="#concept">Contexts</a>
+        <a href="#why-seeon">Why SEEON</a>
+        <a class="nav-contact" href="#contact">Contact</a>
+      </nav>
+    </header>
+
+    <main id="top">
+      <section class="hero">
+        <div class="wrap">
+          <div class="hero-copy">
+            <p class="eyebrow">Business Travel · Events · Conferences</p>
+            <h1>Relevance in motion.</h1>
+            <p class="lead">
+              <strong>SEEON makes professional proximity visible without making it loud.</strong>
+              At events, in hotels, at airports and along the journey, relevant encounters often already exist in the same room.
+              SEEON works through keyword matching between offer, seek and interest signals, with opt-in visibility and no location data.
+            </p>
+            <div class="hero-actions">
+              <a class="button" href="mailto:elmar@seeon.io">Start a conversation</a>
+              <a class="button secondary" href="https://www.linkedin.com/in/elmar-zimmermann" target="_blank" rel="noopener noreferrer">Get in touch on LinkedIn</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="how-it-works">
+        <div class="wrap">
+          <div class="section-head">
+            <h2>How it works.</h2>
+            <p class="section-intro">
+              SEEON is built for professional relevance in shared physical contexts, without turning people into dots on a map.
+            </p>
+          </div>
+
+          <div class="work-grid" aria-label="How SEEON works">
+            <article class="work-card">
+              <p class="kicker">01 | Keyword matching</p>
+              <h3>Offer, seek and interest.</h3>
+              <p>People describe what they offer, what they seek and what they care about. SEEON matches these signals into relevant professional possibilities.</p>
+            </article>
+
+            <article class="work-card">
+              <p class="kicker">02 | Opt-in visibility</p>
+              <h3>You decide when you are findable.</h3>
+              <p>Visibility is intentional. You choose when your profile can appear to relevant people in the same business context.</p>
+            </article>
+
+            <article class="work-card">
+              <p class="kicker">03 | A list, not a map</p>
+              <h3>Ranked by relevance.</h3>
+              <p>SEEON shows a relevance-ranked contact list. No map, no real-time location and no location data.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="concept">
+        <div class="wrap">
+          <div class="section-head">
+            <h2>How it appears.</h2>
+            <p class="section-intro">
+              SEEON moves with real business contexts, recognizes proximity and relevance in the moment, and guides people toward conversations that would otherwise have remained invisible.
+            </p>
+          </div>
+
+          <div class="story-list" aria-label="SEEON concept images with explanations">
+            <article class="story">
+              <div class="story-media">
+                <img src="assets/business-01-hall.png" alt="Black and white event hall with professional visitors" />
+              </div>
+              <div class="story-text">
+                <p class="kicker">01 | Physical context</p>
+                <h3>The room is already full of relevance.</h3>
+                <p>At an event or conference, many people share interests, timing and intent. SEEON treats this existing proximity as the starting point, not as coincidence.</p>
+                <span class="accent" aria-hidden="true"></span>
+              </div>
+            </article>
+
+            <article class="story">
+              <div class="story-media">
+                <img src="assets/business-02-detection.png" alt="Event hall with subtly highlighted people in the background" />
+              </div>
+              <div class="story-text">
+                <p class="kicker">02 | Discovery</p>
+                <h3>Relevant people become visible.</h3>
+                <p>What first looks like anonymous movement becomes readable signal. SEEON can show who may be relevant nearby without turning the moment into a noisy network.</p>
+                <span class="accent" aria-hidden="true"></span>
+              </div>
+            </article>
+
+            <article class="story">
+              <div class="story-media">
+                <img src="assets/business-03-phone.png" alt="Smartphone with the SEEON interface in front of an event environment" />
+              </div>
+              <div class="story-text">
+                <p class="kicker">03 | Interface</p>
+                <h3>The product stays calm and clear.</h3>
+                <p>The interface focuses on orientation, not distraction. Relevance becomes readable in a simple mobile moment.</p>
+                <span class="accent" aria-hidden="true"></span>
+              </div>
+            </article>
+
+            <article class="story">
+              <div class="story-media">
+                <img src="assets/business-04-list.png" alt="Smartphone with SEEON relevance interface in an event setting" />
+              </div>
+              <div class="story-text">
+                <p class="kicker">04 | Relevance list</p>
+                <h3>Proximity becomes a reason to talk.</h3>
+                <p>SEEON shows a contact list ranked by relevance. No map, no real-time location and no location data.</p>
+                <span class="accent" aria-hidden="true"></span>
+              </div>
+            </article>
+
+            <article class="story">
+              <div class="story-media">
+                <img src="assets/business-05-conversation.png" alt="Two business people shaking hands at an event" />
+              </div>
+              <div class="story-text">
+                <p class="kicker">05 | Outcome</p>
+                <h3>Signal becomes encounter.</h3>
+                <p>The goal is not a feed, but a high-quality conversation. SEEON helps relevant people avoid missing each other.</p>
+                <span class="accent" aria-hidden="true"></span>
+              </div>
+            </article>
+
+            <article class="story">
+              <div class="story-media contain">
+                <img src="assets/business-06-journey.png" alt="Concept graphic showing event, hotel, airport, station and train as usage contexts" />
+              </div>
+              <div class="story-text">
+                <p class="kicker">06 | Journey</p>
+                <h3>Professional proximity travels with you.</h3>
+                <p>The context does not end at the booth. Relevant encounters can happen along the way, at the hotel, at the airport, at the station or on the train.</p>
+                <span class="accent" aria-hidden="true"></span>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="why-seeon">
+        <div class="wrap">
+          <div class="differentiator">
+            <h2>Why not just LinkedIn?</h2>
+            <p>
+              LinkedIn shows your entire network. SEEON shows who is relevant now, in the same room or business context. No scraping, no map and GDPR-compliant by design.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="wrap">
+          <div class="cta" id="presentation">
+            <div>
+              <p class="eyebrow">Solution briefing</p>
+              <h2>Explore SEEON in a focused briefing.</h2>
+              <p>
+                For event organizers, conference teams, venues and business-travel communities, SEEON can be reviewed in a concise session covering relevance matching, the privacy model, pilot scenarios and rollout requirements.
+              </p>
+              <div class="hero-actions">
+                <a class="button" href="mailto:elmar@seeon.io">Start a conversation</a>
+                <a class="button secondary" href="https://www.linkedin.com/in/elmar-zimmermann" target="_blank" rel="noopener noreferrer">Get in touch on LinkedIn</a>
+              </div>
+            </div>
+
+            <aside class="contact-panel" id="contact" aria-label="Contact details">
+              <div class="contact-item">
+                <p class="contact-label">Name</p>
+                <p class="contact-value">Elmar Zimmermann</p>
+              </div>
+              <div class="contact-item">
+                <p class="contact-label">Phone</p>
+                <p class="contact-value"><a href="tel:+491705959922">+49 170 59 59 922</a></p>
+              </div>
+              <div class="contact-item">
+                <p class="contact-label">Email</p>
+                <p class="contact-value"><a href="mailto:elmar@seeon.io">elmar@seeon.io</a></p>
+              </div>
+            </aside>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="wrap footer-inner">
+        <div>© SEEON | Business travel · events · conferences | Privacy-first by design</div>
+        <details class="footer-imprint" id="imprint">
+          <summary>Imprint</summary>
+          <address>
+            Elmar Zimmermann<br />
+            Am Vogelherd 17<br />
+            51467 Bergisch Gladbach
+          </address>
+        </details>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    const canvas = document.getElementById('dots');
+    const ctx = canvas.getContext('2d');
+
+    let width = 0;
+    let height = 0;
+    let dpr = Math.min(window.devicePixelRatio || 1, 2);
+    let dots = [];
+    let rafId = null;
+
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    function resizeCanvas() {
+      width = window.innerWidth;
+      height = window.innerHeight;
+      dpr = Math.min(window.devicePixelRatio || 1, 2);
+
+      canvas.width = Math.floor(width * dpr);
+      canvas.height = Math.floor(height * dpr);
+      canvas.style.width = width + 'px';
+      canvas.style.height = height + 'px';
+
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      createDots();
+    }
+
+    function insideTextSafeZone(x, y) {
+      const cx = width < 760 ? width * 0.48 : width * 0.36;
+      const cy = height * 0.43;
+      const rx = Math.min(width * 0.32, 430);
+      const ry = Math.min(height * 0.3, 250);
+      const dx = (x - cx) / rx;
+      const dy = (y - cy) / ry;
+      return (dx * dx + dy * dy) < 1;
+    }
+
+    function createDots() {
+      dots = [];
+      const baseCount = width < 680 ? 72 : width < 1100 ? 112 : 148;
+      let attempts = 0;
+
+      while (dots.length < baseCount && attempts < baseCount * 28) {
+        attempts++;
+        const x = Math.random() * width;
+        const y = Math.random() * height;
+
+        if (insideTextSafeZone(x, y)) continue;
+
+        const size = Math.random() < 0.16 ? 2.8 + Math.random() * 1.5 : 1 + Math.random() * 1.7;
+        const drift = 0.055 + Math.random() * 0.18;
+        const opacity = 0.2 + Math.random() * 0.36;
+        const phase = Math.random() * Math.PI * 2;
+
+        dots.push({
+          x,
+          y,
+          originX: x,
+          originY: y,
+          size,
+          opacity,
+          driftX: (Math.random() - 0.5) * drift,
+          driftY: (Math.random() - 0.5) * drift,
+          phase,
+          pulse: 0.28 + Math.random() * 0.58,
+        });
+      }
+    }
+
+    function drawDot(dot, time) {
+      const t = time * 0.001;
+      dot.x += dot.driftX;
+      dot.y += dot.driftY;
+
+      if (dot.x < -10 || dot.x > width + 10 || dot.y < -10 || dot.y > height + 10 || insideTextSafeZone(dot.x, dot.y)) {
+        dot.x = dot.originX;
+        dot.y = dot.originY;
+        dot.driftX *= -1;
+        dot.driftY *= -1;
+      }
+
+      const breath = 1 + Math.sin(t * dot.pulse + dot.phase) * 0.12;
+      const halo = dot.size + 6 + Math.sin(t * 0.7 + dot.phase) * 1.5;
+      const alpha = dot.opacity * (0.88 + Math.sin(t * 0.55 + dot.phase) * 0.12);
+
+      ctx.beginPath();
+      ctx.fillStyle = `rgba(17,17,17,${(alpha * 0.12).toFixed(3)})`;
+      ctx.arc(dot.x, dot.y, halo, 0, Math.PI * 2);
+      ctx.fill();
+
+      ctx.beginPath();
+      ctx.fillStyle = `rgba(17,17,17,${alpha.toFixed(3)})`;
+      ctx.arc(dot.x, dot.y, dot.size * breath, 0, Math.PI * 2);
+      ctx.fill();
+    }
+
+    function animate(time) {
+      ctx.clearRect(0, 0, width, height);
+      for (let i = 0; i < dots.length; i++) {
+        drawDot(dots[i], time);
+      }
+      rafId = requestAnimationFrame(animate);
+    }
+
+    if (!prefersReducedMotion) {
+      resizeCanvas();
+      animate(0);
+      window.addEventListener('resize', () => {
+        if (rafId) cancelAnimationFrame(rafId);
+        resizeCanvas();
+        animate(0);
+      }, { passive: true });
+    }
+  </script>
+</body>
+</html>
