@@ -164,6 +164,15 @@
       font-weight: 650;
     }
 
+    .product-note {
+      margin: 18px 0 0;
+      max-width: 660px;
+      color: var(--text);
+      font-size: clamp(1.02rem, 1.6vw, 1.16rem);
+      line-height: 1.66;
+      font-weight: 600;
+    }
+
     .hero-actions {
       display: flex;
       flex-wrap: wrap;
@@ -262,6 +271,13 @@
       color: var(--muted);
       font-size: 1rem;
       line-height: 1.68;
+    }
+
+    .example-line {
+      display: block;
+      margin-top: 14px;
+      color: var(--text);
+      font-weight: 650;
     }
 
     .story-list {
@@ -373,10 +389,6 @@
     }
 
     .differentiator {
-      display: grid;
-      grid-template-columns: minmax(0, 0.58fr) minmax(0, 1fr);
-      gap: 42px;
-      align-items: center;
       padding: 46px;
       border: 1px solid var(--line);
       border-radius: 8px;
@@ -385,11 +397,47 @@
       -webkit-backdrop-filter: blur(5px);
     }
 
+    .differentiator .section-intro {
+      max-width: 760px;
+      margin-top: 18px;
+    }
+
+    .comparison-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+      margin-top: 30px;
+    }
+
+    .comparison-card {
+      padding: 28px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.72);
+    }
+
+    .comparison-card h3 {
+      margin: 0 0 18px;
+      font-size: clamp(1.45rem, 2.2vw, 2rem);
+      line-height: 1.08;
+      font-weight: 650;
+      letter-spacing: 0;
+    }
+
+    .comparison-card ul {
+      display: grid;
+      gap: 12px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .comparison-card li,
     .differentiator p {
       margin: 0;
       color: var(--muted);
       font-size: clamp(1.06rem, 1.6vw, 1.2rem);
-      line-height: 1.75;
+      line-height: 1.62;
     }
 
     .cta h2 {
@@ -517,6 +565,7 @@
 
       .section-head,
       .work-grid,
+      .comparison-grid,
       .story,
       .story:nth-child(even),
       .differentiator,
@@ -619,6 +668,11 @@
         line-height: 1.62;
       }
 
+      .product-note {
+        font-size: 1rem;
+        line-height: 1.58;
+      }
+
       .lead strong {
         margin-bottom: 10px;
       }
@@ -680,6 +734,7 @@
       }
 
       .work-card,
+      .comparison-card,
       .differentiator {
         padding: 22px;
       }
@@ -735,6 +790,7 @@
               At events, in hotels, at airports and along the journey, relevant encounters often already exist in the same room.
               SEEON works through keyword matching between offer, seek and interest signals, with opt-in visibility and no location data.
             </p>
+            <p class="product-note">SEEON is a mobile app and an independent proximity layer that works alongside existing event, venue and travel systems.</p>
             <div class="hero-actions">
               <a class="button" href="mailto:elmar@seeon.io">Start a conversation</a>
               <a class="button secondary" href="https://www.linkedin.com/in/elmar-zimmermann" target="_blank" rel="noopener noreferrer">Get in touch on LinkedIn</a>
@@ -756,7 +812,7 @@
             <article class="work-card">
               <p class="kicker">01 | Keyword matching</p>
               <h3>Offer, seek and interest.</h3>
-              <p>People describe what they offer, what they seek and what they care about. SEEON matches these signals into relevant professional possibilities.</p>
+              <p>People describe what they offer, what they seek and what they care about. SEEON matches these signals into relevant professional possibilities. <span class="example-line">Offer: Specific Solution · Seek: Exchange · Interest: New Distributor.</span></p>
             </article>
 
             <article class="work-card">
@@ -786,7 +842,7 @@
           <div class="story-list" aria-label="SEEON concept images with explanations">
             <article class="story">
               <div class="story-media">
-                <img src="business-01-hall.png" alt="Black and white event hall with professional visitors" />
+                <img src="assets/business-01-hall.png" alt="Black and white event hall with professional visitors" />
               </div>
               <div class="story-text">
                 <p class="kicker">01 | Physical context</p>
@@ -798,22 +854,10 @@
 
             <article class="story">
               <div class="story-media">
-                <img src="business-02-detection.png" alt="Event hall with subtly highlighted people in the background" />
+                <img src="assets/business-03-phone.png" alt="Smartphone with the SEEON interface in front of an event environment" />
               </div>
               <div class="story-text">
-                <p class="kicker">02 | Discovery</p>
-                <h3>Relevant people become visible.</h3>
-                <p>What first looks like anonymous movement becomes readable signal. SEEON can show who may be relevant nearby without turning the moment into a noisy network.</p>
-                <span class="accent" aria-hidden="true"></span>
-              </div>
-            </article>
-
-            <article class="story">
-              <div class="story-media">
-                <img src="business-03-phone.png" alt="Smartphone with the SEEON interface in front of an event environment" />
-              </div>
-              <div class="story-text">
-                <p class="kicker">03 | Interface</p>
+                <p class="kicker">02 | Interface</p>
                 <h3>The product stays calm and clear.</h3>
                 <p>The interface focuses on orientation, not distraction. Relevance becomes readable in a simple mobile moment.</p>
                 <span class="accent" aria-hidden="true"></span>
@@ -822,22 +866,10 @@
 
             <article class="story">
               <div class="story-media">
-                <img src="business-04-list.png" alt="Smartphone with SEEON relevance interface in an event setting" />
+                <img src="assets/business-05-conversation.png" alt="Two business people shaking hands at an event" />
               </div>
               <div class="story-text">
-                <p class="kicker">04 | Relevance list</p>
-                <h3>Proximity becomes a reason to talk.</h3>
-                <p>SEEON shows a contact list ranked by relevance. No map, no real-time location and no location data.</p>
-                <span class="accent" aria-hidden="true"></span>
-              </div>
-            </article>
-
-            <article class="story">
-              <div class="story-media">
-                <img src="business-05-conversation.png" alt="Two business people shaking hands at an event" />
-              </div>
-              <div class="story-text">
-                <p class="kicker">05 | Outcome</p>
+                <p class="kicker">03 | Outcome</p>
                 <h3>Signal becomes encounter.</h3>
                 <p>The goal is not a feed, but a high-quality conversation. SEEON helps relevant people avoid missing each other.</p>
                 <span class="accent" aria-hidden="true"></span>
@@ -846,10 +878,10 @@
 
             <article class="story">
               <div class="story-media contain">
-                <img src="business-06-journey.png" alt="Concept graphic showing event, hotel, airport, station and train as usage contexts" />
+                <img src="assets/business-06-journey.png" alt="Concept graphic showing event, hotel, airport, station and train as usage contexts" />
               </div>
               <div class="story-text">
-                <p class="kicker">06 | Journey</p>
+                <p class="kicker">04 | Journey</p>
                 <h3>Professional proximity travels with you.</h3>
                 <p>The context does not end at the booth. Relevant encounters can happen along the way, at the hotel, at the airport, at the station or on the train.</p>
                 <span class="accent" aria-hidden="true"></span>
@@ -863,9 +895,26 @@
         <div class="wrap">
           <div class="differentiator">
             <h2>Why not just LinkedIn?</h2>
-            <p>
-              LinkedIn shows your entire network. SEEON shows who is relevant now, in the same room or business context. No scraping, no map and GDPR-compliant by design.
-            </p>
+            <p class="section-intro">Both can support professional networking. They solve different moments.</p>
+            <div class="comparison-grid" aria-label="LinkedIn compared with SEEON">
+              <article class="comparison-card">
+                <h3>LinkedIn</h3>
+                <ul>
+                  <li>Shows your broad professional network.</li>
+                  <li>Works before and after an event.</li>
+                  <li>Often depends on search, posts or existing connections.</li>
+                </ul>
+              </article>
+
+              <article class="comparison-card">
+                <h3>SEEON</h3>
+                <ul>
+                  <li>Shows who is relevant now, in the same room or business context.</li>
+                  <li>Uses opt-in keyword matching, not scraping.</li>
+                  <li>No map, no location data and GDPR-compliant by design.</li>
+                </ul>
+              </article>
+            </div>
           </div>
         </div>
       </section>
@@ -875,9 +924,9 @@
           <div class="cta" id="presentation">
             <div>
               <p class="eyebrow">Solution briefing</p>
-              <h2>Explore SEEON in a focused briefing.</h2>
+              <h2>Curious how SEEON would fit your event or community? Let's talk.</h2>
               <p>
-                For event organizers, conference teams, venues and business-travel communities, SEEON can be reviewed in a concise session covering relevance matching, the privacy model, pilot scenarios and rollout requirements.
+                A short conversation is usually enough to understand the context, the audience and whether SEEON could create relevant encounters without adding noise.
               </p>
               <div class="hero-actions">
                 <a class="button" href="mailto:elmar@seeon.io">Start a conversation</a>
