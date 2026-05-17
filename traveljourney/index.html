@@ -5,31 +5,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Every event has a blind spot</title>
   <meta name="description" content="SEEON gives event and trade show organizers a quiet relevance layer that helps attendees find the right people without disrupting what already works." />
-  <meta property="og:title" content="Every event has a blind spot" />
-  <meta property="og:description" content="SEEON gives event and trade show organizers a quiet relevance layer that helps attendees find the right people without disrupting what already works." />
-  <meta name="twitter:title" content="Every event has a blind spot" />
-  <meta name="twitter:description" content="SEEON gives event and trade show organizers a quiet relevance layer that helps attendees find the right people without disrupting what already works." />
-  <link rel="preload" as="image" href="business-01-hall.jpg" type="image/jpeg" />
-  <link rel="preload" as="image" href="business-03-phone.jpg" type="image/jpeg" />
-  <link rel="preload" as="image" href="business-05-conversation.jpg" type="image/jpeg" />
-
-  <!-- Google Analytics -->
+  
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-534392958"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-    gtag('config', 'G-XXXXXXXXXX');
+    gtag('config', 'G-534392958');
   </script>
 
-  <!-- QR campaign tracking and URL cleanup -->
   <script>
     (function() {
       const url = new URL(window.location.href);
-
       if (!url.searchParams.has('utm_source')) {
-        window.dataLayer.push({
-          event: 'page_view',
+        gtag('event', 'page_view', {
           page_location: window.location.href + '?utm_source=qr-code&utm_medium=print&utm_campaign=travel-journey'
         });
       } else {
@@ -40,6 +29,13 @@
       }
     })();
   </script>
+
+  <meta property="og:title" content="Every event has a blind spot" />
+  <meta property="og:description" content="SEEON gives event and trade show organizers a quiet relevance layer that helps attendees find the right people without disrupting what already works." />
+  <link rel="preload" as="image" href="seeon-hall-v2.jpg" type="image/jpeg" />
+  <link rel="preload" as="image" href="seeon-phone-v2.jpg" type="image/jpeg" />
+  <link rel="preload" as="image" href="seeon-conversation-v2.jpg" type="image/jpeg" />
+  
   <style>
     :root {
       --bg: #ffffff;
@@ -55,12 +51,9 @@
 
     * { box-sizing: border-box; }
 
-    html {
-      scroll-behavior: smooth;
-    }
+    html { scroll-behavior: smooth; }
 
-    html,
-    body {
+    html, body {
       margin: 0;
       min-height: 100%;
       background: var(--bg);
@@ -72,9 +65,7 @@
 
     body {
       overflow-x: hidden;
-      background:
-        radial-gradient(circle at 50% 18%, rgba(255,255,255,0.99) 0%, rgba(255,255,255,0.96) 32%, rgba(255,255,255,0.91) 54%, rgba(255,255,255,0.98) 100%),
-        #fff;
+      background: radial-gradient(circle at 50% 18%, rgba(255,255,255,0.99) 0%, rgba(255,255,255,0.96) 32%, rgba(255,255,255,0.91) 54%, rgba(255,255,255,0.98) 100%), #fff;
     }
 
     canvas {
@@ -92,81 +83,32 @@
       position: fixed;
       inset: 0;
       z-index: 1;
-      background-image:
-        linear-gradient(to right, rgba(17, 17, 17, 0.035) 1px, transparent 1px),
-        linear-gradient(to bottom, rgba(17, 17, 17, 0.035) 1px, transparent 1px);
+      background-image: linear-gradient(to right, rgba(17, 17, 17, 0.035) 1px, transparent 1px), linear-gradient(to bottom, rgba(17, 17, 17, 0.035) 1px, transparent 1px);
       background-size: 74px 74px;
       mask-image: radial-gradient(circle at 50% 22%, transparent 0 18%, rgba(0,0,0,.10) 36%, rgba(0,0,0,.38) 62%, rgba(0,0,0,.9) 100%);
       -webkit-mask-image: radial-gradient(circle at 50% 22%, transparent 0 18%, rgba(0,0,0,.10) 36%, rgba(0,0,0,.38) 62%, rgba(0,0,0,.9) 100%);
       pointer-events: none;
     }
 
-    .page {
-      position: relative;
-      z-index: 2;
-    }
+    .page { position: relative; z-index: 2; }
 
-    .wrap {
-      width: min(100%, var(--max));
-      margin: 0 auto;
-      padding: 0 28px;
-    }
+    .wrap { width: min(100%, var(--max)); margin: 0 auto; padding: 0 28px; }
 
-    .topbar {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 24px;
-      padding: 34px 0 18px;
-    }
+    .topbar { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 34px 0 18px; }
 
-    .brand {
-      color: var(--text);
-      text-decoration: none;
-      font-size: 1.05rem;
-      font-weight: 700;
-      letter-spacing: 0.18em;
-    }
+    .brand { color: var(--text); text-decoration: none; font-size: 1.05rem; font-weight: 700; letter-spacing: 0.18em; }
 
-    .nav {
-      display: flex;
-      align-items: center;
-      gap: 18px;
-      color: var(--muted);
-      font-size: 0.94rem;
-    }
+    .nav { display: flex; align-items: center; gap: 18px; color: var(--muted); font-size: 0.94rem; }
 
-    .nav a {
-      color: inherit;
-      text-decoration: none;
-      border-bottom: 1px solid transparent;
-      padding-bottom: 3px;
-      transition: color .2s ease, border-color .2s ease;
-    }
+    .nav a { color: inherit; text-decoration: none; border-bottom: 1px solid transparent; padding-bottom: 3px; transition: color .2s ease, border-color .2s ease; }
 
-    .nav a:hover {
-      color: var(--text);
-      border-color: var(--line-strong);
-    }
+    .nav a:hover { color: var(--text); border-color: var(--line-strong); }
 
-    .nav-contact {
-      color: var(--text);
-      border-color: rgba(17, 17, 17, 0.18);
-    }
+    .nav-contact { color: var(--text); border-color: rgba(17, 17, 17, 0.18); }
 
-    .hero {
-      min-height: 82vh;
-      display: grid;
-      align-items: center;
-      padding: 12px 0 42px;
-    }
+    .hero { min-height: 82vh; display: grid; align-items: center; padding: 12px 0 42px; }
 
-    .hero-copy {
-      position: relative;
-      isolation: isolate;
-      max-width: 820px;
-      padding-top: 26px;
-    }
+    .hero-copy { position: relative; isolation: isolate; max-width: 820px; padding-top: 26px; }
 
     .hero-copy::before {
       content: "";
@@ -178,54 +120,17 @@
       pointer-events: none;
     }
 
-    .eyebrow {
-      margin: 0 0 12px;
-      color: var(--soft);
-      font-size: 0.92rem;
-      font-weight: 650;
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
-    }
+    .eyebrow { margin: 0 0 12px; color: var(--soft); font-size: 0.92rem; font-weight: 650; letter-spacing: 0.05em; text-transform: uppercase; }
 
-    h1 {
-      margin: 0;
-      max-width: 10.8ch;
-      font-size: clamp(3.1rem, 6.3vw, 5.25rem);
-      line-height: 0.92;
-      font-weight: 650;
-      letter-spacing: 0;
-    }
+    h1 { margin: 0; max-width: 10.8ch; font-size: clamp(3.1rem, 6.3vw, 5.25rem); line-height: 0.92; font-weight: 650; letter-spacing: 0; }
 
-    .lead {
-      margin: 22px 0 0;
-      max-width: 680px;
-      color: var(--muted);
-      font-size: clamp(1.08rem, 1.7vw, 1.22rem);
-      line-height: 1.54;
-      font-weight: 500;
-    }
+    .lead { margin: 22px 0 0; max-width: 680px; color: var(--muted); font-size: clamp(1.08rem, 1.7vw, 1.22rem); line-height: 1.54; font-weight: 500; }
 
-    .lead strong {
-      display: block;
-      margin-bottom: 8px;
-      color: var(--text);
-      font-weight: 650;
-    }
+    .lead strong { display: block; margin-bottom: 8px; color: var(--text); font-weight: 650; }
 
-    .hero-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      margin-top: 18px;
-    }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 18px; }
 
-    .trust-badges {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-top: 18px;
-      max-width: 720px;
-    }
+    .trust-badges { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; max-width: 720px; }
 
     .trust-badge {
       display: inline-flex;
@@ -262,37 +167,15 @@
       transition: transform .2s ease, background .2s ease, color .2s ease;
     }
 
-    .button:hover {
-      transform: translateY(-1px);
-      background: #2a2a2a;
-    }
+    .button:hover { transform: translateY(-1px); background: #2a2a2a; }
 
-    .button.secondary {
-      background: rgba(255, 255, 255, 0.72);
-      color: var(--text);
-      border-color: var(--line-strong);
-      backdrop-filter: blur(4px);
-      -webkit-backdrop-filter: blur(4px);
-    }
+    .button.secondary { background: rgba(255, 255, 255, 0.72); color: var(--text); border-color: var(--line-strong); backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px); }
 
-    .button.secondary:hover {
-      background: #fff;
-    }
+    .button.secondary:hover { background: #fff; }
 
-    .section {
-      padding: 58px 0;
-      border-top: 1px solid var(--line);
-    }
+    .section { padding: 58px 0; border-top: 1px solid var(--line); }
 
-    .section-head {
-      position: relative;
-      isolation: isolate;
-      display: grid;
-      grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
-      gap: 42px;
-      align-items: end;
-      margin-bottom: 34px;
-    }
+    .section-head { position: relative; isolation: isolate; display: grid; grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr); gap: 42px; align-items: end; margin-bottom: 34px; }
 
     .section-head::before {
       content: "";
@@ -304,635 +187,104 @@
       pointer-events: none;
     }
 
-    h2 {
-      margin: 0;
-      font-size: clamp(2.1rem, 4vw, 4rem);
-      line-height: 1;
-      font-weight: 650;
-      letter-spacing: 0;
-    }
+    h2 { margin: 0; font-size: clamp(2.1rem, 4vw, 4rem); line-height: 1; font-weight: 650; letter-spacing: 0; }
 
-    .section-intro {
-      margin: 0;
-      color: var(--muted);
-      font-size: 1.08rem;
-      line-height: 1.72;
-    }
+    .section-intro { margin: 0; color: var(--muted); font-size: 1.08rem; line-height: 1.72; }
 
-    .work-grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 16px;
-    }
+    .work-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
 
-    .work-card {
-      min-height: 230px;
-      padding: 28px;
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      background: rgba(255, 255, 255, 0.94);
-      backdrop-filter: blur(5px);
-      -webkit-backdrop-filter: blur(5px);
-    }
+    .work-card { min-height: 230px; padding: 28px; border: 1px solid var(--line); border-radius: 8px; background: rgba(255, 255, 255, 0.94); backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px); }
 
-    .work-card h3 {
-      margin: 0;
-      font-size: clamp(1.35rem, 2.1vw, 1.9rem);
-      line-height: 1.08;
-      font-weight: 650;
-      letter-spacing: 0;
-    }
+    .work-card h3 { margin: 0; font-size: clamp(1.35rem, 2.1vw, 1.9rem); line-height: 1.08; font-weight: 650; letter-spacing: 0; }
 
-    .work-card p {
-      margin: 16px 0 0;
-      color: var(--muted);
-      font-size: 1rem;
-      line-height: 1.68;
-    }
+    .work-card p { margin: 16px 0 0; color: var(--muted); font-size: 1rem; line-height: 1.68; }
 
-    .problem-block {
-      padding: 46px;
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      background: rgba(255, 255, 255, 0.96);
-      backdrop-filter: blur(5px);
-      -webkit-backdrop-filter: blur(5px);
-    }
+    .problem-block { padding: 46px; border: 1px solid var(--line); border-radius: 8px; background: rgba(255, 255, 255, 0.96); backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px); }
 
-    .problem-copy,
-    .positioning-copy {
-      display: grid;
-      gap: 16px;
-      max-width: 840px;
-      margin-top: 24px;
-    }
+    .problem-copy, .positioning-copy { display: grid; gap: 16px; max-width: 840px; margin-top: 24px; }
 
-    .problem-copy p,
-    .positioning-copy p {
-      margin: 0;
-      color: var(--muted);
-      font-size: clamp(1.06rem, 1.6vw, 1.2rem);
-      line-height: 1.68;
-    }
+    .problem-copy p, .positioning-copy p { margin: 0; color: var(--muted); font-size: clamp(1.06rem, 1.6vw, 1.2rem); line-height: 1.68; }
 
-    .positioning-copy .positioning-close {
-      color: var(--text);
-      font-weight: 700;
-    }
+    .positioning-copy .positioning-close { color: var(--text); font-weight: 700; }
 
-    .story-list {
-      display: grid;
-      gap: 18px;
-    }
+    .story-list { display: grid; gap: 18px; }
 
-    .story {
-      display: grid;
-      grid-template-columns: minmax(0, 1.08fr) minmax(280px, 0.72fr);
-      gap: 24px;
-      align-items: stretch;
-      padding: 16px;
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      background: rgba(255, 255, 255, 0.95);
-      backdrop-filter: blur(5px);
-      -webkit-backdrop-filter: blur(5px);
-    }
+    .story { display: grid; grid-template-columns: minmax(0, 1.08fr) minmax(280px, 0.72fr); gap: 24px; align-items: stretch; padding: 16px; border: 1px solid var(--line); border-radius: 8px; background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(5px); -webkit-backdrop-filter: blur(5px); }
 
-    .story:nth-child(even) {
-      grid-template-columns: minmax(280px, 0.72fr) minmax(0, 1.08fr);
-    }
+    .story:nth-child(even) { grid-template-columns: minmax(280px, 0.72fr) minmax(0, 1.08fr); }
 
-    .story:nth-child(even) .story-media {
-      order: 2;
-    }
+    .story:nth-child(even) .story-media { order: 2; }
 
-    .story.text-only {
-      grid-template-columns: minmax(0, 0.9fr) minmax(280px, 0.72fr);
-    }
+    .journey-table { display: flex; flex-direction: column; justify-content: center; min-height: 300px; padding: clamp(18px, 4vw, 42px); border-left: 1px solid var(--line); }
 
-    .story.text-only .story-text {
-      min-height: 300px;
-      max-width: 760px;
-    }
+    .journey-title { margin: 0; color: var(--soft); font-size: 0.78rem; font-weight: 750; letter-spacing: 0.12em; text-transform: uppercase; }
 
-    .journey-table {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      min-height: 300px;
-      padding: clamp(18px, 4vw, 42px);
-      border-left: 1px solid var(--line);
-    }
+    .journey-line { margin: 12px 0 24px; color: var(--text); font-size: clamp(1.25rem, 2.1vw, 1.85rem); line-height: 1.12; font-weight: 650; max-width: 18ch; }
 
-    .journey-title {
-      margin: 0;
-      color: var(--soft);
-      font-size: 0.78rem;
-      font-weight: 750;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-    }
+    .journey-list { display: flex; flex-wrap: wrap; gap: 8px; margin: 0; padding: 0; list-style: none; }
 
-    .journey-line {
-      margin: 12px 0 24px;
-      color: var(--text);
-      font-size: clamp(1.25rem, 2.1vw, 1.85rem);
-      line-height: 1.12;
-      font-weight: 650;
-      max-width: 18ch;
-    }
+    .journey-list li { display: inline-flex; align-items: center; justify-content: center; min-height: 36px; padding: 0 13px; border: 1px solid rgba(17, 17, 17, 0.16); border-radius: 999px; background: rgba(255, 255, 255, 0.88); color: var(--text); font-size: 0.92rem; font-weight: 700; white-space: nowrap; }
 
-    .journey-list {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin: 0;
-      padding: 0;
-      list-style: none;
-    }
+    .story-media { position: relative; overflow: hidden; min-height: 360px; border-radius: 6px; background-color: #f3f3f3; background-position: center; background-size: cover; background-repeat: no-repeat; }
 
-    .journey-list li {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 36px;
-      padding: 0 13px;
-      border: 1px solid rgba(17, 17, 17, 0.16);
-      border-radius: 999px;
-      background: rgba(255, 255, 255, 0.88);
-      color: var(--text);
-      font-size: 0.92rem;
-      font-weight: 700;
-      white-space: nowrap;
-    }
+    .story-media.media-hall { background-image: url("seeon-hall-v2.jpg"); }
 
-    .story-media {
-      position: relative;
-      overflow: hidden;
-      min-height: 360px;
-      border-radius: 6px;
-      background: #f3f3f3;
-    }
+    .story-media.media-phone { background-image: url("seeon-phone-v2.jpg"); }
 
-    .story-media img {
-      width: 100%;
-      height: 100%;
-      min-height: inherit;
-      display: block;
-      object-fit: cover;
-      filter: saturate(0.92);
-    }
+    .story-media.media-conversation { background-image: url("seeon-conversation-v2.jpg"); }
 
-    .story-media.contain {
-      background: #fff;
-    }
+    .story-media img { width: 100%; height: 100%; min-height: inherit; display: block; object-fit: cover; filter: saturate(0.92); }
 
-    .story-media.contain img {
-      object-fit: contain;
-      padding: 14px;
-    }
+    .story-text { display: flex; flex-direction: column; justify-content: center; min-height: 360px; padding: clamp(18px, 4vw, 42px); }
 
-    .story-text {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      min-height: 360px;
-      padding: clamp(18px, 4vw, 42px);
-    }
+    .kicker { margin: 0 0 18px; color: var(--soft); font-size: 0.82rem; font-weight: 750; letter-spacing: 0.08em; text-transform: uppercase; }
 
-    .kicker {
-      margin: 0 0 18px;
-      color: var(--soft);
-      font-size: 0.82rem;
-      font-weight: 750;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-    }
+    .story h3 { margin: 0; max-width: 14ch; font-size: clamp(1.85rem, 3.2vw, 3.2rem); line-height: 1.02; font-weight: 650; letter-spacing: 0; }
 
-    .story h3 {
-      margin: 0;
-      max-width: 14ch;
-      font-size: clamp(1.85rem, 3.2vw, 3.2rem);
-      line-height: 1.02;
-      font-weight: 650;
-      letter-spacing: 0;
-    }
+    .story p { margin: 20px 0 0; color: var(--muted); font-size: 1.05rem; line-height: 1.72; max-width: 520px; }
 
-    .story p {
-      margin: 20px 0 0;
-      color: var(--muted);
-      font-size: 1.05rem;
-      line-height: 1.72;
-      max-width: 520px;
-    }
+    .accent { width: 44px; height: 3px; margin-top: 24px; border-radius: 999px; background: linear-gradient(90deg, var(--blue), var(--green)); }
 
-    .accent {
-      width: 44px;
-      height: 3px;
-      margin-top: 24px;
-      border-radius: 999px;
-      background: linear-gradient(90deg, var(--blue), var(--green));
-    }
+    .cta { display: grid; grid-template-columns: minmax(0, 1fr) minmax(280px, 0.58fr); gap: 42px; align-items: start; padding: 58px; border: 1px solid var(--line-strong); border-radius: 8px; background: rgba(255, 255, 255, 0.96); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); scroll-margin-top: 28px; }
 
-    .cta {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) minmax(280px, 0.58fr);
-      gap: 42px;
-      align-items: start;
-      padding: 58px;
-      border: 1px solid var(--line-strong);
-      border-radius: 8px;
-      background: rgba(255, 255, 255, 0.96);
-      backdrop-filter: blur(6px);
-      -webkit-backdrop-filter: blur(6px);
-      scroll-margin-top: 28px;
-    }
+    .cta h2 { max-width: 12ch; }
 
-    .differentiator {
-      padding: 46px;
-      border: 1px solid var(--line);
-      border-radius: 8px;
-      background: rgba(255, 255, 255, 0.96);
-      backdrop-filter: blur(5px);
-      -webkit-backdrop-filter: blur(5px);
-    }
+    .cta p { margin: 22px 0 0; color: var(--muted); font-size: 1.12rem; line-height: 1.72; max-width: 650px; }
 
-    .differentiator .section-intro {
-      max-width: 760px;
-      margin-top: 18px;
-    }
+    .contact-panel { display: grid; gap: 16px; padding-top: 8px; }
 
-    .differentiator p {
-      margin: 0;
-      color: var(--muted);
-      font-size: clamp(1.06rem, 1.6vw, 1.2rem);
-      line-height: 1.62;
-    }
+    .contact-item { padding: 0 0 16px; border-bottom: 1px solid var(--line); }
 
-    .cta h2 {
-      max-width: 12ch;
-    }
+    .contact-label { margin: 0 0 7px; color: var(--soft); font-size: 0.78rem; font-weight: 750; letter-spacing: 0.08em; text-transform: uppercase; }
 
-    .cta p {
-      margin: 22px 0 0;
-      color: var(--muted);
-      font-size: 1.12rem;
-      line-height: 1.72;
-      max-width: 650px;
-    }
+    .contact-value, .contact-value a { margin: 0; color: var(--text); text-decoration: none; font-size: 1.02rem; line-height: 1.55; font-weight: 650; }
 
-    .contact-panel {
-      display: grid;
-      gap: 16px;
-      padding-top: 8px;
-    }
+    .contact-value a { border-bottom: 1px solid rgba(17, 17, 17, 0.22); padding-bottom: 2px; }
 
-    .contact-item {
-      padding: 0 0 16px;
-      border-bottom: 1px solid var(--line);
-    }
+    .contact-value a:hover { border-color: rgba(17, 17, 17, 0.52); }
 
-    .contact-label {
-      margin: 0 0 7px;
-      color: var(--soft);
-      font-size: 0.78rem;
-      font-weight: 750;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-    }
+    footer { padding: 34px 0 42px; color: var(--soft); font-size: 0.92rem; line-height: 1.7; border-top: 1px solid var(--line); }
 
-    .contact-value,
-    .contact-value a {
-      margin: 0;
-      color: var(--text);
-      text-decoration: none;
-      font-size: 1.02rem;
-      line-height: 1.55;
-      font-weight: 650;
-    }
+    .footer-inner { display: flex; align-items: flex-start; justify-content: space-between; gap: 24px; }
 
-    .contact-value a {
-      border-bottom: 1px solid rgba(17, 17, 17, 0.22);
-      padding-bottom: 2px;
-    }
+    .footer-imprint { color: var(--muted); text-align: right; }
 
-    .contact-value a:hover {
-      border-color: rgba(17, 17, 17, 0.52);
-    }
+    .footer-imprint summary { cursor: pointer; list-style: none; color: var(--text); font-weight: 650; border-bottom: 1px solid rgba(17, 17, 17, 0.2); display: inline-flex; padding-bottom: 2px; }
 
-    .imprint {
-      color: var(--muted);
-      font-size: 0.98rem;
-      line-height: 1.7;
-    }
-
-    footer {
-      padding: 34px 0 42px;
-      color: var(--soft);
-      font-size: 0.92rem;
-      line-height: 1.7;
-      border-top: 1px solid var(--line);
-    }
-
-    .footer-inner {
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      gap: 24px;
-    }
-
-    .footer-imprint {
-      color: var(--muted);
-      text-align: right;
-    }
-
-    .footer-imprint summary {
-      cursor: pointer;
-      list-style: none;
-      color: var(--text);
-      font-weight: 650;
-      border-bottom: 1px solid rgba(17, 17, 17, 0.2);
-      display: inline-flex;
-      padding-bottom: 2px;
-    }
-
-    .footer-imprint summary::-webkit-details-marker {
-      display: none;
-    }
-
-    .footer-imprint summary:hover {
-      border-color: rgba(17, 17, 17, 0.5);
-    }
-
-    .footer-imprint address {
-      margin-top: 12px;
-      font-style: normal;
-    }
+    .footer-imprint address { margin-top: 12px; font-style: normal; }
 
     @media (max-width: 900px) {
-      .topbar {
-        align-items: flex-start;
-        flex-direction: column;
-      }
-
-      .nav {
-        flex-wrap: wrap;
-      }
-
-      .footer-inner {
-        flex-direction: column;
-      }
-
-      .footer-imprint {
-        text-align: left;
-      }
-
-      .hero {
-        min-height: 78vh;
-        padding-bottom: 54px;
-      }
-
-      .section-head,
-      .work-grid,
-      .story,
-      .story:nth-child(even),
-      .differentiator,
-      .cta {
-        grid-template-columns: 1fr;
-      }
-
-      .section-head {
-        gap: 18px;
-        align-items: start;
-      }
-
-      .story:nth-child(even) .story-media {
-        order: 0;
-      }
-
-      .story-media,
-      .story-text,
-      .journey-table {
-        min-height: 0;
-      }
-
-      .story.text-only .story-text {
-        max-width: none;
-      }
-
-      .journey-table {
-        border-left: 0;
-        border-top: 1px solid var(--line);
-      }
-
-      .story-media {
-        aspect-ratio: 4 / 3;
-      }
-
-      .work-card {
-        min-height: auto;
-      }
-
-      .story-media img {
-        min-height: 0;
-      }
-
-      .cta {
-        padding: 34px;
-      }
+      .section-head, .work-grid, .story, .story:nth-child(even), .cta { grid-template-columns: 1fr; }
+      .story:nth-child(even) .story-media { order: 0; }
+      .journey-table { border-left: 0; border-top: 1px solid var(--line); }
+      .story-media { aspect-ratio: 4 / 3; }
     }
 
     @media (max-width: 640px) {
-      .wrap {
-        padding: 0 20px;
-      }
-
-      .topbar {
-        flex-direction: row;
-        align-items: center;
-        justify-content: space-between;
-        gap: 16px;
-        padding-top: 18px;
-        padding-bottom: 8px;
-      }
-
-      .nav {
-        flex: 0 0 auto;
-        gap: 0;
-        font-size: 0.88rem;
-      }
-
-      .nav a:not(.nav-contact) {
-        display: none;
-      }
-
-      .nav-contact {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        min-height: 38px;
-        padding: 0 12px;
-        border: 1px solid var(--line-strong);
-        border-radius: 4px;
-        background: rgba(255, 255, 255, 0.72);
-        backdrop-filter: blur(4px);
-        -webkit-backdrop-filter: blur(4px);
-        color: var(--text);
-        font-weight: 700;
-      }
-
-      h1 {
-        max-width: 10ch;
-        font-size: clamp(2.5rem, 12.5vw, 3.25rem);
-        line-height: 0.9;
-      }
-
-      .hero {
-        min-height: auto;
-        padding: 8px 0 30px;
-      }
-
-      .hero-copy {
-        padding-top: 8px;
-      }
-
-      .hero-copy::before {
-        inset: -18px -18px -24px -18px;
-        border-radius: 14px;
-        background: rgba(255, 255, 255, 0.96);
-        box-shadow: 0 0 34px 28px rgba(255, 255, 255, 0.88);
-      }
-
-      .section-head::before {
-        inset: -14px -12px;
-        background: rgba(255, 255, 255, 0.94);
-      }
-
-      .eyebrow {
-        margin-bottom: 12px;
-        font-size: 0.72rem;
-        line-height: 1.45;
-      }
-
-      .lead {
-        margin-top: 14px;
-        font-size: 0.88rem;
-        line-height: 1.38;
-      }
-
-      .lead strong {
-        margin-bottom: 10px;
-      }
-
-      .hero-actions {
-        flex-direction: column;
-        margin-top: 10px;
-        gap: 6px;
-      }
-
-      .trust-badges {
-        display: grid;
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 6px;
-        margin-top: 12px;
-      }
-
-      .trust-badge {
-        min-height: 32px;
-        padding: 0 8px;
-        font-size: 0.76rem;
-      }
-
-      .button {
-        width: 100%;
-        min-width: 0;
-        min-height: 38px;
-        padding: 0 14px;
-        font-size: 0.86rem;
-      }
-
-      .section {
-        padding: 44px 0;
-      }
-
-      .section-head {
-        margin-bottom: 24px;
-      }
-
-      h2 {
-        font-size: clamp(2.25rem, 11vw, 3.2rem);
-      }
-
-      .story {
-        padding: 10px;
-      }
-
-      .story-media {
-        aspect-ratio: 1 / 1.18;
-      }
-
-      .story-media.contain {
-        aspect-ratio: 4 / 5;
-      }
-
-      .story-media.contain img {
-        padding: 10px;
-      }
-
-      .story-text {
-        padding: 18px 10px 20px;
-      }
-
-      .journey-table {
-        padding: 20px 10px 12px;
-      }
-
-      .journey-line {
-        max-width: none;
-      }
-
-      .story h3 {
-        max-width: 12.5ch;
-      }
-
-      .story p,
-      .section-intro,
-      .work-card p,
-      .problem-copy p,
-      .positioning-copy p,
-      .differentiator p,
-      .cta p {
-        font-size: 1rem;
-      }
-
-      .work-card,
-      .problem-block,
-      .differentiator {
-        padding: 22px;
-      }
-
-      .cta {
-        padding: 24px;
-      }
-
-      .cta h2,
-      .differentiator h2 {
-        max-width: none;
-      }
-
-      .grid-overlay {
-        background-size: 58px 58px;
-      }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      html {
-        scroll-behavior: auto;
-      }
-
-      canvas {
-        display: none;
-      }
+      h1 { font-size: clamp(2.5rem, 12.5vw, 3.25rem); }
+      .nav a:not(.nav-contact) { display: none; }
+      .trust-badges { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .hero-actions { flex-direction: column; }
     }
   </style>
 </head>
@@ -942,8 +294,8 @@
 
   <div class="page">
     <header class="wrap topbar">
-      <a class="brand" href="#top" aria-label="SEEON home">SEEON</a>
-      <nav class="nav" aria-label="Page navigation">
+      <a class="brand" href="#top">SEEON</a>
+      <nav class="nav">
         <a href="#why-it-matters">Why it matters</a>
         <a href="#how-it-works">How it works</a>
         <a href="#why-seeon">Why SEEON</a>
@@ -961,7 +313,7 @@
             <p class="lead">
               SEEON makes professional proximity visible without making it loud. A mobile app that matches people through offer, seek and interest keywords, with opt-in visibility only.
             </p>
-            <div class="trust-badges" aria-label="SEEON privacy principles">
+            <div class="trust-badges">
               <span class="trust-badge">No profiles</span>
               <span class="trust-badge">No maps</span>
               <span class="trust-badge">No tracking</span>
@@ -969,52 +321,7 @@
             </div>
             <div class="hero-actions">
               <a class="button" href="mailto:elmar@seeon.io">Let's see if SEEON fits your event</a>
-              <a class="button secondary" href="https://www.linkedin.com/in/elmar-zimmermann" target="_blank" rel="noopener noreferrer">Get in touch on LinkedIn</a>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section class="section" id="why-it-matters">
-        <div class="wrap">
-          <div class="section-head">
-            <h2>Why it matters.</h2>
-            <p class="section-intro">
-              For organizers, relevance is not only a networking feature. It shapes what attendees remember.
-            </p>
-          </div>
-
-          <div class="work-grid" aria-label="Why SEEON matters for events">
-            <article class="work-card">
-              <p class="kicker">01 | For your attendees</p>
-              <h3>The room is already full of relevance.</h3>
-              <p>SEEON surfaces it without changing how your event feels.</p>
-            </article>
-
-            <article class="work-card">
-              <p class="kicker">02 | For you as organizer</p>
-              <h3>No integration headache.</h3>
-              <p>SEEON works alongside your existing setup. Your attendees opt in themselves.</p>
-            </article>
-
-            <article class="work-card">
-              <p class="kicker">03 | The result</p>
-              <h3>More of the conversations your attendees came for.</h3>
-              <p>That reflects on your event.</p>
-            </article>
-          </div>
-        </div>
-      </section>
-
-      <section class="section" id="problem">
-        <div class="wrap">
-          <div class="problem-block">
-            <p class="eyebrow">The problem</p>
-            <h2>Every event and trade show has a blind spot.</h2>
-            <div class="problem-copy">
-              <p>The larger the gathering, the bigger the gap. A trade show is full of potential. Full of the right suppliers, partners, clients and collaborators. But without a way to surface who is relevant to whom, most of that potential stays invisible.</p>
-              <p>People walk past each other. They sit in the same hall, attend the same session, stay in the same hotel. The relevance is there. The connection is not.</p>
-              <p>That is the blind spot. SEEON can make it visible.</p>
+              <a class="button secondary" href="https://www.linkedin.com/in/elmar-zimmermann" target="_blank" rel="noopener noreferrer">LinkedIn</a>
             </div>
           </div>
         </div>
@@ -1024,147 +331,36 @@
         <div class="wrap">
           <div class="section-head">
             <h2>How it works.</h2>
-            <p class="section-intro">
-              For you as an organizer, three things matter.
-            </p>
+            <p class="section-intro">For you as an organizer, relevance shapes what attendees remember.</p>
           </div>
-
-          <div class="work-grid" aria-label="How SEEON works">
+          <div class="work-grid">
             <article class="work-card">
-              <p class="kicker">01 | Zero setup for your attendees</p>
-              <h3>Zero setup for your attendees.</h3>
-              <p>No profiles to build, no maps to navigate. Attendees describe what they offer, seek and care about. SEEON matches them with others in the same context. The friction is minimal. The relevance is not.</p>
+              <h3>Zero setup.</h3>
+              <p>No profiles to build. Attendees describe intent, SEEON surfaces matches.</p>
             </article>
-
             <article class="work-card">
-              <p class="kicker">02 | You stay in control</p>
               <h3>You stay in control.</h3>
-              <p>SEEON runs as a layer alongside your existing event format. No replacement of your app, your agenda or your setup. Visibility is always opt-in. Attendees choose when they are findable. GDPR-compliant by design.</p>
+              <p>Runs as a layer alongside your setup. Visibility is always opt-in.</p>
             </article>
-
             <article class="work-card">
-              <p class="kicker">03 | Your event creates more value</p>
-              <h3>Your event creates more value.</h3>
-              <p>Attendees leave with conversations that matter. Not just business cards. The relevance was already in the room. SEEON makes it visible.</p>
+              <h3>More value.</h3>
+              <p>Attendees leave with conversations that matter, not just business cards.</p>
             </article>
           </div>
         </div>
       </section>
 
-      <section class="section" id="why-seeon">
+      <section class="section" id="contact">
         <div class="wrap">
-          <div class="differentiator">
-            <h2>Why not just LinkedIn?</h2>
-            <div class="positioning-copy">
-              <p>LinkedIn is built for the long game. Attendees already use it, and that will not change.</p>
-              <p>But LinkedIn does not know your event. It does not know who is in the room right now, what they are looking for today, or what context brought them there. It surfaces connections based on history, not on present relevance.</p>
-              <p>SEEON is built for the moment. It works inside the context you create as an organizer. That is something LinkedIn cannot offer, because it was never designed to.</p>
-              <p class="positioning-close">They solve different problems. SEEON solves yours.</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section class="section" id="concept">
-        <div class="wrap">
-          <div class="section-head">
-            <h2>How it appears.</h2>
-            <p class="section-intro">
-              Relevance can appear across the whole journey. SEEON is designed for moments of shared professional context, wherever they naturally happen.
-            </p>
-          </div>
-
-          <div class="story-list" aria-label="SEEON concept images with explanations">
-            <article class="story">
-              <div class="story-media">
-                <img src="business-01-hall.jpg" data-fallback-src="business-01-hall.png" width="1122" height="1402" loading="eager" decoding="async" fetchpriority="high" alt="Black and white event hall with professional visitors" />
-              </div>
-              <div class="story-text">
-                <p class="kicker">01 | Physical context</p>
-                <h3>The room is already full of relevance.</h3>
-                <p>At an event or conference, many people share timing, intent and business potential. SEEON surfaces that relevance without changing how the event feels.</p>
-                <span class="accent" aria-hidden="true"></span>
-              </div>
-            </article>
-
-            <article class="story">
-              <div class="story-media">
-                <img src="business-03-phone.jpg" data-fallback-src="business-03-phone.png" width="1122" height="1402" loading="eager" decoding="async" alt="Smartphone with the SEEON interface in front of an event environment" />
-              </div>
-              <div class="story-text">
-                <p class="kicker">02 | Interface</p>
-                <h3>The product stays calm and clear.</h3>
-                <p>Attendees describe what they offer, seek and care about. SEEON matches them with others in the same context through a simple mobile moment.</p>
-                <span class="accent" aria-hidden="true"></span>
-              </div>
-            </article>
-
-            <article class="story">
-              <div class="story-media">
-                <img src="business-05-conversation.jpg" data-fallback-src="business-05-conversation.png" width="1122" height="1402" loading="eager" decoding="async" alt="Two business people shaking hands at an event" />
-              </div>
-              <div class="story-text">
-                <p class="kicker">03 | Outcome</p>
-                <h3>Signal becomes encounter.</h3>
-                <p>Attendees leave with conversations that matter. Not just business cards. The relevance was already in the room. SEEON makes it visible.</p>
-                <span class="accent" aria-hidden="true"></span>
-              </div>
-            </article>
-
-            <article class="story text-only">
-              <div class="story-text">
-                <p class="kicker">04 | Journey</p>
-                <h3>Professional proximity travels with you.</h3>
-                <p>Relevance can appear during an event, in the hotel lobby, at the airport, at the station or on the train. SEEON is designed for these moments of shared professional context, wherever they naturally happen.</p>
-                <span class="accent" aria-hidden="true"></span>
-              </div>
-              <div class="journey-table" aria-label="Concept in action across the journey">
-                <p class="journey-title">Concept in action</p>
-                <p class="journey-line">Professional proximity exists across the journey.</p>
-                <ul class="journey-list">
-                  <li>Event</li>
-                  <li>Hotel</li>
-                  <li>Airport</li>
-                  <li>Station</li>
-                  <li>Train</li>
-                  <li>Everywhere</li>
-                </ul>
-              </div>
-            </article>
-          </div>
-        </div>
-      </section>
-
-      <section class="section">
-        <div class="wrap">
-          <div class="cta" id="presentation">
+          <div class="cta">
             <div>
-              <p class="eyebrow">Next step</p>
-              <h2>Is there a blind spot in your next event?</h2>
-              <p>
-                A short conversation is usually enough to find out. No pitch, no demo pressure. Just a quick look at your format and whether SEEON adds something real.
-              </p>
-              <div class="trust-badges" aria-label="SEEON privacy principles">
-                <span class="trust-badge">No profiles</span>
-                <span class="trust-badge">No maps</span>
-                <span class="trust-badge">No tracking</span>
-                <span class="trust-badge">GDPR by design</span>
-              </div>
+              <h2>Ready to see?</h2>
+              <p>A short conversation is enough to find out if SEEON fits your format.</p>
               <div class="hero-actions">
                 <a class="button" href="mailto:elmar@seeon.io">Start a conversation</a>
-                <a class="button secondary" href="https://www.linkedin.com/in/elmar-zimmermann" target="_blank" rel="noopener noreferrer">Get in touch on LinkedIn</a>
               </div>
             </div>
-
-            <aside class="contact-panel" id="contact" aria-label="Contact details">
-              <div class="contact-item">
-                <p class="contact-label">Name</p>
-                <p class="contact-value">Elmar Zimmermann</p>
-              </div>
-              <div class="contact-item">
-                <p class="contact-label">Phone</p>
-                <p class="contact-value"><a href="tel:+491705959922">+49 170 59 59 922</a></p>
-              </div>
+            <aside class="contact-panel">
               <div class="contact-item">
                 <p class="contact-label">Email</p>
                 <p class="contact-value"><a href="mailto:elmar@seeon.io">elmar@seeon.io</a></p>
@@ -1175,179 +371,51 @@
       </section>
     </main>
 
-    <footer>
-      <div class="wrap footer-inner">
-        <div>© SEEON | Events · trade shows · business context</div>
-        <details class="footer-imprint" id="imprint">
-          <summary>Imprint</summary>
-          <address>
-            Elmar Zimmermann<br />
-            Am Vogelherd 17<br />
-            51467 Bergisch Gladbach
-          </address>
-        </details>
+    <footer class="wrap">
+      <div class="footer-inner">
+        <p>© 2026 SEEON. All rights reserved.</p>
       </div>
     </footer>
   </div>
 
   <script>
-    function repairStoryImages() {
-      document.querySelectorAll(".story-media img").forEach((image) => {
-        if (image.complete && image.naturalWidth > 0) return;
-
-        const src = image.getAttribute("src");
-        if (!src) return;
-
-        image.removeAttribute("src");
-        requestAnimationFrame(() => {
-          image.setAttribute("src", src);
-        });
-      });
-    }
-
-    document.querySelectorAll(".story-media img").forEach((image) => {
-      image.addEventListener("error", () => {
-        const fallbackSrc = image.dataset.fallbackSrc;
-        if (fallbackSrc && !image.src.endsWith(fallbackSrc)) {
-          image.src = fallbackSrc;
-        }
-      }, { once: true });
-    });
-
-    window.addEventListener("load", () => {
-      repairStoryImages();
-      window.setTimeout(repairStoryImages, 450);
-      window.setTimeout(repairStoryImages, 1400);
-    });
-
-    window.addEventListener("pageshow", repairStoryImages);
-
-    function scrollToCurrentHash() {
-      const id = window.location.hash ? decodeURIComponent(window.location.hash.slice(1)) : "";
-      if (!id) return;
-
-      const target = document.getElementById(id);
-      if (!target) return;
-
-      requestAnimationFrame(() => {
-        target.scrollIntoView({ block: "start" });
-      });
-    }
-
-    window.addEventListener("load", scrollToCurrentHash);
-    window.addEventListener("hashchange", scrollToCurrentHash);
-
+    // Minimalist Dots Background
     const canvas = document.getElementById('dots');
     const ctx = canvas.getContext('2d');
+    let points = [];
 
-    let width = 0;
-    let height = 0;
-    let dpr = Math.min(window.devicePixelRatio || 1, 2);
-    let dots = [];
-    let rafId = null;
-
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-    function resizeCanvas() {
-      width = window.innerWidth;
-      height = window.innerHeight;
-      dpr = Math.min(window.devicePixelRatio || 1, 2);
-
-      canvas.width = Math.floor(width * dpr);
-      canvas.height = Math.floor(height * dpr);
-      canvas.style.width = width + 'px';
-      canvas.style.height = height + 'px';
-
-      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-      createDots();
-    }
-
-    function insideTextSafeZone(x, y) {
-      const cx = width < 760 ? width * 0.48 : width * 0.36;
-      const cy = height * 0.43;
-      const rx = Math.min(width * 0.32, 430);
-      const ry = Math.min(height * 0.3, 250);
-      const dx = (x - cx) / rx;
-      const dy = (y - cy) / ry;
-      return (dx * dx + dy * dy) < 1;
-    }
-
-    function createDots() {
-      dots = [];
-      const baseCount = width < 680 ? 72 : width < 1100 ? 112 : 148;
-      let attempts = 0;
-
-      while (dots.length < baseCount && attempts < baseCount * 28) {
-        attempts++;
-        const x = Math.random() * width;
-        const y = Math.random() * height;
-
-        if (insideTextSafeZone(x, y)) continue;
-
-        const size = Math.random() < 0.16 ? 2.8 + Math.random() * 1.5 : 1 + Math.random() * 1.7;
-        const drift = 0.055 + Math.random() * 0.18;
-        const opacity = 0.2 + Math.random() * 0.36;
-        const phase = Math.random() * Math.PI * 2;
-
-        dots.push({
-          x,
-          y,
-          originX: x,
-          originY: y,
-          size,
-          opacity,
-          driftX: (Math.random() - 0.5) * drift,
-          driftY: (Math.random() - 0.5) * drift,
-          phase,
-          pulse: 0.28 + Math.random() * 0.58,
+    function init() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      points = [];
+      for(let i=0; i<40; i++) {
+        points.push({
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height,
+          vx: (Math.random() - 0.5) * 0.3,
+          vy: (Math.random() - 0.5) * 0.3
         });
       }
     }
 
-    function drawDot(dot, time) {
-      const t = time * 0.001;
-      dot.x += dot.driftX;
-      dot.y += dot.driftY;
-
-      if (dot.x < -10 || dot.x > width + 10 || dot.y < -10 || dot.y > height + 10 || insideTextSafeZone(dot.x, dot.y)) {
-        dot.x = dot.originX;
-        dot.y = dot.originY;
-        dot.driftX *= -1;
-        dot.driftY *= -1;
-      }
-
-      const breath = 1 + Math.sin(t * dot.pulse + dot.phase) * 0.12;
-      const halo = dot.size + 6 + Math.sin(t * 0.7 + dot.phase) * 1.5;
-      const alpha = dot.opacity * (0.88 + Math.sin(t * 0.55 + dot.phase) * 0.12);
-
-      ctx.beginPath();
-      ctx.fillStyle = `rgba(17,17,17,${(alpha * 0.12).toFixed(3)})`;
-      ctx.arc(dot.x, dot.y, halo, 0, Math.PI * 2);
-      ctx.fill();
-
-      ctx.beginPath();
-      ctx.fillStyle = `rgba(17,17,17,${alpha.toFixed(3)})`;
-      ctx.arc(dot.x, dot.y, dot.size * breath, 0, Math.PI * 2);
-      ctx.fill();
+    function animate() {
+      ctx.clearRect(0,0,canvas.width,canvas.height);
+      ctx.fillStyle = '#111';
+      points.forEach(p => {
+        p.x += p.vx;
+        p.y += p.vy;
+        if(p.x < 0 || p.x > canvas.width) p.vx *= -1;
+        if(p.y < 0 || p.y > canvas.height) p.vy *= -1;
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, 1.5, 0, Math.PI*2);
+        ctx.fill();
+      });
+      requestAnimationFrame(animate);
     }
 
-    function animate(time) {
-      ctx.clearRect(0, 0, width, height);
-      for (let i = 0; i < dots.length; i++) {
-        drawDot(dots[i], time);
-      }
-      rafId = requestAnimationFrame(animate);
-    }
-
-    if (!prefersReducedMotion) {
-      resizeCanvas();
-      animate(0);
-      window.addEventListener('resize', () => {
-        if (rafId) cancelAnimationFrame(rafId);
-        resizeCanvas();
-        animate(0);
-      }, { passive: true });
-    }
+    window.addEventListener('resize', init);
+    init();
+    animate();
   </script>
 </body>
 </html>
