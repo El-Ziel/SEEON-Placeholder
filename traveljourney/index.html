@@ -9,6 +9,9 @@
   <meta property="og:description" content="SEEON gives event and trade show organizers a quiet relevance layer that helps attendees find the right people without disrupting what already works." />
   <meta name="twitter:title" content="Every event has a blind spot" />
   <meta name="twitter:description" content="SEEON gives event and trade show organizers a quiet relevance layer that helps attendees find the right people without disrupting what already works." />
+  <link rel="preload" as="image" href="business-01-hall.jpg" type="image/jpeg" />
+  <link rel="preload" as="image" href="business-03-phone.jpg" type="image/jpeg" />
+  <link rel="preload" as="image" href="business-05-conversation.jpg" type="image/jpeg" />
   <style>
     :root {
       --bg: #ffffff;
@@ -382,26 +385,31 @@
       font-size: clamp(1.25rem, 2.1vw, 1.85rem);
       line-height: 1.12;
       font-weight: 650;
-      max-width: 16ch;
+      max-width: 18ch;
     }
 
     .journey-list {
-      display: grid;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
       margin: 0;
       padding: 0;
       list-style: none;
-      border-top: 1px solid var(--line);
     }
 
     .journey-list li {
-      display: flex;
+      display: inline-flex;
       align-items: center;
-      justify-content: space-between;
-      min-height: 38px;
-      border-bottom: 1px solid var(--line);
+      justify-content: center;
+      min-height: 36px;
+      padding: 0 13px;
+      border: 1px solid rgba(17, 17, 17, 0.16);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.88);
       color: var(--text);
-      font-size: 1rem;
-      font-weight: 650;
+      font-size: 0.92rem;
+      font-weight: 700;
+      white-space: nowrap;
     }
 
     .story-media {
@@ -884,10 +892,7 @@
             <p class="eyebrow">For events and trade shows</p>
             <h1>Every event has a blind spot.</h1>
             <p class="lead">
-              Attendees leave without meeting the person who could have changed everything. Not because they weren't there, but because there was no way to surface the relevance between them.
-            </p>
-            <p class="lead">
-              SEEON gives organizers a relevance layer. Quietly, and without disrupting what already works.
+              SEEON makes professional proximity visible without making it loud. A mobile app that matches people through offer, seek and interest keywords, with opt-in visibility only.
             </p>
             <div class="hero-actions">
               <a class="button" href="mailto:elmar@seeon.io">Let's see if SEEON fits your event</a>
@@ -981,7 +986,7 @@
               <p>LinkedIn is built for the long game. Attendees already use it, and that will not change.</p>
               <p>But LinkedIn does not know your event. It does not know who is in the room right now, what they are looking for today, or what context brought them there. It surfaces connections based on history, not on present relevance.</p>
               <p>SEEON is built for the moment. It works inside the context you create as an organizer. That is something LinkedIn cannot offer, because it was never designed to.</p>
-              <p class="positioning-close">They solve different problems. And for the moment inside your event, SEEON is the one built for it.</p>
+              <p class="positioning-close">They solve different problems. SEEON solves yours.</p>
             </div>
           </div>
         </div>
@@ -999,7 +1004,7 @@
           <div class="story-list" aria-label="SEEON concept images with explanations">
             <article class="story">
               <div class="story-media">
-                <img src="business-01-hall.png" alt="Black and white event hall with professional visitors" />
+                <img src="business-01-hall.jpg" data-fallback-src="business-01-hall.png" width="1122" height="1402" loading="eager" decoding="async" fetchpriority="high" alt="Black and white event hall with professional visitors" />
               </div>
               <div class="story-text">
                 <p class="kicker">01 | Physical context</p>
@@ -1011,7 +1016,7 @@
 
             <article class="story">
               <div class="story-media">
-                <img src="business-03-phone.png" alt="Smartphone with the SEEON interface in front of an event environment" />
+                <img src="business-03-phone.jpg" data-fallback-src="business-03-phone.png" width="1122" height="1402" loading="eager" decoding="async" alt="Smartphone with the SEEON interface in front of an event environment" />
               </div>
               <div class="story-text">
                 <p class="kicker">02 | Interface</p>
@@ -1023,7 +1028,7 @@
 
             <article class="story">
               <div class="story-media">
-                <img src="business-05-conversation.png" alt="Two business people shaking hands at an event" />
+                <img src="business-05-conversation.jpg" data-fallback-src="business-05-conversation.png" width="1122" height="1402" loading="eager" decoding="async" alt="Two business people shaking hands at an event" />
               </div>
               <div class="story-text">
                 <p class="kicker">03 | Outcome</p>
@@ -1107,6 +1112,37 @@
   </div>
 
   <script>
+    function repairStoryImages() {
+      document.querySelectorAll(".story-media img").forEach((image) => {
+        if (image.complete && image.naturalWidth > 0) return;
+
+        const src = image.getAttribute("src");
+        if (!src) return;
+
+        image.removeAttribute("src");
+        requestAnimationFrame(() => {
+          image.setAttribute("src", src);
+        });
+      });
+    }
+
+    document.querySelectorAll(".story-media img").forEach((image) => {
+      image.addEventListener("error", () => {
+        const fallbackSrc = image.dataset.fallbackSrc;
+        if (fallbackSrc && !image.src.endsWith(fallbackSrc)) {
+          image.src = fallbackSrc;
+        }
+      }, { once: true });
+    });
+
+    window.addEventListener("load", () => {
+      repairStoryImages();
+      window.setTimeout(repairStoryImages, 450);
+      window.setTimeout(repairStoryImages, 1400);
+    });
+
+    window.addEventListener("pageshow", repairStoryImages);
+
     function scrollToCurrentHash() {
       const id = window.location.hash ? decodeURIComponent(window.location.hash.slice(1)) : "";
       if (!id) return;
