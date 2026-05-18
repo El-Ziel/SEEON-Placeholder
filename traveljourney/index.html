@@ -16,32 +16,23 @@
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
+
   gtag('js', new Date());
 
-  gtag('config', 'G-534392958', { send_page_view: false });
+  gtag('config', 'G-534392958', {
+    page_title: 'SEEON Travel Journey',
+    page_path: '/traveljourney/',
+    page_location: 'https://seeon.io/traveljourney/'
+  });
+
+  gtag('event', 'qr_code_landing_page_visit', {
+    page_title: 'SEEON Travel Journey',
+    page_path: '/traveljourney/',
+    page_location: 'https://seeon.io/traveljourney/',
+    source: 'printed_qr_code',
+    campaign: 'travel_journey'
+  });
 </script>
-
-<script>
-  (function() {
-    const url = new URL(window.location.href);
-
-    if (!url.searchParams.has('utm_source')) {
-      gtag('event', 'page_view', {
-        page_location: window.location.href + '?utm_source=qr-code&utm_medium=print&utm_campaign=travel-journey'
-      });
-    } else {
-      gtag('event', 'page_view', {
-        page_location: window.location.href
-      });
-
-      setTimeout(() => {
-        const cleanUrl = window.location.protocol + "//" + window.location.host + window.location.pathname;
-        window.history.replaceState({}, document.title, cleanUrl);
-      }, 1000);
-    }
-  })();
-</script>
-
   
   <style>
     :root {
