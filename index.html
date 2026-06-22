@@ -191,29 +191,39 @@
     }
 
     .cta-container {
-      margin: 28px 0 36px 0;
+      margin: 32px 0 40px 0;
     }
 
     .cta-button {
-      display: inline-block;
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
       background: var(--text);
       color: #ffffff;
       text-decoration: none;
-      padding: 14px 28px;
-      font-size: 1rem;
+      padding: 16px 32px;
+      font-size: 1.05rem;
       font-weight: 600;
-      border-radius: 6px;
-      transition: background 0.2s ease, transform 0.1s ease;
-      box-shadow: 0 4px 12px rgba(17,17,17,0.08);
+      border-radius: 8px;
+      transition: background 0.2s ease, transform 0.1s ease, box-shadow 0.2s ease;
+      box-shadow: 0 4px 14px rgba(17,17,17,0.12);
     }
 
     .cta-button:hover {
       background: #2a2a2a;
       transform: translateY(-1px);
+      box-shadow: 0 6px 20px rgba(17,17,17,0.18);
     }
 
     .cta-button:active {
       transform: translateY(0);
+    }
+
+    .cta-subtext {
+      display: block;
+      margin-top: 10px;
+      font-size: 0.88rem;
+      color: var(--soft);
     }
 
     .contact-title {
@@ -379,7 +389,11 @@
         </ul>
 
         <div class="cta-container">
-          <a href="mailto:hello@seeon.io?subject=Inquiry%20-%20SEEON%20Pilot%20Partnership" class="cta-button">Request Pilot Partnership</a>
+          <a href="https://calendar.app.google/QthHi7N7QSBMn5Ym6" target="_blank" class="cta-button">
+            <span>Book a 15-Minute Intro Call</span>
+            <span style="font-weight: 300;">→</span>
+          </a>
+          <span class="cta-subtext">Direct and efficient. Get more information about SEEON and our technology.</span>
         </div>
 
         <p class="proof">Built in Europe. Currently deploying selected pilots with forward-thinking organizers and regional business hubs.</p>
