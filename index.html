@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SEEON | Proximity Solutions for Business Events & Urban Networks</title>
+  <meta name="description" content="The right people are often in the same place. They just do not know it. High-engagement proximity solutions for events and smart cities." />
+  <style>
+    :root {
+      --bg: #ffffff;
+      --text: #111111;
+      --muted: #5d5d5d;
+      --soft: #7a7a7a;
+      --max: 1180px;
+      --content: 760px;
+      --toast-bg: rgba(17, 17, 17, 0.92);
+      --toast-text: #ffffff;
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      min-height: 100%;
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Helvetica, Arial, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+
+    body {
+      overflow-x: hidden;
+    }
+
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      background:
+        radial-gradient(circle at 50% 44%, rgba(255,255,255,0.985) 0%, rgba(255,255,255,0.975) 30%, rgba(255,255,255,0.93) 52%, rgba(255,255,255,0.975) 100%),
+        #fff;
+      overflow: hidden;
+      isolation: isolate;
+    }
+
+    canvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      display: block;
+      pointer-events: none;
+    }
+
+    .grid-overlay {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(to right, rgba(17, 17, 17, 0.04) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(17, 17, 17, 0.04) 1px, transparent 1px);
+      background-size: 74px 74px;
+      mask-image: radial-gradient(circle at 50% 44%, transparent 0 19%, rgba(0,0,0,.10) 33%, rgba(0,0,0,.42) 57%, rgba(0,0,0,.92) 100%);
+      -webkit-mask-image: radial-gradient(circle at 50% 44%, transparent 0 19%, rgba(0,0,0,.10) 33%, rgba(0,0,0,.42) 57%, rgba(0,0,0,.92) 100%);
+      pointer-events: none;
+    }
+
+    .wrap {
+      position: relative;
+      z-index: 2;
+      width: min(100%, var(--max));
+      margin: 0 auto;
+      padding: 64px 28px;
+    }
+
+    .content {
+      max-width: var(--content);
+      background: rgba(255,255,255,0.82);
+      backdrop-filter: blur(3px);
+      -webkit-backdrop-filter: blur(3px);
+      padding: 10px 0;
+    }
+
+    .logo {
+      display: inline-block;
+      font-size: clamp(2.1rem, 4vw, 2.8rem);
+      font-weight: 700;
+      letter-spacing: 0.015em;
+      margin: 0 0 18px 0;
+      cursor: pointer;
+      user-select: none;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      font-size: 0.92rem;
+      font-weight: 600;
+      letter-spacing: 0.03em;
+      color: var(--soft);
+      margin: 0 0 18px 0;
+    }
+
+    h1 {
+      margin: 0 0 24px 0;
+      font-size: clamp(2.3rem, 5.5vw, 4.2rem);
+      line-height: 1.05;
+      letter-spacing: -0.035em;
+      font-weight: 700;
+      max-width: 15ch;
+    }
+
+    .lead-story {
+      margin: 0 0 28px 0;
+      font-size: clamp(1.15rem, 1.8vw, 1.35rem);
+      line-height: 1.6;
+      color: var(--text);
+      font-weight: 500;
+      max-width: 38ch;
+    }
+
+    .lead {
+      font-size: clamp(1.04rem, 1.7vw, 1.15rem);
+      line-height: 1.75;
+      color: var(--muted);
+      margin: 0 0 16px 0;
+      max-width: 700px;
+    }
+
+    .lead strong {
+      color: var(--text);
+      font-weight: 650;
+    }
+
+    .highlight-trigger {
+      color: inherit;
+      text-decoration: none;
+      border-bottom: 1px dashed rgba(17, 17, 17, 0.22);
+      cursor: pointer;
+      transition: border-color .2s ease, opacity .2s ease;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .highlight-trigger:hover {
+      border-color: rgba(17, 17, 17, 0.45);
+      opacity: 0.95;
+    }
+
+    .benefits-list {
+      margin: 32px 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .benefits-list li {
+      position: relative;
+      padding-left: 24px;
+      margin-bottom: 20px;
+      font-size: clamp(1rem, 1.5vw, 1.1rem);
+      line-height: 1.6;
+      color: var(--muted);
+    }
+
+    .benefits-list li::before {
+      content: "—";
+      position: absolute;
+      left: 0;
+      color: var(--text);
+      font-weight: 700;
+    }
+
+    .benefits-list strong {
+      color: var(--text);
+    }
+
+    .proof {
+      margin-top: 26px;
+      font-size: 0.98rem;
+      line-height: 1.8;
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    .divider {
+      width: 88px;
+      height: 1px;
+      background: rgba(17, 17, 17, 0.14);
+      margin: 36px 0 32px 0;
+    }
+
+    .cta-container {
+      margin: 28px 0 36px 0;
+    }
+
+    .cta-button {
+      display: inline-block;
+      background: var(--text);
+      color: #ffffff;
+      text-decoration: none;
+      padding: 14px 28px;
+      font-size: 1rem;
+      font-weight: 600;
+      border-radius: 6px;
+      transition: background 0.2s ease, transform 0.1s ease;
+      box-shadow: 0 4px 12px rgba(17,17,17,0.08);
+    }
+
+    .cta-button:hover {
+      background: #2a2a2a;
+      transform: translateY(-1px);
+    }
+
+    .cta-button:active {
+      transform: translateY(0);
+    }
+
+    .contact-title {
+      font-size: 1rem;
+      font-weight: 700;
+      margin: 0 0 10px 0;
+    }
+
+    .contact a {
+      color: var(--text);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(17, 17, 17, 0.17);
+      padding-bottom: 2px;
+      transition: border-color .2s ease, opacity .2s ease;
+    }
+
+    .contact a:hover {
+      border-color: rgba(17, 17, 17, 0.42);
+      opacity: 0.9;
+    }
+
+    .micro {
+      margin-top: 18px;
+      color: var(--soft);
+      font-size: 0.92rem;
+      line-height: 1.7;
+      max-width: 700px;
+    }
+
+    .toast {
+      position: fixed;
+      left: 50%;
+      bottom: 22px;
+      transform: translateX(-50%) translateY(16px);
+      background: var(--toast-bg);
+      color: var(--toast-text);
+      padding: 11px 16px;
+      border-radius: 999px;
+      font-size: 0.92rem;
+      line-height: 1.3;
+      white-space: nowrap;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .28s ease, transform .28s ease;
+      z-index: 9;
+      box-shadow: 0 10px 28px rgba(0,0,0,0.14);
+      max-width: calc(100vw - 32px);
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    footer {
+      position: relative;
+      z-index: 2;
+      padding: 0 28px 30px;
+    }
+
+    .footer-inner {
+      width: min(100%, var(--max));
+      margin: 0 auto;
+      color: var(--soft);
+      font-size: 0.92rem;
+      line-height: 1.7;
+    }
+
+    @media (max-width: 900px) {
+      .hero {
+        align-items: flex-start;
+      }
+
+      .wrap {
+        padding-top: 84px;
+        padding-bottom: 60px;
+      }
+
+      .grid-overlay {
+        background-size: 58px 58px;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .wrap,
+      footer {
+        padding-left: 22px;
+        padding-right: 22px;
+      }
+
+      .content {
+        background: rgba(255,255,255,0.9);
+      }
+
+      h1 {
+        letter-spacing: -0.03em;
+      }
+
+      .lead,
+      .lead-story {
+        line-height: 1.75;
+      }
+
+      .micro {
+        font-size: 0.9rem;
+      }
+
+      .toast {
+        bottom: 16px;
+        font-size: 0.86rem;
+        padding: 10px 14px;
+        border-radius: 18px;
+        white-space: normal;
+        text-align: center;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      canvas { display: none; }
+      .toast { transition: none; }
+    }
+  </style>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-7R87QZLWT5"></script> 
+  <script>   
+    window.dataLayer = window.dataLayer || [];   
+    function gtag(){dataLayer.push(arguments);}   
+    gtag('js', new Date());    
+    gtag('config', 'G-7R87QZLWT5'); 
+  </script>
+</head>
+<body>
+  <main class="hero">
+    <canvas id="dots" aria-hidden="true"></canvas>
+    <div class="grid-overlay" aria-hidden="true"></div>
+
+    <div class="wrap">
+      <section class="content">
+        <div class="logo" id="logo-trigger" title="SEEON">SEEON</div>
+        <div class="eyebrow">Proximity Solutions for Business Events & Smart Cities</div>
+
+        <h1>The right people are often in the same place. They just do not know it.</h1>
+
+        <p class="lead-story">
+          At a trade fair, in an airport, or at a high-profile conference, two hyper-relevant professionals can be just
+          <span class="highlight-trigger" id="thirty-trigger">30 metres apart</span>
+          without ever realizing it.
+        </p>
+
+        <p class="lead">
+          <strong>SEEON bridges this quiet gap beautifully, non-invasively, and at scale.</strong>
+        </p>
+
+        <p class="lead">
+          Our platform operates on a powerful dual architecture designed to maximize reach, engagement, and long-term value across entire business ecosystems.
+        </p>
+
+        <ul class="benefits-list">
+          <li><strong>The B2B Integration Framework (SDK/API):</strong> No friction. Event organizers and corporate platforms embed SEEON directly into their existing official apps with just a few lines of code—instantly unlocking proximity networking for thousands of users on day one.</li>
+          <li><strong>The Standalone Network Ecosystem:</strong> Seamlessly transition. When large-scale events drive high user density into a city, the dedicated SEEON app takes over. It connects professionals beyond the venue doors—in hotels, restaurants, and transit hubs—creating a localized urban network effect.</li>
+          <li><strong>Enterprise-Grade Privacy:</strong> Built in Europe, fully decentralized, and strictly privacy-first by design. No public tracking, no data exposure.</li>
+        </ul>
+
+        <div class="cta-container">
+          <a href="mailto:hello@seeon.io?subject=Inquiry%20-%20SEEON%20Pilot%20Partnership" class="cta-button">Request Pilot Partnership</a>
+        </div>
+
+        <p class="proof">Built in Europe. Currently deploying selected pilots with forward-thinking organizers and regional business hubs.</p>
+
+        <div class="divider"></div>
+
+        <div class="contact">
+          <div class="contact-title"><strong>Direct Channel</strong></div>
+          <a href="mailto:hello@seeon.io">hello@seeon.io</a>
+          <div class="micro">A clear destination for partnerships rooted in real-world proximity, professional relevance, and meaningful encounters.</div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer>
+    <div class="footer-inner">© SEEON<br>Built in Europe</div>
+  </footer>
+
+  <div class="toast" id="toast" aria-live="polite"></div>
+
+  <script>
+    const canvas = document.getElementById('dots');
+    const ctx = canvas.getContext('2d');
+
+    let width = 0;
+    let height = 0;
+    let dpr = Math.min(window.devicePixelRatio || 1, 2);
+    let dots = [];
+    let rafId = null;
+    let activePulse = 0;
+    let pulseTarget = null;
+    let logoTapCount = 0;
+    let logoTapTimer = null;
+    let toastTimer = null;
+
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const toast = document.getElementById('toast');
+    const logoTrigger = document.getElementById('logo-trigger');
+    const thirtyTrigger = document.getElementById('thirty-trigger');
+
+    function showToast(message) {
+      toast.textContent = message;
+      toast.classList.add('show');
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => {
+        toast.classList.remove('show');
+      }, 2600);
+    }
+
+    function resizeCanvas() {
+      width = window.innerWidth;
+      height = Math.max(window.innerHeight, document.querySelector('.hero').offsetHeight);
+      dpr = Math.min(window.devicePixelRatio || 1, 2);
+
+      canvas.width = Math.floor(width * dpr);
+      canvas.height = Math.floor(height * dpr);
+      canvas.style.width = width + 'px';
+      canvas.style.height = height + 'px';
+
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      createDots();
+    }
+
+    function insideTextSafeZone(x, y) {
+      const cx = width * 0.42;
+      const cy = height * 0.43;
+      const rx = Math.min(width * 0.30, 390);
+      const ry = Math.min(height * 0.27, 240);
+      const dx = (x - cx) / rx;
+      const dy = (y - cy) / ry;
+      return (dx * dx + dy * dy) < 1;
+    }
+
+    function createDots() {
+      dots = [];
+      const baseCount = width < 680 ? 72 : width < 1100 ? 108 : 142;
+      let attempts = 0;
+
+      while (dots.length < baseCount && attempts < baseCount * 28) {
+        attempts++;
+        const x = Math.random() * width;
+        const y = Math.random() * height;
+
+        if (insideTextSafeZone(x, y)) continue;
+
+        const prominent = Math.random() < 0.18;
+        const size = prominent ? 2.5 + Math.random() * 1.4 : 0.95 + Math.random() * 1.45;
+        const drift = 0.05 + Math.random() * 0.12;
+        const opacity = prominent ? 0.34 + Math.random() * 0.18 : 0.15 + Math.random() * 0.18;
+        const phase = Math.random() * Math.PI * 2;
+        const halo = prominent ? 8 + Math.random() * 5 : 5 + Math.random() * 3;
+
+        dots.push({
+          x, y,
+          originX: x,
+          originY: y,
+          size,
+          opacity,
+          halo,
+          driftX: (Math.random() - 0.5) * drift,
+          driftY: (Math.random() - 0.5) * drift,
+          phase,
+          pulse: 0.35 + Math.random() * 0.55,
+          targetable: prominent
+        });
+      }
+
+      pulseTarget = dots[Math.floor(dots.length * 0.68)] || dots[0] || null;
+    }
+
+    function triggerPulse() {
+      activePulse = 1;
+    }
+
+    function drawDot(dot, time) {
+      const t = time * 0.001;
+      dot.x += dot.driftX;
+      dot.y += dot.driftY;
+
+      if (dot.x < -10 || dot.x > width + 10 || dot.y < -10 || dot.y > height + 10 || insideTextSafeZone(dot.x, dot.y)) {
+        dot.x = dot.originX;
+        dot.y = dot.originY;
+        dot.driftX *= -1;
+        dot.driftY *= -1;
+      }
+
+      const breath = 1 + Math.sin(t * dot.pulse + dot.phase) * 0.12;
+      let halo = dot.halo + Math.sin(t * 0.7 + dot.phase) * 1.4;
+      let alpha = dot.opacity * (0.88 + Math.sin(t * 0.55 + dot.phase) * 0.12);
+      let size = dot.size * breath;
+
+      if (pulseTarget === dot && activePulse > 0.001) {
+        halo += 14 * activePulse;
+        alpha += 0.32 * activePulse;
+        size += 1.2 * activePulse;
+      }
+
+      ctx.beginPath();
+      ctx.fillStyle = `rgba(17,17,17,${Math.max(0, alpha * 0.11).toFixed(3)})`;
+      ctx.arc(dot.x, dot.y, halo, 0, Math.PI * 2);
+      ctx.fill();
+
+      ctx.beginPath();
+      ctx.fillStyle = `rgba(17,17,17,${Math.min(0.92, alpha).toFixed(3)})`;
+      ctx.arc(dot.x, dot.y, size, 0, Math.PI * 2);
+      ctx.fill();
+    }
+
+    function animate(time) {
+      ctx.clearRect(0, 0, width, height);
+      for (let i = 0; i < dots.length; i++) {
+        drawDot(dots[i], time);
+      }
+      activePulse *= 0.955;
+      rafId = requestAnimationFrame(animate);
+    }
+
+    logoTrigger.addEventListener('click', () => {
+      logoTapCount += 1;
+      clearTimeout(logoTapTimer);
+
+      if (logoTapCount >= 2) {
+        logoTapCount = 0;
+        triggerPulse();
+        showToast('You found a quiet signal.');
+        return;
+      }
+
+      logoTapTimer = setTimeout(() => {
+        logoTapCount = 0;
+      }, 420);
+    });
+
+    thirtyTrigger.addEventListener('click', () => {
+      triggerPulse();
+      showToast('Closer than it looks.');
+    });
+
+    if (!prefersReducedMotion) {
+      resizeCanvas();
+      animate(0);
+      window.addEventListener('resize', () => {
+        if (rafId) cancelAnimationFrame(rafId);
+        resizeCanvas();
+        animate(0);
+      }, { passive: true });
+    }
+  </script>
+</body>
+</html>
