@@ -232,7 +232,14 @@
       margin: 0 0 10px 0;
     }
 
-    .contact a {
+    .contact-links {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .contact-links a {
+      align-self: flex-start;
       color: var(--text);
       text-decoration: none;
       border-bottom: 1px solid rgba(17, 17, 17, 0.17);
@@ -240,7 +247,7 @@
       transition: border-color .2s ease, opacity .2s ease;
     }
 
-    .contact a:hover {
+    .contact-links a:hover {
       border-color: rgba(17, 17, 17, 0.42);
       opacity: 0.9;
     }
@@ -390,7 +397,7 @@
 
         <div class="cta-container">
           <a href="https://calendar.app.google/QthHi7N7QSBMn5Ym6" target="_blank" class="cta-button">
-            <span>Book a 15-Minute Intro Call</span>
+            <span>Explore SEEON</span>
             <span style="font-weight: 300;">→</span>
           </a>
           <span class="cta-subtext">Direct and efficient. Get more information about SEEON and our technology.</span>
@@ -402,7 +409,10 @@
 
         <div class="contact">
           <div class="contact-title"><strong>Direct Channel</strong></div>
-          <a href="mailto:hello@seeon.io">hello@seeon.io</a>
+          <div class="contact-links">
+            <a href="mailto:hello@seeon.io">hello@seeon.io</a>
+            <a href="https://www.linkedin.com/in/elmar-zimmermann" target="_blank">Connect on LinkedIn</a>
+          </div>
           <div class="micro">A clear destination for partnerships rooted in real-world proximity, professional relevance, and meaningful encounters.</div>
         </div>
       </section>
