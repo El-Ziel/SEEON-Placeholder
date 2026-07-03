@@ -34,6 +34,37 @@
       overflow-x: hidden;
     }
 
+    /* Lang Switcher Styles */
+    .lang-switcher {
+      position: absolute;
+      top: 24px;
+      right: 28px;
+      z-index: 10;
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+
+    .lang-btn {
+      background: none;
+      border: none;
+      color: var(--soft);
+      cursor: pointer;
+      padding: 4px 8px;
+      font-family: inherit;
+      font-weight: inherit;
+      transition: color 0.2s ease;
+    }
+
+    .lang-btn.active {
+      color: var(--text);
+      text-decoration: underline;
+      text-underline-offset: 4px;
+    }
+
+    .lang-btn:hover {
+      color: var(--text);
+    }
+
     .hero {
       position: relative;
       min-height: 100vh;
@@ -302,6 +333,11 @@
     }
 
     @media (max-width: 900px) {
+      .lang-switcher {
+        top: 16px;
+        right: 22px;
+      }
+
       .hero {
         align-items: flex-start;
       }
@@ -364,6 +400,12 @@
   </script>
 </head>
 <body>
+  <div class="lang-switcher">
+    <button class="lang-btn active" onclick="setLanguage('en')">EN</button>
+    <span style="color: var(--soft);">|</span>
+    <button class="lang-btn" onclick="setLanguage('de')">DE</button>
+  </div>
+
   <main class="hero">
     <canvas id="dots" aria-hidden="true"></canvas>
     <div class="grid-overlay" aria-hidden="true"></div>
@@ -371,25 +413,25 @@
     <div class="wrap">
       <section class="content">
         <div class="logo" id="logo-trigger" title="SEEON">SEEON</div>
-        <div class="eyebrow">Professional Proximity Infrastructure for Business Travel</div>
+        <div class="eyebrow" id="txt-eyebrow">Professional Proximity Infrastructure for Business Travel</div>
 
-        <h1>The right people are often in the same place. They just do not know it.</h1>
+        <h1 id="txt-h1">The right people are often in the same place. They just do not know it.</h1>
 
-        <p class="lead-story">
+        <p class="lead-story" id="txt-lead-story">
           At a trade fair, in an airport, or at a high-profile conference, two hyper-relevant professionals can be just
           <span class="highlight-trigger" id="thirty-trigger">30 metres apart</span>
           without ever realizing it.
         </p>
 
-        <p class="lead">
+        <p class="lead" id="txt-lead-1">
           <strong>SEEON makes this invisible layer visible: non-invasively and at scale.</strong>
         </p>
 
-        <p class="lead">
+        <p class="lead" id="txt-lead-2">
           Our platform operates on a powerful dual architecture designed to maximize reach, engagement, and long-term value across entire business ecosystems.
         </p>
 
-        <ul class="benefits-list">
+        <ul class="benefits-list" id="txt-benefits">
           <li><strong>The B2B Integration Framework (SDK/API):</strong> No friction. Event organizers and corporate platforms embed SEEON directly into their existing official apps with just a few lines of code—instantly unlocking proximity networking for thousands of users on day one.</li>
           <li><strong>The Standalone Network Ecosystem:</strong> Seamlessly transition. When large-scale events drive high user density into a city, the dedicated SEEON app takes over. It connects professionals beyond the venue doors—in hotels, restaurants, and transit hubs—creating a localized urban network effect.</li>
           <li><strong>Enterprise-Grade Privacy:</strong> Built in Europe, fully decentralized, and strictly privacy-first by design. No public tracking, no data exposure.</li>
@@ -397,35 +439,119 @@
 
         <div class="cta-container">
           <a href="https://calendar.app.google/QthHi7N7QSBMn5Ym6" target="_blank" class="cta-button">
-            <span>Explore SEEON</span>
+            <span id="txt-cta-btn">Explore SEEON</span>
             <span style="font-weight: 300;">→</span>
           </a>
-          <span class="cta-subtext">Direct and efficient. Get more information about SEEON and our technology.</span>
+          <span class="cta-subtext" id="txt-cta-sub">Direct and efficient. Get more information about SEEON and our technology.</span>
         </div>
 
-        <p class="proof">Built in Europe. Currently evaluating first deployments with industry partners.</p>
+        <p class="proof" id="txt-proof">Built in Europe. Currently evaluating first deployments with industry partners.</p>
 
         <div class="divider"></div>
 
         <div class="contact">
-          <div class="contact-title"><strong>Direct Channel</strong></div>
+          <div class="contact-title"><strong id="txt-contact-title">Direct Channel</strong></div>
           <div class="contact-links">
             <a href="mailto:hello@seeon.io">hello@seeon.io</a>
-            <a href="https://www.linkedin.com/in/elmar-zimmermann" target="_blank">Connect on LinkedIn</a>
+            <a href="https://www.linkedin.com/in/elmar-zimmermann" target="_blank" id="txt-linkedin">Connect on LinkedIn</a>
           </div>
-          <div class="micro">A clear destination for partnerships rooted in real-world proximity, professional relevance, and meaningful encounters.</div>
+          <div class="micro" id="txt-micro">A clear destination for partnerships rooted in real-world proximity, professional relevance, and meaningful encounters.</div>
         </div>
       </section>
     </div>
   </main>
 
   <footer>
-    <div class="footer-inner">© SEEON<br>Built in Europe</div>
+    <div class="footer-inner" id="txt-footer">© SEEON<br>Built in Europe</div>
   </footer>
 
   <div class="toast" id="toast" aria-live="polite"></div>
 
   <script>
+    // Translations Data Object
+    const translations = {
+      en: {
+        eyebrow: "Professional Proximity Infrastructure for Business Travel",
+        h1: "The right people are often in the same place. They just do not know it.",
+        leadStory: "At a trade fair, in an airport, or at a high-profile conference, two hyper-relevant professionals can be just <span class='highlight-trigger' id='thirty-trigger'>30 metres apart</span> without ever realizing it.",
+        lead1: "<strong>SEEON makes this invisible layer visible: non-invasively and at scale.</strong>",
+        lead2: "Our platform operates on a powerful dual architecture designed to maximize reach, engagement, and long-term value across entire business ecosystems.",
+        benefits: `
+          <li><strong>The B2B Integration Framework (SDK/API):</strong> No friction. Event organizers and corporate platforms embed SEEON directly into their existing official apps with just a few lines of code—instantly unlocking proximity networking for thousands of users on day one.</li>
+          <li><strong>The Standalone Network Ecosystem:</strong> Seamlessly transition. When large-scale events drive high user density into a city, the dedicated SEEON app takes over. It connects professionals beyond the venue doors—in hotels, restaurants, and transit hubs—creating a localized urban network effect.</li>
+          <li><strong>Enterprise-Grade Privacy:</strong> Built in Europe, fully decentralized, and strictly privacy-first by design. No public tracking, no data exposure.</li>
+        `,
+        ctaBtn: "Explore SEEON",
+        ctaSub: "Direct and efficient. Get more information about SEEON and our technology.",
+        proof: "Built in Europe. Currently evaluating first deployments with industry partners.",
+        contactTitle: "Direct Channel",
+        linkedin: "Connect on LinkedIn",
+        micro: "A clear destination for partnerships rooted in real-world proximity, professional relevance, and meaningful encounters.",
+        footer: "© SEEON<br>Built in Europe",
+        toastSignal: "You found a quiet signal.",
+        toastCloser: "Closer than it looks."
+      },
+      de: {
+        eyebrow: "Professionelle Proximity-Infrastruktur für Business-Events & urbane Netzwerke",
+        h1: "Die richtigen Leute sind oft am selben Ort. Sie wissen es nur nicht.",
+        leadStory: "Ob auf einer Fachmesse, am Flughafen oder bei einer hochkarätigen Konferenz: Zwei hochrelevante Entscheider trennen oft nur <span class='highlight-trigger' id='thirty-trigger'>30 Meter</span> – ohne dass sie je davon erfahren.",
+        lead1: "<strong>SEEON macht diese unsichtbare Ebene sichtbar: non-invasiv und skalierbar.</strong>",
+        lead2: "Unsere Plattform basiert auf einer leistungsstarken Dual-Architektur, die darauf ausgelegt ist, Reichweite, Engagement und langfristigen Wert in B2B-Ökosystemen zu maximieren.",
+        benefits: `
+          <li><strong>Das B2B-Integration-Framework (SDK/API):</strong> Keine Reibungspunkte. Messeveranstalter und Corporate-Plattformen integrieren SEEON mit wenigen Zeilen Code direkt in ihre bestehenden offiziellen Apps – und aktivieren Proximity-Networking vom ersten Tag an für tausende Nutzer.</li>
+          <li><strong>Das eigenständige Netzwerk-Ökosystem:</strong> Nahtloser Übergang. Wenn Großveranstaltungen eine hohe Nutzerdichte in eine Stadt bringen, übernimmt die dedizierte SEEON-App. Sie vernetzt Professionals auch außerhalb des Messegeländes – in Hotels, Restaurants und Verkehrsknotenpunkten – und erzeugt einen lokalen urbanen Netzwerkeffekt.</li>
+          <li><strong>Enterprise-Grade Privacy:</strong> Entwickelt in Europa, vollständig dezentralisiert und strikt Privacy-first. Kein öffentliches Tracking, keine Offenlegung sensibler Daten.</li>
+        `,
+        ctaBtn: "SEEON entdecken",
+        ctaSub: "Direkt und effizient. Erhalten Sie mehr Informationen über SEEON und unsere Technologie.",
+        proof: "Entwickelt in Europa. Wir evaluieren derzeit erste Implementierungen mit Industriepartnern.",
+        contactTitle: "Direkter Kanal",
+        linkedin: "Auf LinkedIn vernetzen",
+        micro: "Eine klare Anlaufstelle für Partnerschaften, die auf realer Nähe, beruflicher Relevanz und zielführenden Begegnungen basieren.",
+        footer: "© SEEON<br>Entwickelt in Europa",
+        toastSignal: "Sie haben ein leises Signal gefunden.",
+        toastCloser: "Näher als es aussieht."
+      }
+    };
+
+    let currentLang = 'en';
+
+    function setLanguage(lang) {
+      currentLang = lang;
+      
+      // Update Active Button State
+      document.querySelectorAll('.lang-btn').forEach(btn => {
+        btn.classList.remove('active');
+        if(btn.getAttribute('onclick').includes(lang)) {
+          btn.classList.add('active');
+        }
+      });
+
+      // Update Texts
+      document.getElementById('txt-eyebrow').textContent = translations[lang].eyebrow;
+      document.getElementById('txt-h1').textContent = translations[lang].h1;
+      document.getElementById('txt-lead-story').innerHTML = translations[lang].leadStory;
+      document.getElementById('txt-lead-1').innerHTML = translations[lang].lead1;
+      document.getElementById('txt-lead-2').textContent = translations[lang].lead2;
+      document.getElementById('txt-benefits').innerHTML = translations[lang].benefits;
+      document.getElementById('txt-cta-btn').textContent = translations[lang].ctaBtn;
+      document.getElementById('txt-cta-sub').textContent = translations[lang].ctaSub;
+      document.getElementById('txt-proof').textContent = translations[lang].proof;
+      document.getElementById('txt-contact-title').textContent = translations[lang].contactTitle;
+      document.getElementById('txt-linkedin').textContent = translations[lang].linkedin;
+      document.getElementById('txt-micro').textContent = translations[lang].micro;
+      document.getElementById('txt-footer').innerHTML = translations[lang].footer;
+
+      // Re-attach Event Listener to dynamic elements
+      const newThirtyTrigger = document.getElementById('thirty-trigger');
+      if (newThirtyTrigger) {
+        newThirtyTrigger.addEventListener('click', () => {
+          triggerPulse();
+          showToast(translations[currentLang].toastCloser);
+        });
+      }
+    }
+
     const canvas = document.getElementById('dots');
     const ctx = canvas.getContext('2d');
 
@@ -443,7 +569,6 @@
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const toast = document.getElementById('toast');
     const logoTrigger = document.getElementById('logo-trigger');
-    const thirtyTrigger = document.getElementById('thirty-trigger');
 
     function showToast(message) {
       toast.textContent = message;
@@ -569,7 +694,7 @@
       if (logoTapCount >= 2) {
         logoTapCount = 0;
         triggerPulse();
-        showToast('You found a quiet signal.');
+        showToast(translations[currentLang].toastSignal);
         return;
       }
 
@@ -578,10 +703,14 @@
       }, 420);
     });
 
-    thirtyTrigger.addEventListener('click', () => {
-      triggerPulse();
-      showToast('Closer than it looks.');
-    });
+    // Initial event binding
+    const initialThirtyTrigger = document.getElementById('thirty-trigger');
+    if (initialThirtyTrigger) {
+      initialThirtyTrigger.addEventListener('click', () => {
+        triggerPulse();
+        showToast(translations[currentLang].toastCloser);
+      });
+    }
 
     if (!prefersReducedMotion) {
       resizeCanvas();
