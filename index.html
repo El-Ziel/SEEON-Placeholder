@@ -332,6 +332,79 @@
       line-height: 1.7;
     }
 
+
+    /* Legal / Impressum */
+    .footer-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 18px 28px;
+    }
+
+    .legal-details {
+      position: relative;
+      max-width: 760px;
+    }
+
+    .legal-details summary {
+      cursor: pointer;
+      color: var(--soft);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      list-style: none;
+      user-select: none;
+    }
+
+    .legal-details summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .legal-details summary:hover {
+      color: var(--text);
+    }
+
+    .legal-card {
+      margin-top: 14px;
+      padding: 20px 22px;
+      border: 1px solid rgba(17, 17, 17, 0.12);
+      border-radius: 10px;
+      background: rgba(255,255,255,0.96);
+      color: var(--muted);
+      line-height: 1.7;
+      box-shadow: 0 8px 26px rgba(17,17,17,0.06);
+    }
+
+    .legal-card h2 {
+      margin: 0 0 14px 0;
+      color: var(--text);
+      font-size: 1.15rem;
+      letter-spacing: -0.01em;
+    }
+
+    .legal-card p {
+      margin: 0 0 14px 0;
+    }
+
+    .legal-card p:last-child {
+      margin-bottom: 0;
+    }
+
+    .legal-card a {
+      color: var(--text);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(17, 17, 17, 0.17);
+    }
+
+    .legal-placeholder {
+      display: inline-block;
+      padding: 0 4px;
+      border-radius: 4px;
+      background: rgba(17,17,17,0.06);
+      color: var(--text);
+      font-weight: 600;
+    }
+
     @media (max-width: 900px) {
       .lang-switcher {
         top: 16px;
@@ -462,7 +535,34 @@
   </main>
 
   <footer>
-    <div class="footer-inner" id="txt-footer">© SEEON<br>Built in Europe</div>
+    <div class="footer-inner">
+      <div class="footer-row">
+        <div id="txt-footer">© SEEON<br>Built in Europe</div>
+
+        <details class="legal-details" id="impressum">
+          <summary>Impressum</summary>
+          <div class="legal-card">
+            <h2>Impressum</h2>
+            <p>Angaben gemäß § 5 DDG</p>
+            <p>
+              <strong>Elmar Dominik Zimmermann</strong><br>
+              SEEON<br>
+              <span class="legal-placeholder">STRAẞE HAUSNUMMER</span><br>
+              <span class="legal-placeholder">PLZ</span> Bergisch Gladbach<br>
+              Deutschland
+            </p>
+            <p>
+              <strong>Kontakt</strong><br>
+              E-Mail: <a href="mailto:hello@seeon.io">hello@seeon.io</a>
+            </p>
+            <p>
+              Verantwortlich für den Inhalt dieser Website:<br>
+              Elmar Dominik Zimmermann, Anschrift wie oben.
+            </p>
+          </div>
+        </details>
+      </div>
+    </div>
   </footer>
 
   <div class="toast" id="toast" aria-live="polite"></div>
