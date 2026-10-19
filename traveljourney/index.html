@@ -758,6 +758,14 @@
             </div>
             <a class="button tint" href="/tradefairs/">See the trade fair page &rarr;</a>
           </div>
+
+          <div class="tf-strip">
+            <div>
+              <p class="kicker">For companies and associations</p>
+              <p class="tf-text">Relevant colleagues, partners and members, in any city your people travel to.</p>
+            </div>
+            <a class="button tint" href="/businesstravel/">See the business travel page &rarr;</a>
+          </div>
         </div>
       </section>
 
@@ -869,6 +877,7 @@
               <div class="hero-actions">
                 <a class="button" href="mailto:elmar@seeon.io">Start a conversation</a>
                 <a class="button tint" href="/tradefairs/">For trade fairs &rarr;</a>
+                <a class="button tint" href="/businesstravel/">For companies &rarr;</a>
                 <a class="button secondary" href="https://www.linkedin.com/in/elmar-zimmermann" target="_blank" rel="noopener noreferrer">Get in touch on LinkedIn</a>
               </div>
             </div>
@@ -1048,6 +1057,7 @@
         if (a.id === 'open-examples') { track('open_examples', { page: location.pathname }); return; }
         var href = a.getAttribute('href') || '';
         if (href.indexOf('/tradefairs') === 0) { track('click_tradefairs', { link_text: a.textContent.trim(), page: location.pathname }); return; }
+        if (href.indexOf('/businesstravel') === 0) { track('click_businesstravel', { link_text: a.textContent.trim(), page: location.pathname }); return; }
         if (href.indexOf('/traveljourney') === 0) { track('click_traveljourney', { link_text: a.textContent.trim(), page: location.pathname }); return; }
         if (href.indexOf('mailto:') === 0) { track('contact_email', { page: location.pathname }); return; }
         if (href.indexOf('tel:') === 0) { track('contact_phone', { page: location.pathname }); return; }

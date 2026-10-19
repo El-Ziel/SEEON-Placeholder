@@ -463,6 +463,18 @@
       canvas { display: none; }
       .toast { transition: none; }
     }
+
+    .context-nav { margin: 30px 0 6px; }
+    .context-title { font-size: 0.82rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--soft); margin-bottom: 12px; }
+    .context-links { display: flex; flex-wrap: wrap; gap: 10px; }
+    .context-links a {
+      display: inline-flex; align-items: center; min-height: 44px; padding: 0 16px;
+      border: 1px solid rgba(64, 94, 141, 0.38); border-radius: 4px;
+      background: #f4f5f8; color: #405e8d; font-weight: 650; font-size: 0.95rem; text-decoration: none;
+      transition: background .2s ease, border-color .2s ease;
+    }
+    .context-links a:hover { background: #e9edf3; border-color: rgba(64, 94, 141, 0.6); }
+    @media (max-width: 640px) { .context-links a { width: 100%; justify-content: space-between; } }
   </style>
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-7R87QZLWT5"></script> 
   <script>   
@@ -519,6 +531,14 @@
         </div>
 
         <p class="proof" id="txt-proof">Built in Europe. Currently evaluating first deployments with industry partners.</p>
+        <nav class="context-nav" aria-label="SEEON by context">
+          <div class="context-title" id="txt-ctx-title">Explore SEEON by context</div>
+          <div class="context-links">
+            <a href="/traveljourney/" id="txt-ctx-journey">The travel journey &rarr;</a>
+            <a href="/tradefairs/" id="txt-ctx-fairs">For trade fairs &rarr;</a>
+            <a href="/businesstravel/" id="txt-ctx-bt">For companies &amp; associations &rarr;</a>
+          </div>
+        </nav>
 
         <div class="divider"></div>
 
@@ -589,7 +609,11 @@
         micro: "A clear destination for partnerships rooted in real-world proximity, professional relevance, and meaningful encounters.",
         footer: "© SEEON<br>Built in Europe",
         toastSignal: "You found a quiet signal.",
-        toastCloser: "Closer than it looks."
+        toastCloser: "Closer than it looks.",
+        ctxTitle: "Explore SEEON by context",
+        ctxJourney: "The travel journey →",
+        ctxFairs: "For trade fairs →",
+        ctxBt: "For companies & associations →"
       },
       de: {
         eyebrow: "Professionelle Proximity-Infrastruktur für Business-Events & urbane Netzwerke",
@@ -610,7 +634,11 @@
         micro: "Eine klare Anlaufstelle für Partnerschaften, die auf realer Nähe, beruflicher Relevanz und zielführenden Begegnungen basieren.",
         footer: "© SEEON<br>Entwickelt in Europa",
         toastSignal: "Sie haben ein leises Signal gefunden.",
-        toastCloser: "Näher als es aussieht."
+        toastCloser: "Näher als es aussieht.",
+        ctxTitle: "SEEON nach Einsatzbereich",
+        ctxJourney: "Die Reise im Überblick →",
+        ctxFairs: "Für Messen →",
+        ctxBt: "Für Unternehmen & Verbände →"
       }
     };
 
@@ -640,6 +668,10 @@
       document.getElementById('txt-contact-title').textContent = translations[lang].contactTitle;
       document.getElementById('txt-linkedin').textContent = translations[lang].linkedin;
       document.getElementById('txt-micro').textContent = translations[lang].micro;
+      document.getElementById('txt-ctx-title').textContent = translations[lang].ctxTitle;
+      document.getElementById('txt-ctx-journey').textContent = translations[lang].ctxJourney;
+      document.getElementById('txt-ctx-fairs').textContent = translations[lang].ctxFairs;
+      document.getElementById('txt-ctx-bt').textContent = translations[lang].ctxBt;
       document.getElementById('txt-footer').innerHTML = translations[lang].footer;
 
       // Re-attach Event Listener to dynamic elements
@@ -821,6 +853,13 @@
         animate(0);
       }, { passive: true });
     }
+  </script>
+  <script>
+    document.addEventListener('click', function (e) {
+      var a = e.target.closest('.context-links a');
+      if (!a || typeof gtag !== 'function') return;
+      gtag('event', 'click_context_page', { target: a.getAttribute('href'), page: location.pathname });
+    });
   </script>
 </body>
 </html>
