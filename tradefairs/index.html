@@ -681,6 +681,13 @@
       .story-media::before { padding-top: 118%; }
     }
   </style>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-7R87QZLWT5"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-7R87QZLWT5');
+  </script>
 </head>
 <body>
   <canvas id="dots" aria-hidden="true"></canvas>
@@ -1029,6 +1036,22 @@
       }, 2500);
       window.addEventListener('pageshow', function () {
         document.querySelectorAll('.story-media img').forEach(function (img) { if (img.complete) img.classList.add('is-loaded'); });
+      });
+    })();
+  </script>
+  <script>
+    (function () {
+      function track(name, params) { if (typeof gtag === 'function') gtag('event', name, params || {}); }
+      document.addEventListener('click', function (e) {
+        var a = e.target.closest('a, button');
+        if (!a) return;
+        if (a.id === 'open-examples') { track('open_examples', { page: location.pathname }); return; }
+        var href = a.getAttribute('href') || '';
+        if (href.indexOf('/tradefairs') === 0) { track('click_tradefairs', { link_text: a.textContent.trim(), page: location.pathname }); return; }
+        if (href.indexOf('/traveljourney') === 0) { track('click_traveljourney', { link_text: a.textContent.trim(), page: location.pathname }); return; }
+        if (href.indexOf('mailto:') === 0) { track('contact_email', { page: location.pathname }); return; }
+        if (href.indexOf('tel:') === 0) { track('contact_phone', { page: location.pathname }); return; }
+        if (href.indexOf('linkedin.com') > -1) { track('contact_linkedin', { page: location.pathname }); return; }
       });
     })();
   </script>
