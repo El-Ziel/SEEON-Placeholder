@@ -197,6 +197,47 @@
       background: #fff;
     }
 
+    .button.tint {
+      background: rgba(64, 94, 141, 0.08);
+      color: #405e8d;
+      border-color: rgba(64, 94, 141, 0.38);
+    }
+
+    .button.tint:hover {
+      background: rgba(64, 94, 141, 0.14);
+      border-color: rgba(64, 94, 141, 0.6);
+    }
+
+    .tf-strip {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 28px;
+      margin-top: 16px;
+      padding: 26px 28px;
+      border: 1px solid rgba(64, 94, 141, 0.32);
+      border-radius: 8px;
+      background: rgba(64, 94, 141, 0.06);
+      backdrop-filter: blur(5px);
+      -webkit-backdrop-filter: blur(5px);
+    }
+
+    .tf-strip .kicker { margin: 0 0 8px; color: #405e8d; }
+
+    .tf-strip p.tf-text {
+      margin: 0;
+      color: var(--text);
+      font-size: 1.12rem;
+      line-height: 1.5;
+      font-weight: 600;
+    }
+
+    .tf-strip .button { flex: 0 0 auto; }
+
+    @media (max-width: 760px) {
+      .tf-strip { flex-direction: column; align-items: stretch; padding: 22px; }
+    }
+
     .section {
       padding: 58px 0;
       border-top: 1px solid var(--line);
@@ -670,6 +711,14 @@
               <p>The highest concentration of relevant co-presence. Hundreds of professionals with shared intent, and no infrastructure to make it visible.</p>
             </article>
           </div>
+
+          <div class="tf-strip">
+            <div>
+              <p class="kicker">For trade fair organisers</p>
+              <p class="tf-text">How SEEON runs at a trade fair: integrated into your app or standalone.</p>
+            </div>
+            <a class="button tint" href="/tradefairs/">See the trade fair page &rarr;</a>
+          </div>
         </div>
       </section>
 
@@ -778,9 +827,9 @@
               <p>
                 SEEON is looking for trade fair and congress organisers, industry associations, and travel management companies ready to explore what professional proximity infrastructure can do for their events and platforms.
               </p>
-              <p><a href="/tradefairs/" style="color:var(--text);font-weight:650;text-decoration:none;border-bottom:1px solid var(--line-strong)">How SEEON runs at trade fairs &rarr;</a></p>
               <div class="hero-actions">
                 <a class="button" href="mailto:elmar@seeon.io">Start a conversation</a>
+                <a class="button tint" href="/tradefairs/">For trade fairs &rarr;</a>
                 <a class="button secondary" href="https://www.linkedin.com/in/elmar-zimmermann" target="_blank" rel="noopener noreferrer">Get in touch on LinkedIn</a>
               </div>
             </div>
