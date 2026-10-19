@@ -181,11 +181,9 @@
     }
 
     .button.secondary {
-      background: rgba(255, 255, 255, 0.72);
+      background: rgba(255, 255, 255, 0.92);
       color: var(--text);
       border-color: var(--line-strong);
-      backdrop-filter: blur(4px);
-      -webkit-backdrop-filter: blur(4px);
     }
 
     .button.secondary:hover { background: #fff; }
@@ -229,9 +227,7 @@
       padding: 28px;
       border: 1px solid var(--line);
       border-radius: 8px;
-      background: rgba(255, 255, 255, 0.7);
-      backdrop-filter: blur(5px);
-      -webkit-backdrop-filter: blur(5px);
+      background: rgba(255, 255, 255, 0.92);
     }
 
     .work-card h3 {
@@ -253,9 +249,7 @@
       padding: 42px 46px;
       border: 1px solid var(--line);
       border-radius: 8px;
-      background: rgba(255, 255, 255, 0.72);
-      backdrop-filter: blur(5px);
-      -webkit-backdrop-filter: blur(5px);
+      background: rgba(255, 255, 255, 0.92);
     }
 
     .hero-copy.panel { padding: 46px; }
@@ -274,9 +268,7 @@
       padding: 24px 28px;
       border: 1px solid var(--line);
       border-radius: 8px;
-      background: rgba(255, 255, 255, 0.72);
-      backdrop-filter: blur(5px);
-      -webkit-backdrop-filter: blur(5px);
+      background: rgba(255, 255, 255, 0.92);
     }
 
     .signal p {
@@ -325,9 +317,7 @@
     }
 
     dialog.examples::backdrop {
-      background: rgba(255, 255, 255, 0.72);
-      backdrop-filter: blur(6px);
-      -webkit-backdrop-filter: blur(6px);
+      background: rgba(255, 255, 255, 0.92);
     }
 
     .examples-inner {
@@ -434,6 +424,9 @@
       filter: saturate(0.92);
     }
 
+    .story-media img { opacity: 0; transition: opacity .35s ease; }
+    .story-media img.is-loaded { opacity: 1; }
+
     .story-text {
       display: flex;
       flex-direction: column;
@@ -484,9 +477,7 @@
       padding: 58px;
       border: 1px solid var(--line-strong);
       border-radius: 8px;
-      background: rgba(255, 255, 255, 0.78);
-      backdrop-filter: blur(6px);
-      -webkit-backdrop-filter: blur(6px);
+      background: rgba(255, 255, 255, 0.92);
       scroll-margin-top: 28px;
     }
 
@@ -498,9 +489,7 @@
       padding: 46px;
       border: 1px solid var(--line);
       border-radius: 8px;
-      background: rgba(255, 255, 255, 0.72);
-      backdrop-filter: blur(5px);
-      -webkit-backdrop-filter: blur(5px);
+      background: rgba(255, 255, 255, 0.92);
     }
 
     .differentiator p {
@@ -1003,6 +992,22 @@
       dlg.addEventListener('click', (e) => { if (e.target === dlg) dlg.close(); });
       dlg.addEventListener('close', () => openBtn.focus());
       if (location.hash === '#examples') dlg.showModal();
+    })();
+  </script>
+  <noscript><style>.story-media img { opacity: 1 !important; }</style></noscript>
+  <script>
+    (function () {
+      function show(img) { requestAnimationFrame(function () { img.classList.add('is-loaded'); }); }
+      document.querySelectorAll('.story-media img').forEach(function (img) {
+        if (img.complete && img.naturalWidth > 0) { show(img); }
+        else {
+          img.addEventListener('load', function () { show(img); }, { once: true });
+          img.addEventListener('error', function () { img.classList.add('is-loaded'); }, { once: true });
+        }
+      });
+      window.addEventListener('pageshow', function () {
+        document.querySelectorAll('.story-media img').forEach(function (img) { if (img.complete) img.classList.add('is-loaded'); });
+      });
     })();
   </script>
 </body>
