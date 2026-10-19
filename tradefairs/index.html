@@ -1,0 +1,972 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SEEON | Trade Fairs</title>
+  <meta name="description" content="SEEON at trade fairs: relevant professional co-presence made visible in the hall, in the hotels around it and across the city. Integrated into the official event app or standalone. Always opt-in.">
+  <style>
+    :root {
+      --bg: #ffffff;
+      --text: #111111;
+      --muted: #5f6368;
+      --soft: #8a8f94;
+      --line: rgba(17, 17, 17, 0.12);
+      --line-strong: rgba(17, 17, 17, 0.24);
+      --blue: #1e6bb8;
+      --green: #49a564;
+      --max: 1180px;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    html,
+    body {
+      margin: 0;
+      min-height: 100%;
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Helvetica, Arial, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+
+    body {
+      overflow-x: hidden;
+      background:
+        radial-gradient(circle at 50% 18%, rgba(255,255,255,0.99) 0%, rgba(255,255,255,0.96) 32%, rgba(255,255,255,0.91) 54%, rgba(255,255,255,0.98) 100%),
+        #fff;
+    }
+
+    canvas {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      display: block;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .grid-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 1;
+      background-image:
+        linear-gradient(to right, rgba(17, 17, 17, 0.035) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(17, 17, 17, 0.035) 1px, transparent 1px);
+      background-size: 74px 74px;
+      mask-image: radial-gradient(circle at 50% 22%, transparent 0 18%, rgba(0,0,0,.10) 36%, rgba(0,0,0,.38) 62%, rgba(0,0,0,.9) 100%);
+      -webkit-mask-image: radial-gradient(circle at 50% 22%, transparent 0 18%, rgba(0,0,0,.10) 36%, rgba(0,0,0,.38) 62%, rgba(0,0,0,.9) 100%);
+      pointer-events: none;
+    }
+
+    .page { position: relative; z-index: 2; }
+
+    .wrap {
+      width: min(100%, var(--max));
+      margin: 0 auto;
+      padding: 0 28px;
+    }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      padding: 34px 0 18px;
+    }
+
+    .brand {
+      color: var(--text);
+      text-decoration: none;
+      font-size: 1.05rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      color: var(--muted);
+      font-size: 0.94rem;
+    }
+
+    .nav a {
+      color: inherit;
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+      padding-bottom: 3px;
+      transition: color .2s ease, border-color .2s ease;
+    }
+
+    .nav a:hover {
+      color: var(--text);
+      border-color: var(--line-strong);
+    }
+
+    .hero {
+      min-height: 88vh;
+      display: grid;
+      align-items: center;
+      padding: 42px 0 82px;
+    }
+
+    .hero-copy {
+      max-width: 820px;
+      padding-top: 26px;
+    }
+
+    .eyebrow {
+      margin: 0 0 18px;
+      color: var(--soft);
+      font-size: 0.92rem;
+      font-weight: 650;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 0;
+      max-width: 15ch;
+      font-size: clamp(2.8rem, 6vw, 5.4rem);
+      line-height: 0.92;
+      font-weight: 650;
+      letter-spacing: 0;
+    }
+
+    .lead {
+      margin: 28px 0 0;
+      max-width: 680px;
+      color: var(--muted);
+      font-size: clamp(1.12rem, 2vw, 1.34rem);
+      line-height: 1.62;
+      font-weight: 500;
+    }
+
+    .lead strong {
+      color: var(--text);
+      font-weight: 650;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 34px;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      padding: 0 18px;
+      border: 1px solid var(--text);
+      border-radius: 4px;
+      color: #fff;
+      background: var(--text);
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 0.98rem;
+      transition: transform .2s ease, background .2s ease, color .2s ease;
+    }
+
+    .button:hover {
+      transform: translateY(-1px);
+      background: #2a2a2a;
+    }
+
+    .button.secondary {
+      background: rgba(255, 255, 255, 0.72);
+      color: var(--text);
+      border-color: var(--line-strong);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+    }
+
+    .button.secondary:hover { background: #fff; }
+
+    .section {
+      padding: 58px 0;
+      border-top: 1px solid var(--line);
+    }
+
+    .section-head {
+      display: grid;
+      grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+      gap: 42px;
+      align-items: end;
+      margin-bottom: 34px;
+    }
+
+    h2 {
+      margin: 0;
+      font-size: clamp(2.1rem, 4vw, 4rem);
+      line-height: 1;
+      font-weight: 650;
+      letter-spacing: 0;
+    }
+
+    .section-intro {
+      margin: 0;
+      color: var(--muted);
+      font-size: 1.08rem;
+      line-height: 1.72;
+    }
+
+    .work-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .work-card {
+      min-height: 230px;
+      padding: 28px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(5px);
+      -webkit-backdrop-filter: blur(5px);
+    }
+
+    .work-card h3 {
+      margin: 0;
+      font-size: clamp(1.35rem, 2.1vw, 1.9rem);
+      line-height: 1.08;
+      font-weight: 650;
+      letter-spacing: 0;
+    }
+
+    .work-card p {
+      margin: 16px 0 0;
+      color: var(--muted);
+      font-size: 1rem;
+      line-height: 1.68;
+    }
+
+    .panel {
+      padding: 42px 46px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.72);
+      backdrop-filter: blur(5px);
+      -webkit-backdrop-filter: blur(5px);
+    }
+
+    .hero-copy.panel { padding: 46px; }
+
+    @media (max-width: 640px) {
+      .panel,
+      .hero-copy.panel { padding: 22px; }
+    }
+
+    .signal {
+      margin-top: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 28px;
+      padding: 24px 28px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.72);
+      backdrop-filter: blur(5px);
+      -webkit-backdrop-filter: blur(5px);
+    }
+
+    .signal p {
+      margin: 0;
+      max-width: 720px;
+      color: var(--muted);
+      font-size: 1rem;
+      line-height: 1.68;
+    }
+
+    .signal q { color: var(--text); font-weight: 650; }
+
+    .signal-source {
+      display: inline-block;
+      margin-left: 6px;
+      color: var(--soft);
+      font-size: 0.86rem;
+    }
+
+    .signal .button { flex: 0 0 auto; }
+
+    .button.tint {
+      background: rgba(64, 94, 141, 0.08);
+      color: #405e8d;
+      border-color: rgba(64, 94, 141, 0.38);
+    }
+
+    .button.tint:hover {
+      background: rgba(64, 94, 141, 0.14);
+      border-color: rgba(64, 94, 141, 0.6);
+    }
+
+    @media (max-width: 760px) {
+      .signal { flex-direction: column; align-items: stretch; padding: 22px; }
+    }
+
+    dialog.examples {
+      width: min(760px, calc(100% - 32px));
+      max-height: calc(100vh - 48px);
+      padding: 0;
+      border: 1px solid var(--line-strong);
+      border-radius: 8px;
+      background: #fff;
+      color: var(--text);
+      box-shadow: 0 24px 80px rgba(17, 17, 17, 0.18);
+    }
+
+    dialog.examples::backdrop {
+      background: rgba(255, 255, 255, 0.72);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+    }
+
+    .examples-inner {
+      padding: 46px;
+      overflow-y: auto;
+      max-height: calc(100vh - 50px);
+    }
+
+    .examples-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 24px;
+    }
+
+    .examples h2 {
+      font-size: clamp(1.9rem, 3.4vw, 2.8rem);
+    }
+
+    .examples-close {
+      flex: 0 0 auto;
+      width: 40px;
+      height: 40px;
+      border: 1px solid var(--line-strong);
+      border-radius: 4px;
+      background: #fff;
+      color: var(--text);
+      font-size: 1.3rem;
+      line-height: 1;
+      cursor: pointer;
+    }
+
+    .examples-close:hover { background: #f5f5f5; }
+
+    .example {
+      padding: 28px 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .example:first-of-type { margin-top: 18px; }
+
+    .example h3 {
+      margin: 0;
+      font-size: clamp(1.35rem, 2.1vw, 1.7rem);
+      line-height: 1.12;
+      font-weight: 650;
+    }
+
+    .example p {
+      margin: 14px 0 0;
+      color: var(--muted);
+      font-size: 1.04rem;
+      line-height: 1.72;
+    }
+
+    .example p.with-seeon {
+      color: var(--text);
+    }
+
+    .examples-note {
+      margin: 24px 0 0;
+      color: var(--soft);
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+
+    @media (max-width: 640px) {
+      .examples-inner { padding: 24px; }
+    }
+
+    .story-list { display: grid; gap: 18px; }
+
+    .story {
+      display: grid;
+      grid-template-columns: minmax(0, 1.08fr) minmax(280px, 0.72fr);
+      gap: 24px;
+      align-items: stretch;
+      padding: 16px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.68);
+      backdrop-filter: blur(5px);
+      -webkit-backdrop-filter: blur(5px);
+    }
+
+    .story:nth-child(even) {
+      grid-template-columns: minmax(280px, 0.72fr) minmax(0, 1.08fr);
+    }
+
+    .story:nth-child(even) .story-media { order: 2; }
+
+    .story-media {
+      position: relative;
+      overflow: hidden;
+      min-height: 360px;
+      border-radius: 6px;
+      background: #f3f3f3;
+    }
+
+    .story-media img {
+      width: 100%;
+      height: 100%;
+      min-height: inherit;
+      display: block;
+      object-fit: cover;
+      filter: saturate(0.92);
+    }
+
+    .story-text {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      min-height: 360px;
+      padding: clamp(18px, 4vw, 42px);
+    }
+
+    .kicker {
+      margin: 0 0 18px;
+      color: var(--soft);
+      font-size: 0.82rem;
+      font-weight: 750;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .story h3 {
+      margin: 0;
+      max-width: 14ch;
+      font-size: clamp(1.85rem, 3.2vw, 3.2rem);
+      line-height: 1.02;
+      font-weight: 650;
+      letter-spacing: 0;
+    }
+
+    .story p {
+      margin: 20px 0 0;
+      color: var(--muted);
+      font-size: 1.05rem;
+      line-height: 1.72;
+      max-width: 520px;
+    }
+
+    .accent {
+      width: 44px;
+      height: 3px;
+      margin-top: 24px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, var(--blue), var(--green));
+    }
+
+    .cta {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(280px, 0.58fr);
+      gap: 42px;
+      align-items: start;
+      padding: 58px;
+      border: 1px solid var(--line-strong);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.78);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      scroll-margin-top: 28px;
+    }
+
+    .differentiator {
+      display: grid;
+      grid-template-columns: minmax(0, 0.58fr) minmax(0, 1fr);
+      gap: 42px;
+      align-items: center;
+      padding: 46px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.72);
+      backdrop-filter: blur(5px);
+      -webkit-backdrop-filter: blur(5px);
+    }
+
+    .differentiator p {
+      margin: 0;
+      color: var(--muted);
+      font-size: clamp(1.06rem, 1.6vw, 1.2rem);
+      line-height: 1.75;
+    }
+
+    .cta h2 { max-width: 12ch; }
+
+    .cta p {
+      margin: 22px 0 0;
+      color: var(--muted);
+      font-size: 1.12rem;
+      line-height: 1.72;
+      max-width: 650px;
+    }
+
+    .contact-panel { display: grid; gap: 16px; padding-top: 8px; }
+
+    .contact-item {
+      padding: 0 0 16px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .contact-label {
+      margin: 0 0 7px;
+      color: var(--soft);
+      font-size: 0.78rem;
+      font-weight: 750;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .contact-value,
+    .contact-value a {
+      margin: 0;
+      color: var(--text);
+      text-decoration: none;
+      font-size: 1.02rem;
+      line-height: 1.55;
+      font-weight: 650;
+    }
+
+    .contact-value a {
+      border-bottom: 1px solid rgba(17, 17, 17, 0.22);
+      padding-bottom: 2px;
+    }
+
+    .contact-value a:hover { border-color: rgba(17, 17, 17, 0.52); }
+
+    footer {
+      padding: 34px 0 42px;
+      color: var(--soft);
+      font-size: 0.92rem;
+      line-height: 1.7;
+      border-top: 1px solid var(--line);
+    }
+
+    .footer-inner {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .footer-imprint { color: var(--muted); text-align: right; }
+
+    .footer-imprint summary {
+      cursor: pointer;
+      list-style: none;
+      color: var(--text);
+      font-weight: 650;
+      border-bottom: 1px solid rgba(17, 17, 17, 0.2);
+      display: inline-flex;
+      padding-bottom: 2px;
+    }
+
+    .footer-imprint summary::-webkit-details-marker { display: none; }
+
+    .footer-imprint summary:hover { border-color: rgba(17, 17, 17, 0.5); }
+
+    .footer-imprint address { margin-top: 12px; font-style: normal; }
+
+    @media (max-width: 1100px) {
+      .work-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+
+    @media (max-width: 900px) {
+      .topbar { align-items: flex-start; flex-direction: column; }
+      .nav { flex-wrap: wrap; }
+      .footer-inner { flex-direction: column; }
+      .footer-imprint { text-align: left; }
+      .hero { min-height: 78vh; padding-bottom: 54px; }
+
+      .section-head,
+      .story,
+      .story:nth-child(even),
+      .differentiator,
+      .cta { grid-template-columns: 1fr; }
+
+      .story:nth-child(even) .story-media { order: 0; }
+      .story-media,
+      .story-text { min-height: 0; }
+      .story-media { aspect-ratio: 4 / 3; }
+      .story-media img { min-height: 0; }
+      .cta { padding: 34px; }
+    }
+
+    @media (max-width: 640px) {
+      .wrap { padding: 0 20px; }
+      .topbar { padding-top: 26px; }
+      .nav { gap: 12px; font-size: 0.9rem; }
+      h1 { max-width: none; font-size: clamp(2.4rem, 11vw, 3.4rem); }
+      .hero-actions { flex-direction: column; }
+      .button { width: 100%; }
+      .section { padding: 42px 0; }
+      .work-grid { grid-template-columns: 1fr; }
+      .story { padding: 10px; }
+      .story-media { aspect-ratio: 1 / 1.18; }
+      .story-text { padding: 18px 10px 20px; }
+      .story h3 { max-width: 12.5ch; }
+
+      .story p,
+      .section-intro,
+      .work-card p,
+      .differentiator p,
+      .cta p { font-size: 1rem; }
+
+      .work-card,
+      .differentiator { padding: 22px; }
+      .cta { padding: 24px; }
+      .grid-overlay { background-size: 58px 58px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      canvas { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <canvas id="dots" aria-hidden="true"></canvas>
+  <div class="grid-overlay" aria-hidden="true"></div>
+
+  <div class="page">
+    <header class="wrap topbar">
+      <a class="brand" href="/" aria-label="SEEON home">SEEON</a>
+      <nav class="nav" aria-label="Page navigation">
+        <a href="#journey">The journey</a>
+        <a href="#how-it-runs">How it runs</a>
+        <a href="#privacy">Privacy</a>
+        <a href="#contact">Contact</a>
+        <a href="/traveljourney">Travel journey</a>
+      </nav>
+    </header>
+
+    <main id="top">
+      <section class="hero">
+        <div class="wrap">
+          <div class="hero-copy panel">
+            <p class="eyebrow">Trade fairs · Congresses · Organisers</p>
+            <h1>The missing layer between hall, hotel and city.</h1>
+            <p class="lead">
+              <strong>A trade fair brings thousands of relevant professionals into one city for a few days.</strong>
+              SEEON makes this co-presence visible in the hall, in nearby hotels and, if attendees choose, across the city. It runs inside the organiser's app or as a standalone app.
+            </p>
+            <div class="hero-actions">
+              <a class="button" href="mailto:elmar@seeon.io">Start a conversation</a>
+              <a class="button secondary" href="https://www.linkedin.com/in/elmar-zimmermann" target="_blank" rel="noopener noreferrer">Get in touch on LinkedIn</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="journey">
+        <div class="wrap">
+          <div class="section-head panel">
+            <h2>From arrival to after closing.</h2>
+            <p class="section-intro">
+              Relevant encounters at a trade fair are not limited to the opening hours. They happen on the way in, in the hall and in the evening near the venue. SEEON covers each of these moments, only when the attendee activates it.
+            </p>
+          </div>
+
+          <div class="work-grid" aria-label="The trade fair journey SEEON covers">
+            <article class="work-card">
+              <p class="kicker">01 | Arrival</p>
+              <h3>Airport, train &amp; hotel.</h3>
+              <p>Visitors and exhibitors travel on the same flights and check into the same hotels. A first contact can happen before the fair opens.</p>
+            </article>
+
+            <article class="work-card">
+              <p class="kicker">02 | The fair</p>
+              <h3>In the hall.</h3>
+              <p>SEEON shows who is relevant, based on what people offer and what they seek.</p>
+            </article>
+
+            <article class="work-card">
+              <p class="kicker">03 | After closing</p>
+              <h3>Hotel &amp; surroundings.</h3>
+              <p>After closing, attendees meet in lobbies, bars and restaurants nearby. SEEON continues to work there.</p>
+            </article>
+
+            <article class="work-card">
+              <p class="kicker">04 | The city</p>
+              <h3>Optional.</h3>
+              <p>Attendees can widen their visibility to the whole city for the duration of the fair. It is never the default.</p>
+            </article>
+          </div>
+
+          <div class="signal">
+            <p>Networking is one of the main reasons professionals attend trade fairs. Most relevant encounters still happen by chance.</p>
+            <button type="button" class="button tint" id="open-examples" aria-haspopup="dialog">See three real examples</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="how-it-runs">
+        <div class="wrap">
+          <div class="section-head panel">
+            <h2>How SEEON runs at your fair.</h2>
+            <p class="section-intro">
+              Two deployment options. Inside the venue, attendees can use the organiser's app. Beyond the venue, the SEEON app continues. Use is voluntary in both cases.
+            </p>
+          </div>
+
+          <div class="story-list">
+            <article class="story">
+              <div class="story-media">
+                <img src="assets/tradefair-visibility.jpg" loading="eager" alt="Busy trade fair hall, two attendees subtly highlighted as visible">
+              </div>
+              <div class="story-text">
+                <p class="kicker">01 | Visibility</p>
+                <h3>You decide how visible you are.</h3>
+                <p>Visibility is set by each attendee, not by the organiser and not by SEEON. Off, the fair only, the fair and its surroundings, or the whole city. If you do not activate, you do not exist in the system. Contact opens only when both sides want it.</p>
+                <span class="accent" aria-hidden="true"></span>
+              </div>
+            </article>
+
+            <article class="story">
+              <div class="story-media">
+                <img src="assets/tradefair-integrated.jpg" loading="eager" alt="Attendee holding a smartphone showing relevant people inside the official event app, powered by SEEON">
+              </div>
+              <div class="story-text">
+                <p class="kicker">02 | Integrated</p>
+                <h3>Inside your official app.</h3>
+                <p>SEEON is embedded into your existing event app via SDK and API. To show names and relevance, it uses the profile data behind your badges. On SEEON's side, this data is converted into anonymised tokens immediately. Nothing is stored.</p>
+                <span class="accent" aria-hidden="true"></span>
+              </div>
+            </article>
+
+            <article class="story">
+              <div class="story-media">
+                <img src="assets/tradefair-standalone.jpg" loading="eager" alt="Hotel bar in the early evening, trade fair attendees with lanyards sitting apart, each unaware of the others">
+              </div>
+              <div class="story-text">
+                <p class="kicker">03 | Standalone</p>
+                <h3>The SEEON app as standalone.</h3>
+                <p>Without integration, attendees enter your fair through the SEEON app, via QR code or event password. After closing, the same app works in hotels, restaurants and across the city.</p>
+                <span class="accent" aria-hidden="true"></span>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="privacy">
+        <div class="wrap">
+          <div class="differentiator">
+            <h2>Privacy by design.</h2>
+            <p>
+              No GPS and no movement history. Identity becomes an anonymised token on entry and is not stored. Presence expires on its own when the fair ends. Hosted in Germany, built for GDPR. The organiser keeps its attendee data. SEEON does not build profiles of its own.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="wrap">
+          <div class="cta">
+            <div>
+              <p class="eyebrow">Proximity infrastructure for trade fairs</p>
+              <h2>Explore a pilot for your next trade fair.</h2>
+              <p>
+                SEEON is looking for trade fair and congress organisers interested in a first deployment, integrated or standalone.
+              </p>
+              <div class="hero-actions">
+                <a class="button" href="mailto:elmar@seeon.io">Start a conversation</a>
+                <a class="button secondary" href="https://www.linkedin.com/in/elmar-zimmermann" target="_blank" rel="noopener noreferrer">Get in touch on LinkedIn</a>
+              </div>
+            </div>
+
+            <aside class="contact-panel" id="contact" aria-label="Contact details">
+              <div class="contact-item">
+                <p class="contact-label">Name</p>
+                <p class="contact-value">Elmar Zimmermann</p>
+              </div>
+              <div class="contact-item">
+                <p class="contact-label">Phone</p>
+                <p class="contact-value"><a href="tel:+491705959922">+49 170 59 59 922</a></p>
+              </div>
+              <div class="contact-item">
+                <p class="contact-label">Email</p>
+                <p class="contact-value"><a href="mailto:elmar@seeon.io">elmar@seeon.io</a></p>
+              </div>
+            </aside>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <dialog class="examples" id="examples" aria-labelledby="examples-title">
+      <div class="examples-inner">
+        <div class="examples-top">
+          <div>
+            <p class="eyebrow">Three real examples</p>
+            <h2 id="examples-title">It already happens. By chance.</h2>
+          </div>
+          <button type="button" class="examples-close" id="close-examples" aria-label="Close">&times;</button>
+        </div>
+
+        <article class="example">
+          <p class="kicker">01 | On the way</p>
+          <h3>Five hours, one row apart.</h3>
+          <p>5:30 in the morning, a train from Berlin to Cologne. A travel manager is heading to an industry conference. Only on arrival does she notice that a colleague from the same industry, on his way to the same event, had been sitting directly in front of her the entire trip.</p>
+          <p class="with-seeon">With SEEON active on both sides, they would have seen each other at the platform.</p>
+        </article>
+
+        <article class="example">
+          <p class="kicker">02 | At the event</p>
+          <h3>Five minutes in the speaker lounge.</h3>
+          <p>A conference that is not going well. An event professional slips away for five minutes and finds a speaker who had the same idea. They talk about AI, scepticism and everyday work. Nobody is selling, nobody is buying. It becomes one of the most important conversations of their career. Since then, the question behind every event they build is whether it creates the conditions for that moment, or only hopes for it.</p>
+          <p class="with-seeon">SEEON is one way to create those conditions, without changing the event itself.</p>
+        </article>
+
+        <article class="example">
+          <p class="kicker">03 | After the event</p>
+          <h3>One transfer instead of two.</h3>
+          <p>After an event, an attendee waits for the airport transfer and happens to meet one of the speakers, waiting for the same thing. They decide to share the ride and talk the entire way. One car instead of two, and a conversation neither had planned.</p>
+          <p class="with-seeon">With SEEON, this kind of moment no longer depends on luck. The shared ride is a sustainable side effect.</p>
+        </article>
+
+        <p class="examples-note">All three situations were shared by people from the industry. Names are left out.</p>
+      </div>
+    </dialog>
+
+    <footer>
+      <div class="wrap footer-inner">
+        <div>© SEEON | Proximity infrastructure for business travel | Privacy-first by design</div>
+        <details class="footer-imprint" id="imprint">
+          <summary>Imprint</summary>
+          <address>
+            Elmar Zimmermann<br>
+            Am Vogelherd 17<br>
+            51467 Bergisch Gladbach
+          </address>
+        </details>
+      </div>
+    </footer>
+  </div>
+
+  <script>
+    const canvas = document.getElementById('dots');
+    const ctx = canvas.getContext('2d');
+    let width = 0, height = 0;
+    let dpr = Math.min(window.devicePixelRatio || 1, 2);
+    let dots = [];
+    let rafId = null;
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    function resizeCanvas() {
+      width = window.innerWidth;
+      height = window.innerHeight;
+      dpr = Math.min(window.devicePixelRatio || 1, 2);
+      canvas.width = Math.floor(width * dpr);
+      canvas.height = Math.floor(height * dpr);
+      canvas.style.width = width + 'px';
+      canvas.style.height = height + 'px';
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      createDots();
+    }
+
+    function insideTextSafeZone(x, y) {
+      const cx = width < 760 ? width * 0.48 : width * 0.36;
+      const cy = height * 0.43;
+      const rx = Math.min(width * 0.32, 430);
+      const ry = Math.min(height * 0.3, 250);
+      const dx = (x - cx) / rx;
+      const dy = (y - cy) / ry;
+      return (dx * dx + dy * dy) < 1;
+    }
+
+    function createDots() {
+      dots = [];
+      const baseCount = width < 680 ? 72 : width < 1100 ? 112 : 148;
+      let attempts = 0;
+      while (dots.length < baseCount && attempts < baseCount * 28) {
+        attempts++;
+        const x = Math.random() * width;
+        const y = Math.random() * height;
+        if (insideTextSafeZone(x, y)) continue;
+        const size = Math.random() < 0.16 ? 2.8 + Math.random() * 1.5 : 1 + Math.random() * 1.7;
+        const drift = 0.055 + Math.random() * 0.18;
+        dots.push({
+          x, y, originX: x, originY: y, size,
+          opacity: 0.2 + Math.random() * 0.36,
+          driftX: (Math.random() - 0.5) * drift,
+          driftY: (Math.random() - 0.5) * drift,
+          phase: Math.random() * Math.PI * 2,
+          pulse: 0.28 + Math.random() * 0.58,
+        });
+      }
+    }
+
+    function drawDot(dot, time) {
+      const t = time * 0.001;
+      dot.x += dot.driftX;
+      dot.y += dot.driftY;
+      if (dot.x < -10 || dot.x > width + 10 || dot.y < -10 || dot.y > height + 10 || insideTextSafeZone(dot.x, dot.y)) {
+        dot.x = dot.originX; dot.y = dot.originY;
+        dot.driftX *= -1; dot.driftY *= -1;
+      }
+      const breath = 1 + Math.sin(t * dot.pulse + dot.phase) * 0.12;
+      const halo = dot.size + 6 + Math.sin(t * 0.7 + dot.phase) * 1.5;
+      const alpha = dot.opacity * (0.88 + Math.sin(t * 0.55 + dot.phase) * 0.12);
+      ctx.beginPath();
+      ctx.fillStyle = `rgba(17,17,17,${(alpha * 0.12).toFixed(3)})`;
+      ctx.arc(dot.x, dot.y, halo, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.beginPath();
+      ctx.fillStyle = `rgba(17,17,17,${alpha.toFixed(3)})`;
+      ctx.arc(dot.x, dot.y, dot.size * breath, 0, Math.PI * 2);
+      ctx.fill();
+    }
+
+    function animate(time) {
+      ctx.clearRect(0, 0, width, height);
+      for (let i = 0; i < dots.length; i++) drawDot(dots[i], time);
+      rafId = requestAnimationFrame(animate);
+    }
+
+    if (!prefersReducedMotion) {
+      resizeCanvas();
+      animate(0);
+      window.addEventListener('resize', () => {
+        if (rafId) cancelAnimationFrame(rafId);
+        resizeCanvas();
+        animate(0);
+      }, { passive: true });
+    }
+  </script>
+  <script>
+    (function () {
+      const dlg = document.getElementById('examples');
+      const openBtn = document.getElementById('open-examples');
+      const closeBtn = document.getElementById('close-examples');
+      if (!dlg || !openBtn) return;
+      openBtn.addEventListener('click', () => { dlg.showModal(); closeBtn.focus(); });
+      closeBtn.addEventListener('click', () => dlg.close());
+      dlg.addEventListener('click', (e) => { if (e.target === dlg) dlg.close(); });
+      dlg.addEventListener('close', () => openBtn.focus());
+      if (location.hash === '#examples') dlg.showModal();
+    })();
+  </script>
+</body>
+</html>
