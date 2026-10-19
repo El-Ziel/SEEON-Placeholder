@@ -259,6 +259,17 @@
       letter-spacing: 0;
     }
 
+    .hero-copy.panel {
+      padding: 46px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.92);
+    }
+
+    @media (max-width: 640px) {
+      .hero-copy.panel { padding: 24px; }
+    }
+
     .section-head.panel {
       padding: 42px 46px;
       border: 1px solid var(--line);
@@ -677,7 +688,7 @@
     <main id="top">
       <section class="hero">
         <div class="wrap">
-          <div class="hero-copy">
+          <div class="hero-copy panel">
             <p class="eyebrow">Airports · Lounges · Hotels · Events · Conferences</p>
             <h1>The missing layer.</h1>
             <p class="lead">
