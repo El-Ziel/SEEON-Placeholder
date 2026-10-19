@@ -510,6 +510,37 @@
       line-height: 1.75;
     }
 
+    .privacy-points {
+      list-style: none;
+      margin: 26px 0 0;
+      padding: 0;
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px 28px;
+    }
+
+    .privacy-points li {
+      padding-top: 14px;
+      border-top: 1px solid var(--line-strong);
+    }
+
+    .privacy-points strong {
+      display: block;
+      font-size: 1rem;
+      font-weight: 650;
+      margin-bottom: 4px;
+    }
+
+    .privacy-points span {
+      color: var(--muted);
+      font-size: 0.96rem;
+      line-height: 1.6;
+    }
+
+    @media (max-width: 640px) {
+      .privacy-points { grid-template-columns: 1fr; }
+    }
+
     .cta h2 { max-width: 12ch; }
 
     .cta p {
@@ -667,7 +698,7 @@
             <h1>The missing layer between hall, hotel and city.</h1>
             <p class="lead">
               <strong>A trade fair brings thousands of relevant professionals into one city for a few days.</strong>
-              SEEON makes this co-presence visible in the hall, in nearby hotels and, if attendees choose, across the city. It runs inside the organiser's app or as a standalone app.
+              SEEON makes this co-presence visible in the hall, in nearby hotels and, if attendees choose, across the city. It runs inside the organiser's app or as a standalone app. No location tracking, nothing stored.
             </p>
             <div class="hero-actions">
               <a class="button" href="mailto:elmar@seeon.io">Start a conversation</a>
@@ -702,13 +733,13 @@
             <article class="work-card">
               <p class="kicker">03 | After closing</p>
               <h3>Hotel &amp; surroundings.</h3>
-              <p>After closing, attendees meet in lobbies, bars and restaurants nearby. SEEON continues to work there.</p>
+              <p>After closing, attendees meet in lobbies, bars and restaurants nearby. Those who want to stay visible there choose to, with a one-time check on entry. No tracking in between.</p>
             </article>
 
             <article class="work-card">
               <p class="kicker">04 | The city</p>
               <h3>Optional.</h3>
-              <p>Attendees can widen their visibility to the whole city for the duration of the fair. It is never the default.</p>
+              <p>Attendees can widen their visibility to the whole city for the duration of the fair. It is never the default, and it is not a live location.</p>
             </article>
           </div>
 
@@ -736,7 +767,7 @@
               <div class="story-text">
                 <p class="kicker">01 | Visibility</p>
                 <h3>You decide how visible you are.</h3>
-                <p>Visibility is set by each attendee, not by the organiser and not by SEEON. Off, the fair only, the fair and its surroundings, or the whole city. If you do not activate, you do not exist in the system. Contact opens only when both sides want it.</p>
+                <p>Visibility is set by each attendee, not by the organiser and not by SEEON. Off, the fair only, the fair and its surroundings, or the whole city. If you do not activate, you do not exist in the system. Your exact location is never shared. Contact opens only when both sides want it.</p>
                 <span class="accent" aria-hidden="true"></span>
               </div>
             </article>
@@ -760,7 +791,7 @@
               <div class="story-text">
                 <p class="kicker">03 | Standalone</p>
                 <h3>The SEEON app as standalone.</h3>
-                <p>Without integration, attendees enter your fair through the SEEON app, via QR code or event password. After closing, the same app works in hotels, restaurants and across the city.</p>
+                <p>Without integration, attendees enter your fair through the SEEON app, via QR code or event password, plus a one-time check that they are on site. After closing, the same app works in hotels, restaurants and across the city, always with the same rule: entered by choice, never tracked.</p>
                 <span class="accent" aria-hidden="true"></span>
               </div>
             </article>
@@ -771,10 +802,18 @@
       <section class="section" id="privacy">
         <div class="wrap">
           <div class="differentiator">
-            <h2>Privacy by design.</h2>
-            <p>
-              No GPS and no movement history. Identity becomes an anonymised token on entry and is not stored. Presence expires on its own when the fair ends. Hosted in Germany, built for GDPR. The organiser keeps its attendee data. SEEON does not build profiles of its own.
-            </p>
+            <h2>No tracking. Privacy by design.</h2>
+            <div>
+              <p>
+                SEEON does not follow anyone's location. There is no live location, no background tracking and no movement history. The only location check is a one-time confirmation, on entering a White Room, that you are actually there. A single check instead of constant location use also means no extra battery drain.
+              </p>
+              <ul class="privacy-points">
+                <li><strong>No live location</strong><span>One-time check on entry, nothing followed afterwards.</span></li>
+                <li><strong>Nothing stored</strong><span>Identities become anonymised tokens. When the context ends, the room and its data are gone.</span></li>
+                <li><strong>GDPR</strong><span>Built for GDPR from the ground up. Hosted in Germany, no data leaves the EU.</span></li>
+                <li><strong>Organiser data stays put</strong><span>The organiser keeps its attendee data. SEEON builds no profiles of its own.</span></li>
+              </ul>
+            </div>
           </div>
         </div>
       </section>
@@ -827,7 +866,7 @@
           <p class="kicker">01 | On the way</p>
           <h3>Five hours, one row apart.</h3>
           <p>5:30 in the morning, a train from Berlin to Cologne. A travel manager is heading to an industry conference. Only on arrival does she notice that a colleague from the same industry, on his way to the same event, had been sitting directly in front of her the entire trip.</p>
-          <p class="with-seeon">With SEEON active on both sides, they would have seen each other at the platform.</p>
+          <p class="with-seeon">Had both activated SEEON for the trip, they would have seen each other at the platform.</p>
         </article>
 
         <article class="example">
