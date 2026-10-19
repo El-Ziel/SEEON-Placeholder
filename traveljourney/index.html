@@ -259,6 +259,17 @@
       letter-spacing: 0;
     }
 
+    .section-head.panel {
+      padding: 42px 46px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.92);
+    }
+
+    @media (max-width: 640px) {
+      .section-head.panel { padding: 22px; }
+    }
+
     .section-intro {
       margin: 0;
       color: var(--muted);
@@ -310,9 +321,7 @@
       padding: 16px;
       border: 1px solid var(--line);
       border-radius: 8px;
-      background: rgba(255, 255, 255, 0.68);
-      backdrop-filter: blur(5px);
-      -webkit-backdrop-filter: blur(5px);
+      background: rgba(255, 255, 255, 0.94);
     }
 
     .story:nth-child(even) {
@@ -685,7 +694,7 @@
 
       <section class="section" id="how-it-works">
         <div class="wrap">
-          <div class="section-head">
+          <div class="section-head panel">
             <h2>The journey no platform covers.</h2>
             <p class="section-intro">
               A professional travels to an industry conference. At every point along the way, dozens of relevant people are in the same physical space. None of this is visible. The journey ends, and the opportunity is gone.
@@ -724,7 +733,7 @@
 
       <section class="section" id="concept">
         <div class="wrap">
-          <div class="section-head">
+          <div class="section-head panel">
             <h2>How SEEON works.</h2>
             <p class="section-intro">
               Not a platform. Not a social network. A proximity infrastructure layer that is session-scoped, privacy-first, and designed to sit beneath the tools professionals already use.
@@ -734,7 +743,7 @@
           <div class="story-list" aria-label="SEEON concept images with explanations">
             <article class="story">
               <div class="story-media">
-                <img src="assets/business-08-airport.jpg" loading="eager" alt="Business professionals in an airport lounge, each working independently, unaware of who is nearby" />
+                <img src="assets/business-08-airport-web.jpg" loading="eager" alt="Business professionals in an airport lounge, each working independently, unaware of who is nearby" />
               </div>
               <div class="story-text">
                 <p class="kicker">01 | Departure</p>
@@ -746,7 +755,7 @@
 
             <article class="story">
               <div class="story-media">
-                <img src="assets/business-07-hotel.jpg" loading="eager" alt="Hotel lobby with business travelers checking in and working, unaware of each other" />
+                <img src="assets/business-07-hotel-web.jpg" loading="eager" alt="Hotel lobby with business travelers checking in and working, unaware of each other" />
               </div>
               <div class="story-text">
                 <p class="kicker">02 | Arrival</p>
@@ -758,7 +767,7 @@
 
             <article class="story">
               <div class="story-media">
-                <img src="assets/business-01-hall.png" loading="eager" alt="Black and white event hall with professional visitors" />
+                <img src="assets/business-01-hall-web.jpg" loading="eager" alt="Black and white event hall with professional visitors" />
               </div>
               <div class="story-text">
                 <p class="kicker">03 | The event</p>
@@ -770,7 +779,7 @@
 
             <article class="story">
               <div class="story-media">
-                <img src="assets/business-02-detection.png" loading="eager" alt="Event hall with subtly highlighted people in the background" />
+                <img src="assets/business-02-detection-web.jpg" loading="eager" alt="Event hall with subtly highlighted people in the background" />
               </div>
               <div class="story-text">
                 <p class="kicker">04 | Opt-in visibility</p>
@@ -782,7 +791,7 @@
 
             <article class="story">
               <div class="story-media">
-                <img src="assets/business-04-list.png" loading="eager" alt="Smartphone with SEEON relevance interface showing matched professionals nearby" />
+                <img src="assets/business-04-list-web.jpg" loading="eager" alt="Smartphone with SEEON relevance interface showing matched professionals nearby" />
               </div>
               <div class="story-text">
                 <p class="kicker">05 | Matching</p>
@@ -794,7 +803,7 @@
 
             <article class="story">
               <div class="story-media">
-                <img src="assets/business-05-conversation.png" loading="eager" alt="Two business people shaking hands at an event" />
+                <img src="assets/business-05-conversation-web.jpg" loading="eager" alt="Two business people shaking hands at an event" />
               </div>
               <div class="story-text">
                 <p class="kicker">06 | Outcome</p>
