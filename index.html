@@ -342,6 +342,10 @@
       gap: 18px 28px;
     }
 
+    .legal-links { display: flex; flex-wrap: wrap; align-items: flex-start; gap: 6px 22px; }
+    .legal-links > a, .legal-links > .consent-link { color: var(--soft); text-decoration: underline; text-underline-offset: 3px; }
+    .legal-links > a:hover, .legal-links > .consent-link:hover { color: var(--text); }
+
     .legal-details {
       position: relative;
       max-width: 760px;
@@ -476,13 +480,7 @@
     .context-links a:hover { background: #e9edf3; border-color: rgba(64, 94, 141, 0.6); }
     @media (max-width: 640px) { .context-links a { width: 100%; justify-content: space-between; } }
   </style>
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-7R87QZLWT5"></script> 
-  <script>   
-    window.dataLayer = window.dataLayer || [];   
-    function gtag(){dataLayer.push(arguments);}   
-    gtag('js', new Date());    
-    gtag('config', 'G-7R87QZLWT5'); 
-  </script>
+  <script src="/consent.js"></script>
 </head>
 <body>
   <div class="lang-switcher">
@@ -559,6 +557,9 @@
       <div class="footer-row">
         <div id="txt-footer">© SEEON<br>Built in Europe</div>
 
+        <div class="legal-links">
+          <a href="/privacy/">Datenschutz / Privacy</a>
+          <button type="button" class="consent-link" data-consent-open>Cookies</button>
         <details class="legal-details" id="impressum">
           <summary>Impressum</summary>
           <div class="legal-card">
@@ -581,6 +582,7 @@
             </p>
           </div>
         </details>
+        </div>
       </div>
     </div>
   </footer>
