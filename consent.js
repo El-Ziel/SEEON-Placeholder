@@ -15,9 +15,9 @@
   function read() { try { return localStorage.getItem(KEY); } catch (e) { return null; } }
   function write(v) { try { localStorage.setItem(KEY, v); } catch (e) {} }
 
-  var TEXTS = { de: null, en: null };
-  function pageLang() { return (document.documentElement.lang || 'en').toLowerCase().indexOf('de') === 0 ? 'de' : 'en'; }
-  function T() { return pageLang() === 'de' ? TEXTS.de : TEXTS.en; }
+  var TEXTS = {};
+  function pageLang() { var l = (document.documentElement.lang || 'en').toLowerCase().slice(0, 2); return TEXTS[l] ? l : 'en'; }
+  function T() { return TEXTS[pageLang()]; }
   TEXTS.de = {
     text: 'Wir möchten mit Google Analytics sehen, wie diese Website genutzt wird. Dafür werden Cookies gesetzt, Daten können in die USA übermittelt werden. Nur mit Ihrer Zustimmung, jederzeit widerrufbar.',
     privacy: 'Datenschutzerklärung',
@@ -31,6 +31,35 @@
     accept: 'Accept',
     decline: 'Decline',
     label: 'Cookie consent'
+  };
+
+  TEXTS.fr = {
+    text: 'Nous aimerions utiliser Google Analytics pour comprendre comment ce site est utilisé. Des cookies sont alors déposés et des données peuvent être transférées aux États-Unis. Uniquement avec votre consentement, révocable à tout moment.',
+    privacy: 'Politique de confidentialité',
+    accept: 'Accepter',
+    decline: 'Refuser',
+    label: 'Consentement aux cookies'
+  };
+  TEXTS.es = {
+    text: 'Nos gustaría usar Google Analytics para ver cómo se utiliza este sitio web. Para ello se instalan cookies y los datos pueden transferirse a EE. UU. Solo con su consentimiento, que puede retirar en cualquier momento.',
+    privacy: 'Política de privacidad',
+    accept: 'Aceptar',
+    decline: 'Rechazar',
+    label: 'Consentimiento de cookies'
+  };
+  TEXTS.pt = {
+    text: 'Gostaríamos de usar o Google Analytics para perceber como este site é utilizado. Para isso são definidos cookies e os dados podem ser transferidos para os EUA. Apenas com o seu consentimento, que pode retirar a qualquer momento.',
+    privacy: 'Política de privacidade',
+    accept: 'Aceitar',
+    decline: 'Recusar',
+    label: 'Consentimento de cookies'
+  };
+  TEXTS.it = {
+    text: 'Vorremmo usare Google Analytics per capire come viene utilizzato questo sito. In questo modo vengono impostati cookie e i dati possono essere trasferiti negli Stati Uniti. Solo con il suo consenso, revocabile in qualsiasi momento.',
+    privacy: 'Informativa sulla privacy',
+    accept: 'Accetta',
+    decline: 'Rifiuta',
+    label: 'Consenso ai cookie'
   };
 
   function loadGA() {
@@ -90,7 +119,7 @@
     var t = T();
     b.setAttribute('aria-label', t.label);
     b.innerHTML =
-      '<p>' + t.text + ' <a href="/privacy/">' + t.privacy + '</a></p>' +
+      '<p>' + t.text + ' <a href="/privacy/#' + (pageLang() === 'de' ? 'de' : 'en') + '">' + t.privacy + '</a></p>' +
       '<div class="sc-row">' +
       '<button type="button" data-c="0">' + t.decline + '</button>' +
       '<button type="button" data-c="1">' + t.accept + '</button>' +
