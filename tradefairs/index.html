@@ -187,6 +187,7 @@
     }
 
     .button.secondary:hover { background: #fff; }
+    .cta-note { margin: 12px 0 0; color: var(--muted); font-size: 0.92rem; }
 
     .section {
       padding: 58px 0;
@@ -710,9 +711,10 @@
               SEEON makes this co-presence visible in the hall, in nearby hotels and, if attendees choose, across the city. It runs inside the organiser's app or as a standalone app. No location tracking, nothing stored.
             </p>
             <div class="hero-actions">
-              <a class="button" href="mailto:elmar@seeon.io">Start a conversation</a>
-              <a class="button secondary" href="https://www.linkedin.com/in/elmar-zimmermann" target="_blank" rel="noopener noreferrer">Get in touch on LinkedIn</a>
+              <a class="button" href="https://calendar.app.google/QthHi7N7QSBMn5Ym6" target="_blank" rel="noopener">Book a 15-minute call &rarr;</a>
+              <a class="button secondary" href="mailto:elmar@seeon.io">Start a conversation</a>
             </div>
+            <p class="cta-note">A 15-minute video call with Elmar, founder of SEEON, on how it would work at your event. No sales pitch.</p>
           </div>
         </div>
       </section>
@@ -832,14 +834,16 @@
           <div class="cta">
             <div>
               <p class="eyebrow">Proximity infrastructure for trade fairs</p>
-              <h2>Explore a pilot for your next trade fair.</h2>
+              <h2>Let's talk about your next trade fair.</h2>
               <p>
                 SEEON is looking for trade fair and congress organisers interested in a first deployment, integrated or standalone.
               </p>
               <div class="hero-actions">
-                <a class="button" href="mailto:elmar@seeon.io">Start a conversation</a>
+                <a class="button" href="https://calendar.app.google/QthHi7N7QSBMn5Ym6" target="_blank" rel="noopener">Book a 15-minute call &rarr;</a>
+                <a class="button secondary" href="mailto:elmar@seeon.io">Start a conversation</a>
                 <a class="button secondary" href="https://www.linkedin.com/in/elmar-zimmermann" target="_blank" rel="noopener noreferrer">Get in touch on LinkedIn</a>
               </div>
+              <p class="cta-note">A 15-minute video call with Elmar, founder of SEEON, on how it would work at your event. No sales pitch.</p>
             </div>
 
             <aside class="contact-panel" id="contact" aria-label="Contact details">
@@ -1044,6 +1048,7 @@
         var href = a.getAttribute('href') || '';
         if (href.indexOf('/tradefairs') === 0) { track('click_tradefairs', { link_text: a.textContent.trim(), page: location.pathname }); return; }
         if (href.indexOf('/traveljourney') === 0) { track('click_traveljourney', { link_text: a.textContent.trim(), page: location.pathname }); return; }
+        if (href.indexOf('calendar.app.google') > -1) { track('click_booking', { page: location.pathname, link_text: a.textContent.trim() }); return; }
         if (href.indexOf('mailto:') === 0) { track('contact_email', { page: location.pathname }); return; }
         if (href.indexOf('tel:') === 0) { track('contact_phone', { page: location.pathname }); return; }
         if (href.indexOf('linkedin.com') > -1) { track('contact_linkedin', { page: location.pathname }); return; }

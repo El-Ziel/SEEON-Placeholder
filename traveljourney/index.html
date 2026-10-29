@@ -709,9 +709,10 @@
               But there is no layer that makes relevant professional co-presence visible. SEEON closes this gap: without tracking, without persistent profiles, without a social network.
             </p>
             <div class="hero-actions">
-              <a class="button" href="mailto:elmar@seeon.io">Start a conversation</a>
-              <a class="button secondary" href="https://www.linkedin.com/in/elmar-zimmermann" target="_blank" rel="noopener noreferrer">Get in touch on LinkedIn</a>
+              <a class="button" href="https://calendar.app.google/QthHi7N7QSBMn5Ym6" target="_blank" rel="noopener">Book a 15-minute call &rarr;</a>
+              <a class="button secondary" href="mailto:elmar@seeon.io">Start a conversation</a>
             </div>
+            <p class="cta-note">A 15-minute video call with Elmar, founder of SEEON. Your context, your questions. No sales pitch.</p>
           </div>
         </div>
       </section>
@@ -869,11 +870,12 @@
                 SEEON is looking for trade fair and congress organisers, industry associations, and travel management companies ready to explore what professional proximity infrastructure can do for their events and platforms.
               </p>
               <div class="hero-actions">
-                <a class="button" href="mailto:elmar@seeon.io">Start a conversation</a>
+                <a class="button" href="https://calendar.app.google/QthHi7N7QSBMn5Ym6" target="_blank" rel="noopener">Book a 15-minute call &rarr;</a>
+                <a class="button secondary" href="mailto:elmar@seeon.io">Start a conversation</a>
                 <a class="button tint" href="/tradefairs/">For trade fairs &rarr;</a>
                 <a class="button tint" href="/businesstravel/">For companies &rarr;</a>
-                <a class="button secondary" href="https://www.linkedin.com/in/elmar-zimmermann" target="_blank" rel="noopener noreferrer">Get in touch on LinkedIn</a>
               </div>
+              <p class="cta-note">A 15-minute video call with Elmar, founder of SEEON. Your context, your questions. No sales pitch.</p>
             </div>
 
             <aside class="contact-panel" id="contact" aria-label="Contact details">
@@ -1054,6 +1056,7 @@
         if (href.indexOf('/tradefairs') === 0) { track('click_tradefairs', { link_text: a.textContent.trim(), page: location.pathname }); return; }
         if (href.indexOf('/businesstravel') === 0) { track('click_businesstravel', { link_text: a.textContent.trim(), page: location.pathname }); return; }
         if (href.indexOf('/traveljourney') === 0) { track('click_traveljourney', { link_text: a.textContent.trim(), page: location.pathname }); return; }
+        if (href.indexOf('calendar.app.google') > -1) { track('click_booking', { page: location.pathname, link_text: a.textContent.trim() }); return; }
         if (href.indexOf('mailto:') === 0) { track('contact_email', { page: location.pathname }); return; }
         if (href.indexOf('tel:') === 0) { track('contact_phone', { page: location.pathname }); return; }
         if (href.indexOf('linkedin.com') > -1) { track('contact_linkedin', { page: location.pathname }); return; }

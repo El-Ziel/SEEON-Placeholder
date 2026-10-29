@@ -522,10 +522,10 @@
 
         <div class="cta-container">
           <a href="https://calendar.app.google/QthHi7N7QSBMn5Ym6" target="_blank" class="cta-button">
-            <span id="txt-cta-btn">Explore SEEON</span>
+            <span id="txt-cta-btn">Book a 15-minute call</span>
             <span style="font-weight: 300;">→</span>
           </a>
-          <span class="cta-subtext" id="txt-cta-sub">Direct and efficient. Get more information about SEEON and our technology.</span>
+          <span class="cta-subtext" id="txt-cta-sub">Video call with Elmar, founder of SEEON. Your context, your questions. No sales pitch.</span>
         </div>
 
         <p class="proof" id="txt-proof">Built in Europe. Currently evaluating first deployments with industry partners.</p>
@@ -603,8 +603,8 @@
           <li><strong>The Standalone Network Ecosystem:</strong> Seamlessly transition. When large-scale events drive high user density into a city, the dedicated SEEON app takes over. It connects professionals beyond the venue doors—in hotels, restaurants, and transit hubs—creating a localized urban network effect.</li>
           <li><strong>Enterprise-Grade Privacy:</strong> Built in Europe, fully decentralized, and strictly privacy-first by design. No public tracking, no data exposure.</li>
         `,
-        ctaBtn: "Explore SEEON",
-        ctaSub: "Direct and efficient. Get more information about SEEON and our technology.",
+        ctaBtn: "Book a 15-minute call",
+        ctaSub: "Video call with Elmar, founder of SEEON. Your context, your questions. No sales pitch.",
         proof: "Built in Europe. Currently evaluating first deployments with industry partners.",
         contactTitle: "Direct Channel",
         linkedin: "Connect on LinkedIn",
@@ -628,8 +628,8 @@
           <li><strong>Das urbane Netzwerk:</strong> Sobald eine hohe Nutzerdichte in einer Stadt erreicht ist, verbindet die eigenständige SEEON-App Professionals auch außerhalb des Messegeländes. Zum Beispiel in Hotels, Restaurants und an Verkehrsknotenpunkten.</li>
           <li><strong>Privacy by Design:</strong> Entwickelt in Europa, vollständig dezentralisiert und strikt Privacy-first. Kein zentrales Tracking, kein Bewegungsprofil, keine Offenlegung sensibler Daten.</li>
         `,
-        ctaBtn: "SEEON entdecken",
-        ctaSub: "Direkt und effizient. Lassen Sie uns über die Technologie und unsere Pilotprjekte sprechen.",
+        ctaBtn: "15-Minuten-Call buchen",
+        ctaSub: "Videocall mit Elmar, Gründer von SEEON. Ihr Kontext, Ihre Fragen. Kein Verkaufsgespräch.",
         proof: "Entwickelt in Europa. Wir evaluieren derzeit erste Implementierungen mit Industriepartnern.",
         contactTitle: "Direkter Kanal",
         linkedin: "Auf LinkedIn vernetzen",
@@ -859,6 +859,10 @@
     }
   </script>
   <script>
+    document.addEventListener('click', function (e) {
+      var b = e.target.closest('a.cta-button');
+      if (b && typeof gtag === 'function') gtag('event', 'click_booking', { page: location.pathname });
+    });
     document.addEventListener('click', function (e) {
       var a = e.target.closest('.context-links a');
       if (!a || typeof gtag !== 'function') return;

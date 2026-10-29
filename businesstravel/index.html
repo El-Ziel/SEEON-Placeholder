@@ -187,6 +187,7 @@
     }
 
     .button.secondary:hover { background: #fff; }
+    .cta-note { margin: 12px 0 0; color: var(--muted); font-size: 0.92rem; }
 
     .section {
       padding: 58px 0;
@@ -713,9 +714,10 @@
               SEEON shows who is relevant around you on these trips: colleagues, partners, members, and people you have not met yet. It runs inside existing travel tools or as a standalone app. No location tracking, nothing stored.
             </p>
             <div class="hero-actions">
-              <a class="button" href="mailto:elmar@seeon.io">Start a conversation</a>
-              <a class="button secondary" href="https://www.linkedin.com/in/elmar-zimmermann" target="_blank" rel="noopener noreferrer">Get in touch on LinkedIn</a>
+              <a class="button" href="https://calendar.app.google/QthHi7N7QSBMn5Ym6" target="_blank" rel="noopener">Book a 15-minute call &rarr;</a>
+              <a class="button secondary" href="mailto:elmar@seeon.io">Start a conversation</a>
             </div>
+            <p class="cta-note">A 15-minute video call with Elmar, founder of SEEON, on how it would work for your organisation. No sales pitch.</p>
           </div>
         </div>
       </section>
@@ -840,9 +842,11 @@
                 SEEON is looking for companies, travel management companies and associations whose people are on the road, in the city next door or on the other side of the world.
               </p>
               <div class="hero-actions">
-                <a class="button" href="mailto:elmar@seeon.io">Start a conversation</a>
+                <a class="button" href="https://calendar.app.google/QthHi7N7QSBMn5Ym6" target="_blank" rel="noopener">Book a 15-minute call &rarr;</a>
+                <a class="button secondary" href="mailto:elmar@seeon.io">Start a conversation</a>
                 <a class="button secondary" href="https://www.linkedin.com/in/elmar-zimmermann" target="_blank" rel="noopener noreferrer">Get in touch on LinkedIn</a>
               </div>
+              <p class="cta-note">A 15-minute video call with Elmar, founder of SEEON, on how it would work for your organisation. No sales pitch.</p>
             </div>
 
             <aside class="contact-panel" id="contact" aria-label="Contact details">
@@ -1047,6 +1051,7 @@
         var href = a.getAttribute('href') || '';
         if (href.indexOf('/tradefairs') === 0) { track('click_tradefairs', { link_text: a.textContent.trim(), page: location.pathname }); return; }
         if (href.indexOf('/traveljourney') === 0) { track('click_traveljourney', { link_text: a.textContent.trim(), page: location.pathname }); return; }
+        if (href.indexOf('calendar.app.google') > -1) { track('click_booking', { page: location.pathname, link_text: a.textContent.trim() }); return; }
         if (href.indexOf('mailto:') === 0) { track('contact_email', { page: location.pathname }); return; }
         if (href.indexOf('tel:') === 0) { track('contact_phone', { page: location.pathname }); return; }
         if (href.indexOf('linkedin.com') > -1) { track('contact_linkedin', { page: location.pathname }); return; }
