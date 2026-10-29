@@ -90,8 +90,8 @@ MENU_CSS = '''
 .lang-menu li a:hover{background:#f4f5f8;color:#111}
 .lang-menu li a[aria-current]{color:#405e8d;font-weight:700}
 @media (max-width:900px){.nav .lang-menu ul{left:0;right:auto}}
-h1,h2,h3,p,li,a,strong,span{overflow-wrap:break-word}
-html:not([lang="en"]) h1,html:not([lang="en"]) h2,html:not([lang="en"]) .privacy-points strong{hyphens:auto;-webkit-hyphens:auto}
+h1,h2,h3,p,li,a,strong,span{hyphens:manual;-webkit-hyphens:manual}
+h1,h2,h3{text-wrap:balance}
 .hero > .wrap,.hero-copy,.privacy-points li,.cta > div,.differentiator > *{min-width:0}
 @media (max-width:640px){.privacy-points{grid-template-columns:minmax(0,1fr)!important}.button{white-space:normal;text-align:center;line-height:1.3;padding-top:10px;padding-bottom:10px}}
 '''
@@ -108,7 +108,10 @@ def add_chrome(s, lang, page):
     for el in s.select('details.lang-menu'): el.decompose()
     for el in s.select('link[rel="alternate"][hreflang]'): el.decompose()
     for el in s.select('style#lang-menu-css'): el.decompose()
-    st = s.new_tag('style', id='lang-menu-css'); st.string = MENU_CSS; s.head.append(st)
+    css = MENU_CSS
+    if page == 'traveljourney' and lang != 'en':
+        css += '@media (max-width:640px){.hero h1{font-size:clamp(2.6rem,14vw,4.6rem);max-width:none}}\n'
+    st = s.new_tag('style', id='lang-menu-css'); st.string = css; s.head.append(st)
     for l in LANGS + ['x-default']:
         ln = s.new_tag('link', rel='alternate', hreflang=l, href='https://seeon.io' + url('en' if l == 'x-default' else l, page))
         s.head.append(ln)
