@@ -19,14 +19,14 @@
   function pageLang() { return (document.documentElement.lang || 'en').toLowerCase().indexOf('de') === 0 ? 'de' : 'en'; }
   function T() { return pageLang() === 'de' ? TEXTS.de : TEXTS.en; }
   TEXTS.de = {
-    text: 'Wir nutzen Google Analytics, um zu verstehen, wie diese Website genutzt wird. Dabei werden Cookies gesetzt und Nutzungsdaten an Google übermittelt, auch in die USA. Das passiert nur, wenn Sie zustimmen. Ihre Wahl können Sie jederzeit unten auf der Seite ändern.',
+    text: 'Wir möchten mit Google Analytics sehen, wie diese Website genutzt wird. Dafür werden Cookies gesetzt, Daten können in die USA übermittelt werden. Nur mit Ihrer Zustimmung, jederzeit widerrufbar.',
     privacy: 'Datenschutzerklärung',
     accept: 'Akzeptieren',
     decline: 'Ablehnen',
     label: 'Cookie-Einwilligung'
   };
   TEXTS.en = {
-    text: 'We use Google Analytics to understand how this website is used. This sets cookies and sends usage data to Google, including to the USA. It only happens if you agree. You can change your choice at any time at the bottom of the page.',
+    text: 'We would like to use Google Analytics to see how this website is used. This sets cookies and may transfer data to the USA. Only with your consent, which you can withdraw at any time.',
     privacy: 'Privacy policy',
     accept: 'Accept',
     decline: 'Decline',

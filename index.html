@@ -44,6 +44,14 @@
       font-weight: 600;
     }
 
+    .top-book {
+      display: inline-flex; align-items: center; min-height: 34px; margin-right: 14px; padding: 0 12px;
+      border: 1px solid rgba(64, 94, 141, 0.38); border-radius: 4px; background: #f4f5f8;
+      color: #405e8d; text-decoration: none; font-weight: 650;
+    }
+    .top-book:hover { background: #e9edf3; border-color: rgba(64, 94, 141, 0.6); }
+    .lang-switcher { display: flex; align-items: center; }
+
     .lang-btn {
       background: none;
       border: none;
@@ -480,10 +488,11 @@
     .context-links a:hover { background: #e9edf3; border-color: rgba(64, 94, 141, 0.6); }
     @media (max-width: 640px) { .context-links a { width: 100%; justify-content: space-between; } }
   </style>
-  <script src="/consent.js?v=2"></script>
+  <script src="/consent.js?v=3"></script>
 </head>
 <body>
   <div class="lang-switcher">
+    <a class="top-book" id="txt-top-book" href="https://calendar.app.google/QthHi7N7QSBMn5Ym6" target="_blank" rel="noopener">Book a call &rarr;</a>
     <button class="lang-btn active" onclick="setLanguage('en')">EN</button>
     <span style="color: var(--soft);">|</span>
     <button class="lang-btn" onclick="setLanguage('de')">DE</button>
@@ -649,6 +658,7 @@
     function setLanguage(lang) {
       currentLang = lang;
       document.documentElement.lang = lang;
+      document.getElementById('txt-top-book').innerHTML = lang === 'de' ? 'Call buchen &rarr;' : 'Book a call &rarr;';
       if (window.seeonConsent) window.seeonConsent.refresh();
       
       // Update Active Button State
@@ -860,7 +870,7 @@
   </script>
   <script>
     document.addEventListener('click', function (e) {
-      var b = e.target.closest('a.cta-button');
+      var b = e.target.closest('a.cta-button, a.top-book');
       if (b && typeof gtag === 'function') gtag('event', 'click_booking', { page: location.pathname });
     });
     document.addEventListener('click', function (e) {
