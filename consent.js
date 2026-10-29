@@ -15,15 +15,17 @@
   function read() { try { return localStorage.getItem(KEY); } catch (e) { return null; } }
   function write(v) { try { localStorage.setItem(KEY, v); } catch (e) {} }
 
-  var de = /^de\b/i.test((navigator.language || '') + '') ||
-           (document.documentElement.lang || '').toLowerCase().indexOf('de') === 0;
-  var T = de ? {
+  var TEXTS = { de: null, en: null };
+  function pageLang() { return (document.documentElement.lang || 'en').toLowerCase().indexOf('de') === 0 ? 'de' : 'en'; }
+  function T() { return pageLang() === 'de' ? TEXTS.de : TEXTS.en; }
+  TEXTS.de = {
     text: 'Wir nutzen Google Analytics, um zu verstehen, wie diese Website genutzt wird. Dabei werden Cookies gesetzt und Nutzungsdaten an Google übermittelt, auch in die USA. Das passiert nur, wenn Sie zustimmen. Ihre Wahl können Sie jederzeit unten auf der Seite ändern.',
     privacy: 'Datenschutzerklärung',
     accept: 'Akzeptieren',
     decline: 'Ablehnen',
     label: 'Cookie-Einwilligung'
-  } : {
+  };
+  TEXTS.en = {
     text: 'We use Google Analytics to understand how this website is used. This sets cookies and sends usage data to Google, including to the USA. It only happens if you agree. You can change your choice at any time at the bottom of the page.',
     privacy: 'Privacy policy',
     accept: 'Accept',
@@ -85,12 +87,13 @@
     var b = document.createElement('div');
     b.id = 'seeon-consent';
     b.setAttribute('role', 'dialog');
-    b.setAttribute('aria-label', T.label);
+    var t = T();
+    b.setAttribute('aria-label', t.label);
     b.innerHTML =
-      '<p>' + T.text + ' <a href="/privacy/">' + T.privacy + '</a></p>' +
+      '<p>' + t.text + ' <a href="/privacy/">' + t.privacy + '</a></p>' +
       '<div class="sc-row">' +
-      '<button type="button" data-c="0">' + T.decline + '</button>' +
-      '<button type="button" data-c="1">' + T.accept + '</button>' +
+      '<button type="button" data-c="0">' + t.decline + '</button>' +
+      '<button type="button" data-c="1">' + t.accept + '</button>' +
       '</div>';
     b.addEventListener('click', function (e) {
       var v = e.target && e.target.getAttribute('data-c');
@@ -105,7 +108,10 @@
     document.body.appendChild(b);
   }
 
-  window.seeonConsent = { open: show };
+  window.seeonConsent = {
+    open: show,
+    refresh: function () { if (document.getElementById('seeon-consent')) show(); }
+  };
 
   var state = read();
   if (state === 'granted') loadGA();

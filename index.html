@@ -480,7 +480,7 @@
     .context-links a:hover { background: #e9edf3; border-color: rgba(64, 94, 141, 0.6); }
     @media (max-width: 640px) { .context-links a { width: 100%; justify-content: space-between; } }
   </style>
-  <script src="/consent.js"></script>
+  <script src="/consent.js?v=2"></script>
 </head>
 <body>
   <div class="lang-switcher">
@@ -648,6 +648,8 @@
 
     function setLanguage(lang) {
       currentLang = lang;
+      document.documentElement.lang = lang;
+      if (window.seeonConsent) window.seeonConsent.refresh();
       
       // Update Active Button State
       document.querySelectorAll('.lang-btn').forEach(btn => {
