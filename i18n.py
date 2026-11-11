@@ -115,6 +115,20 @@ def add_chrome(s, lang, page):
     for l in LANGS + ['x-default']:
         ln = s.new_tag('link', rel='alternate', hreflang=l, href='https://seeon.io' + url('en' if l == 'x-default' else l, page))
         s.head.append(ln)
+    # Open Graph / social preview (idempotent)
+    for el in s.find_all('meta'):
+        if (el.get('property') or '').startswith('og:') or (el.get('name') or '').startswith('twitter:'): el.decompose()
+    title = norm(s.title.string) if s.title and s.title.string else 'SEEON'
+    dm = s.find('meta', attrs={'name': 'description'}); desc = dm['content'] if dm else ''
+    OGL = {'en':'en_GB','de':'de_DE','fr':'fr_FR','es':'es_ES','pt':'pt_PT','it':'it_IT'}
+    tags = [('property','og:type','website'), ('property','og:site_name','SEEON'), ('property','og:title',title),
+            ('property','og:description',desc), ('property','og:url','https://seeon.io'+url(lang,page)),
+            ('property','og:locale',OGL[lang]),
+            ('property','og:image','https://seeon.io/og-image.jpg'), ('property','og:image:width','1200'),
+            ('property','og:image:height','627'), ('property','og:image:alt','SEEON: The right people are often in the same place. They just don\'t know it.'),
+            ('name','twitter:card','summary_large_image'), ('name','twitter:image','https://seeon.io/og-image.jpg')]
+    for k, v, c in tags:
+        m = s.new_tag('meta'); m[k] = v; m['content'] = c; s.head.append(m)
     menu = BeautifulSoup(menu_html(lang, page), 'html.parser')
     if page == 'home':
         sw = s.select_one('.lang-switcher')
