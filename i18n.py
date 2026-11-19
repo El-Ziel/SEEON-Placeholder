@@ -108,6 +108,8 @@ def add_chrome(s, lang, page):
     for el in s.select('details.lang-menu'): el.decompose()
     for el in s.select('link[rel="alternate"][hreflang]'): el.decompose()
     for el in s.select('style#lang-menu-css'): el.decompose()
+    for el in s.select('link[rel="canonical"]'): el.decompose()
+    cn = s.new_tag('link', rel='canonical', href='https://seeon.io' + url(lang, page)); s.head.append(cn)
     css = MENU_CSS
     if page == 'traveljourney' and lang != 'en':
         css += '@media (max-width:640px){.hero h1{font-size:clamp(2.6rem,14vw,4.6rem);max-width:none}}\n'
