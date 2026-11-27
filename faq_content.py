@@ -27,7 +27,7 @@ FAQ = {
  ]),
  ('For companies and associations', [
   ('Can our company see who was where?',
-   'No. Employers and associations only get aggregated usage figures, such as activations and contacts made. Never who was where, and never who met whom.'),
+   'No. Employers and associations only get aggregated usage figures, such as activations and contacts made. Never who was where, and never who met whom. Messages between users are not stored, neither by your organisation nor by SEEON.'),
   ('How do you check who belongs to our company or association?',
    'Through your own systems. SEEON only receives the confirmation that someone is a member or employee. Your organisation never sees where its people are.'),
  ]),
@@ -65,7 +65,7 @@ FAQ = {
  ]),
  ('Für Unternehmen und Verbände', [
   ('Kann unser Unternehmen sehen, wer wo war?',
-   'Nein. Arbeitgeber und Verbände erhalten nur zusammengefasste Nutzungszahlen, etwa Aktivierungen und entstandene Kontakte. Nie, wer wo war, und nie, wer wen getroffen hat.'),
+   'Nein. Arbeitgeber und Verbände erhalten nur zusammengefasste Nutzungszahlen, etwa Aktivierungen und entstandene Kontakte. Nie, wer wo war, und nie, wer wen getroffen hat. Nachrichten zwischen Nutzern werden nicht gespeichert, weder bei Ihrer Organisation noch bei SEEON.'),
   ('Wie prüfen Sie, wer zu unserem Unternehmen oder Verband gehört?',
    'Über Ihre eigenen Systeme. SEEON erhält nur die Bestätigung, dass jemand Mitglied ist oder dort arbeitet. Ihre Organisation sieht nie, wo ihre Leute sind.'),
  ]),
