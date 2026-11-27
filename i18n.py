@@ -151,6 +151,7 @@ def localize_links(s, lang, page):
                     for p in ('traveljourney','tradefairs','businesstravel'):
                         if v.rstrip('/') == '/' + p: el[attr] = f'/{lang}/{p}/'
                     if v.startswith('/privacy/'): el[attr] = '/privacy/#' + ('de' if lang == 'de' else 'en')
+                    if v.startswith('/experience/') and lang == 'de': el[attr] = '/de' + v
             if lang != 'en' and not re.match(r'^(/|https?:|#|mailto:|tel:|data:)', v):
                 el[attr] = '/' + PATHS[page] + v
 
