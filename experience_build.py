@@ -115,6 +115,7 @@ def page(lang):
     <span>© SEEON</span>
     <a href="{t['home']}">seeon.io</a>
     <a href="{t['privacy']}">{t['priv']}</a>
+    <a href="{'/faq/' if lang=='en' else '/de/faq/'}">FAQ</a>
     <a href="{t['home']}#impressum">{t['imp']}</a>
     <button type="button" class="consent-link" data-consent-open>{t['cookies']}</button>
   </footer>
