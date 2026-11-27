@@ -490,7 +490,6 @@
     @media (max-width: 640px) { .context-links a { width: 100%; justify-content: space-between; } }
   </style>
 <script src="/consent.js?v=4"></script>
-
 <link href="https://seeon.io/" rel="canonical"/><style id="lang-menu-css">
 .lang-menu{position:relative;display:inline-block;font-size:.9rem;font-weight:600}
 .lang-menu summary{list-style:none;cursor:pointer;display:inline-flex;align-items:center;gap:6px;min-height:34px;padding:0 10px;border:1px solid rgba(17,17,17,.16);border-radius:4px;background:rgba(255,255,255,.92);color:#111;user-select:none}
@@ -549,6 +548,7 @@ h1,h2,h3{text-wrap:balance}
 <a href="/traveljourney/" id="txt-ctx-journey">The travel journey →</a>
 <a href="/tradefairs/" id="txt-ctx-fairs">For trade fairs →</a>
 <a href="/businesstravel/" id="txt-ctx-bt">For companies &amp; associations →</a>
+<a href="/experience/" id="txt-ctx-exp">Try it yourself: find the three →</a>
 </div>
 </nav>
 <div class="divider"></div>
@@ -623,7 +623,8 @@ h1,h2,h3{text-wrap:balance}
         ctxTitle: "Explore SEEON by context",
         ctxJourney: "The travel journey →",
         ctxFairs: "For trade fairs →",
-        ctxBt: "For companies & associations →"
+        ctxBt: "For companies & associations →",
+        ctxExp: "Try it yourself: find the three →"
       },
       de: {
         eyebrow: "Professionelle Proximity-Infrastruktur für Business-Events & urbane Netzwerke",
@@ -648,7 +649,8 @@ h1,h2,h3{text-wrap:balance}
         ctxTitle: "SEEON nach Einsatzbereich",
         ctxJourney: "Die Reise im Überblick →",
         ctxFairs: "Für Messen →",
-        ctxBt: "Für Unternehmen & Verbände →"
+        ctxBt: "Für Unternehmen & Verbände →",
+        ctxExp: "Selbst ausprobieren: Finden Sie die drei →"
       }
     };
 
@@ -685,6 +687,7 @@ h1,h2,h3{text-wrap:balance}
       document.getElementById('txt-ctx-journey').textContent = translations[lang].ctxJourney;
       document.getElementById('txt-ctx-fairs').textContent = translations[lang].ctxFairs;
       document.getElementById('txt-ctx-bt').textContent = translations[lang].ctxBt;
+      document.getElementById('txt-ctx-exp').textContent = translations[lang].ctxExp;
       document.getElementById('txt-footer').innerHTML = translations[lang].footer;
 
       // Re-attach Event Listener to dynamic elements

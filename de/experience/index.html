@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>SEEON erleben | Finden Sie die drei</title>
+<meta name="description" content="Eine anschauliche Simulation: zwanzig Menschen um Sie herum, auf einer Messe, in einer Lounge, einer Hotellobby oder im Zug. Drei davon zählen. Finden Sie sie.">
+<link rel="canonical" href="https://seeon.io/de/experience/">
+<link rel="alternate" hreflang="en" href="https://seeon.io/experience/"><link rel="alternate" hreflang="de" href="https://seeon.io/de/experience/"><link rel="alternate" hreflang="x-default" href="https://seeon.io/experience/">
+<meta property="og:type" content="website"><meta property="og:site_name" content="SEEON">
+<meta property="og:title" content="SEEON erleben: zwanzig Menschen um Sie herum, drei davon zählen"><meta property="og:description" content="Eine anschauliche Simulation: zwanzig Menschen um Sie herum, auf einer Messe, in einer Lounge, einer Hotellobby oder im Zug. Drei davon zählen. Finden Sie sie.">
+<meta property="og:url" content="https://seeon.io/de/experience/"><meta property="og:locale" content="de_DE">
+<meta property="og:image" content="https://seeon.io/experience/og-experience.jpg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="627">
+<meta property="og:image:alt" content="Messehalle von oben mit zwanzig Menschen. Drei davon zählen.">
+<meta name="twitter:card" content="summary_large_image"><meta name="twitter:image" content="https://seeon.io/experience/og-experience.jpg">
+<meta name="robots" content="index, follow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@700&display=swap">
+<style>
+
+:root{
+  --bg:#ffffff; --fg:#111317; --muted:#5d636d; --line:rgba(17,19,23,.12);
+  --tint:#405e8d; --tint-soft:rgba(64,94,141,.10); --tint-line:rgba(64,94,141,.38);
+  --panel:#ffffff; --stage:#f7f8fa;
+  --floor:#e9ecf0; --aisle:#f4f5f7; --carpet1:#dbe3ee; --carpet2:#e8e2d7; --carpet3:#dbe6df; --wall:#2b3038; --counter:#ffffff; --furn:#c5cbd4; --plant:#7d9a85; --shade:rgba(17,19,23,.12); --glass:#cfe0ee;
+  --font:"Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+  --mark:"Poppins","Inter",Helvetica,Arial,sans-serif;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{background:var(--bg);color:var(--fg);font:15px/1.55 var(--font)}
+.wrap{max-width:1080px;margin:0 auto;padding-block:20px 40px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));display:grid;gap:16px}
+header{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap}
+.mark{font:700 22px/1 var(--mark);letter-spacing:.02em;color:var(--fg);text-decoration:none}
+.sim{font-size:12px;letter-spacing:.04em;color:var(--muted)}
+.tabs{display:flex;gap:6px;flex-wrap:wrap;border-bottom:1px solid var(--line);padding-bottom:10px}
+.tab{min-height:38px;padding:0 14px;border-radius:19px;border:1px solid var(--line);background:transparent;color:var(--muted);font:600 14px var(--font);cursor:pointer}
+.tab[aria-selected="true"]{background:var(--fg);color:var(--bg);border-color:var(--fg)}
+.where{font-size:13px;color:var(--muted);letter-spacing:.06em;text-transform:uppercase;margin:0}
+h1{margin:0;font-size:clamp(24px,4vw,34px);line-height:1.15;letter-spacing:-.01em;text-wrap:balance;font-weight:700}
+.lead{margin:0;color:var(--muted);max-width:66ch}
+.you{display:grid;grid-template-columns:auto 1fr;gap:4px 14px;padding:14px 16px;border:1px solid var(--tint-line);background:var(--tint-soft);border-radius:8px}
+.you b{font-size:12px;text-transform:uppercase;letter-spacing:.07em;color:var(--tint);font-weight:700;padding-top:2px}
+.you span{min-width:0}
+.hud{display:flex;gap:18px;flex-wrap:wrap;align-items:center;font-size:14px;color:var(--muted)}
+.hud strong{color:var(--fg);font-variant-numeric:tabular-nums}
+.hud .spacer{flex:1}
+.toggle{display:inline-flex;border:1px solid var(--line);border-radius:18px;overflow:hidden}
+.toggle button{border:0;background:transparent;color:var(--muted);font:600 13px var(--font);padding:7px 12px;cursor:pointer}
+.toggle button[aria-pressed="true"]{background:var(--tint-soft);color:var(--tint)}
+button{font:inherit;cursor:pointer}
+.btn{min-height:42px;padding:0 18px;border-radius:6px;border:1px solid var(--fg);background:var(--fg);color:var(--bg);font-weight:600}
+.btn.ghost{background:transparent;color:var(--fg);border-color:var(--line)}
+.btn.tint{background:var(--tint-soft);color:var(--tint);border-color:var(--tint-line)}
+.btn:focus-visible,.p:focus-visible,.close:focus-visible,.tab:focus-visible,.toggle button:focus-visible{outline:2px solid var(--tint);outline-offset:3px}
+.stage{position:relative;width:100%;aspect-ratio:16/9;min-height:360px;max-height:72vh;background:var(--floor);border:1px solid var(--line);border-radius:10px;overflow:hidden}
+.hall{position:absolute;inset:0;width:100%;height:100%;transition:filter .5s}
+.hall .floor{fill:var(--floor)} .hall .aisle{fill:var(--aisle)} .hall .c1{fill:var(--carpet1)} .hall .c2{fill:var(--carpet2)} .hall .c3{fill:var(--carpet3)}
+.hall .wall{fill:var(--wall)} .hall .counter{fill:var(--counter);stroke:var(--furn);stroke-width:1} .hall .furn{fill:var(--furn)} .hall .plant{fill:var(--plant)}
+.hall .shade{fill:var(--shade)} .hall .glass{fill:var(--glass)} .hall .sign{fill:#fff;font:600 11px var(--font);letter-spacing:.08em}
+.hall .floorlabel{fill:var(--muted);font:600 10px var(--font);letter-spacing:.1em}
+.p{position:absolute;width:44px;height:44px;margin:-22px 0 0 -22px;border:0;border-radius:50%;background:transparent;padding:0;
+  transition:left 3.2s ease-in-out,top 3.2s ease-in-out,opacity .4s,filter .2s,transform .2s}
+.p svg{width:44px;height:44px;overflow:visible;display:block}
+.p:hover,.p.hinted{transform:scale(1.12);filter:drop-shadow(0 3px 6px var(--shade))}
+.p .ring{fill:none;stroke:transparent;stroke-width:2}
+.p.opened .ring{stroke:var(--muted);stroke-dasharray:3 3}
+.p.talked .ring{stroke:var(--tint);stroke-dasharray:none;stroke-width:2.5}
+.p.active .ring{stroke:var(--tint);stroke-dasharray:none}
+.tip{position:absolute;transform:translate(-50%,calc(-100% - 24px));padding:6px 10px;border-radius:6px;background:var(--panel);color:var(--fg);border:1px solid var(--line);border-top:3px solid var(--tint);
+  box-shadow:0 6px 18px var(--shade);font-size:12px;font-weight:500;white-space:nowrap;pointer-events:none;z-index:3}
+.stage.revealed .hall,.stage.revealed .p{filter:blur(2px) saturate(.6)}
+.stage.revealed .p{opacity:.45;pointer-events:none}
+.sheet{position:absolute;top:12px;right:12px;max-height:calc(100% - 24px);width:min(360px,calc(100% - 24px));background:var(--panel);border:1px solid var(--line);border-radius:10px;
+  box-shadow:0 18px 50px rgba(0,0,0,.18);padding:18px;display:flex;flex-direction:column;gap:12px;overflow:auto;z-index:4}
+.sheet h2{margin:0;font-size:19px;line-height:1.25;padding-right:28px}
+.role{margin:-6px 0 0;color:var(--muted);font-size:14px}
+.tag{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:0 0 2px}
+.story p{margin:0}
+.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:4px}
+.close{position:absolute;top:10px;right:10px;width:34px;height:34px;border-radius:50%;border:0;background:transparent;color:var(--muted);font-size:20px}
+.verdict{padding:10px 12px;border-radius:6px;background:var(--stage);font-size:14px}
+.verdict.hit{background:var(--tint-soft);border:1px solid var(--tint-line)}
+.backdrop{position:absolute;inset:0;background:rgba(15,17,21,.32);border:0;padding:0;cursor:default;z-index:3}
+@media (min-width:641px){.backdrop{display:none}}
+.phone{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:min(310px,calc(100% - 32px));max-height:calc(100% - 24px);overflow:auto;background:var(--panel);
+  border:1px solid var(--line);border-radius:26px;box-shadow:0 30px 80px rgba(0,0,0,.28);padding:18px 16px 16px;display:grid;gap:12px;z-index:5;animation:rise .5s ease-out}
+.phone .bar{width:64px;height:5px;border-radius:3px;background:var(--line);margin:0 auto 2px}
+.phone .ph{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+.phone .ph b{font:700 15px/1 var(--mark);letter-spacing:.04em}
+.phone .ph span{font-size:11px;color:var(--muted);letter-spacing:.06em;text-transform:uppercase;text-align:right}
+.phone .sub{margin:0;font-size:13px;color:var(--muted)}
+.phone .item{display:grid;grid-template-columns:36px 1fr;gap:10px;align-items:start;padding:10px;border-radius:12px;background:var(--tint-soft);border:1px solid var(--tint-line)}
+.phone .av{width:36px;height:36px;border-radius:50%;background:var(--tint);color:var(--bg);display:grid;place-items:center;font-weight:700;font-size:13px}
+.phone .item strong{display:block;font-size:14px}
+.phone .item span{display:block;font-size:12px;color:var(--muted)}
+.phone .item em{display:block;font-style:normal;font-size:12.5px;margin-top:4px}
+.phone .foot{margin:0;font-size:11.5px;color:var(--muted)}
+@keyframes rise{from{opacity:0;transform:translate(-50%,-44%)}to{opacity:1;transform:translate(-50%,-50%)}}
+.reveal{display:grid;gap:14px;padding:20px;border:1px solid var(--line);border-radius:10px;background:var(--panel)}
+.reveal h2{margin:0;font-size:clamp(20px,3vw,26px);line-height:1.2;text-wrap:balance}
+.reveal .stats{margin:0;color:var(--muted)}
+.reveal h3{margin:4px 0 0;font-size:13px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--tint)}
+.matches{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
+.match{padding:14px;border:1px solid var(--tint-line);background:var(--tint-soft);border-radius:8px;display:grid;gap:6px;min-width:0}
+.match strong{font-size:15px}
+.match span{font-size:13px;color:var(--muted)}
+.match p{margin:0;font-size:14px}
+.note{margin:0;font-size:14px;color:var(--muted);max-width:72ch}
+.row{display:flex;gap:10px;flex-wrap:wrap}
+a.btn{display:inline-flex;align-items:center;text-decoration:none}
+@media (prefers-reduced-motion: reduce){.p{transition:none}.phone{animation:none}}
+@media (max-width:640px){
+  .stage{aspect-ratio:3/5;max-height:none}
+  .sheet{top:auto;bottom:8px;left:8px;right:8px;width:auto;max-height:78%}
+  .tab{font-size:13px;padding:0 12px}
+}
+
+body{margin:0}
+header .top{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.langs{font-size:13px;color:var(--muted)}
+.langs a{color:var(--muted);text-decoration:none;font-weight:600}
+.langs a[aria-current]{color:var(--tint)}
+.topbook{font-size:14px;font-weight:600;color:var(--tint);text-decoration:none;border:1px solid var(--tint-line);background:var(--tint-soft);border-radius:4px;padding:7px 12px}
+.sim{margin:0}
+footer{border-top:1px solid var(--line);margin-top:24px;padding-top:16px;display:flex;gap:18px;flex-wrap:wrap;font-size:13px;color:var(--muted)}
+footer a{color:var(--muted)}
+.consent-link{background:none;border:0;padding:0;font:inherit;color:inherit;text-decoration:underline;cursor:pointer}
+</style>
+<script src="/consent.js?v=4" defer></script>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <a class="mark" href="/de/">SEEON</a>
+    <div class="top"><span class="langs"><a href="/experience/" hreflang="en" lang="en">EN</a> · <a href="/de/experience/" hreflang="de" lang="de" aria-current="true">DE</a></span><a class="topbook" href="https://calendar.app.google/QthHi7N7QSBMn5Ym6" target="_blank" rel="noopener" data-book>Call buchen →</a></div>
+  </header>
+  <p class="sim">Anschauliche Simulation. Nicht das fertige Produkt. Alle Personen und Geschichten sind erfunden.</p>
+  <nav class="tabs" role="tablist" aria-label="Szenen" id="tabs"></nav>
+  <p class="where" id="where"></p>
+  <h1 id="title"></h1>
+  <p class="lead">Zeigen Sie auf eine Person, um kurz zu sehen, was sie macht. Öffnen Sie ihre Geschichte, um die persönliche und die berufliche Seite zu hören. Wenn Sie glauben, die richtige Person gefunden zu haben, gehen Sie hin und sprechen Sie sie an. Finden Sie alle drei.</p>
+  <div class="you" aria-label="Ihr Profil">
+    <b>Sie</b><span id="youWho"></span>
+    <b>Angebot</b><span id="youOffer"></span>
+    <b>Gesucht</b><span id="youLook"></span>
+  </div>
+  <div class="hud" aria-live="polite">
+    <span>Gefunden <strong id="found">0</strong> von 3</span>
+    <span>Geschichten gehört <strong id="heard">0</strong></span>
+    <span>Zeit <strong id="time">0:00</strong></span>
+    <span class="toggle" id="timeToggle" hidden role="group" aria-label="Tageszeit">
+      <button type="button" data-v="morning" aria-pressed="true">08:10</button>
+      <button type="button" data-v="evening" aria-pressed="false">19:20</button>
+    </span>
+    <span class="spacer"></span>
+    <button class="btn tint" id="revealBtn" type="button">Mit SEEON zeigen</button>
+  </div>
+  <div class="stage" id="stage">
+    <svg class="hall" id="hall" aria-hidden="true"></svg>
+    <button class="backdrop" id="backdrop" type="button" hidden aria-label="Geschichte schließen" tabindex="-1"></button>
+    <div class="sheet" id="sheet" hidden role="dialog" aria-modal="false" aria-labelledby="sName">
+      <button class="close" id="closeSheet" type="button" aria-label="Schließen">×</button>
+      <div><h2 id="sName"></h2><p class="role" id="sRole"></p></div>
+      <div class="story"><p class="tag">Persönlich</p><p id="sPersonal"></p></div>
+      <div class="story"><p class="tag">Beruflich</p><p id="sBusiness"></p></div>
+      <div class="verdict" id="sVerdict" hidden></div>
+      <div class="actions" id="sActions">
+        <button class="btn" id="talkBtn" type="button">Ansprechen</button>
+        <button class="btn ghost" id="walkBtn" type="button">Weitergehen</button>
+      </div>
+    </div>
+  </div>
+  <section class="reveal" id="reveal" hidden aria-live="polite">
+    <h2 id="rTitle"></h2>
+    <p class="stats" id="rStats"></p>
+    <h3 id="rHead"></h3>
+    <div class="matches" id="matches"></div>
+    <p class="note" id="rNote"></p>
+    <div class="row">
+      <a class="btn" href="https://calendar.app.google/QthHi7N7QSBMn5Ym6" target="_blank" rel="noopener" data-book>15-Minuten-Call buchen →</a>
+      <button class="btn ghost" id="againBtn" type="button">Diese Szene noch einmal</button>
+    </div>
+  </section>
+  <footer>
+    <span>© SEEON</span>
+    <a href="/de/">seeon.io</a>
+    <a href="/privacy/#de">Datenschutz</a>
+    <a href="/de/#impressum">Impressum</a>
+    <button type="button" class="consent-link" data-consent-open>Cookie-Einstellungen</button>
+  </footer>
+</div>
+<script src="/experience/data.de.js?v=1"></script>
+<script src="/experience/game.js?v=1"></script>
+</body>
+</html>

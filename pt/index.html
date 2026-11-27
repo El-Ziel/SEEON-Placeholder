@@ -540,6 +540,7 @@ h1,h2,h3{text-wrap:balance}
 <a href="/pt/traveljourney/" id="txt-ctx-journey">A viagem completa →</a>
 <a href="/pt/tradefairs/" id="txt-ctx-fairs">Para feiras →</a>
 <a href="/pt/businesstravel/" id="txt-ctx-bt">Para empresas e associações →</a>
+<a href="/experience/" id="txt-ctx-exp">Experimente: encontre os três →</a>
 </div>
 </nav>
 <div class="divider"></div>
@@ -614,7 +615,8 @@ h1,h2,h3{text-wrap:balance}
         ctxTitle: "Explore SEEON by context",
         ctxJourney: "The travel journey →",
         ctxFairs: "For trade fairs →",
-        ctxBt: "For companies & associations →"
+        ctxBt: "For companies & associations →",
+        ctxExp: "Try it yourself: find the three →"
       },
       de: {
         eyebrow: "Professionelle Proximity-Infrastruktur für Business-Events & urbane Netzwerke",
@@ -639,7 +641,8 @@ h1,h2,h3{text-wrap:balance}
         ctxTitle: "SEEON nach Einsatzbereich",
         ctxJourney: "Die Reise im Überblick →",
         ctxFairs: "Für Messen →",
-        ctxBt: "Für Unternehmen & Verbände →"
+        ctxBt: "Für Unternehmen & Verbände →",
+        ctxExp: "Selbst ausprobieren: Finden Sie die drei →"
       }
     };
 
@@ -678,6 +681,7 @@ h1,h2,h3{text-wrap:balance}
       document.getElementById('txt-ctx-journey').textContent = translations[lang].ctxJourney;
       document.getElementById('txt-ctx-fairs').textContent = translations[lang].ctxFairs;
       document.getElementById('txt-ctx-bt').textContent = translations[lang].ctxBt;
+      document.getElementById('txt-ctx-exp').textContent = translations[lang].ctxExp;
       document.getElementById('txt-footer').innerHTML = translations[lang].footer;
 
       // Re-attach Event Listener to dynamic elements
